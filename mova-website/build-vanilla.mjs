@@ -294,11 +294,21 @@ function renderHtmlShell({
     </script>
   ` : "";
 
+  const rootFallbackScript = canonicalPath === "/404" ? `
+  <script>
+    (function() {
+      var p = window.location.pathname;
+      if (p === '/' || p === '' || p === '/index.html' || /^\\/(en-gh|en-ke|en-za|en-gb|en)\\/?$/i.test(p)) {
+        window.location.replace('/en-ng/');
+      }
+    })();
+  </script>` : "";
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">${rootFallbackScript}
   <title>${fullTitle}</title>
   <meta name="description" content="${description}">
   <link rel="canonical" href="${canonicalUrl}">
@@ -4199,14 +4209,13 @@ input, button, textarea, select {
         updateHeaderDisplay(selectedCode);
         closeRegionModal();
 
-        let newPath = currentPath;
-        if (hasLocalePrefix) {
-          const sub = currentPath.substring(firstSeg.length + 1) || '/';
-          newPath = '/' + selectedCode + (sub.startsWith('/') ? sub : '/' + sub);
-        } else {
-          newPath = '/' + selectedCode + (currentPath.startsWith('/') ? currentPath : '/' + currentPath);
+        const sub = hasLocalePrefix ? (currentPath.substring(firstSeg.length + 1) || '/') : currentPath;
+        const cleanSub = sub.startsWith('/') ? sub : '/' + sub;
+        if (selectedCode === 'en-ng') {
+          window.location.href = '/en-ng' + cleanSub;
+        } else if (hasLocalePrefix) {
+          window.location.href = cleanSub === '/' ? '/en-ng/' : cleanSub;
         }
-        window.location.href = newPath;
       });
     });
   })();

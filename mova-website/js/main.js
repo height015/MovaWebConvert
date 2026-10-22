@@ -869,14 +869,13 @@
         updateHeaderDisplay(selectedCode);
         closeRegionModal();
 
-        let newPath = currentPath;
-        if (hasLocalePrefix) {
-          const sub = currentPath.substring(firstSeg.length + 1) || '/';
-          newPath = '/' + selectedCode + (sub.startsWith('/') ? sub : '/' + sub);
-        } else {
-          newPath = '/' + selectedCode + (currentPath.startsWith('/') ? currentPath : '/' + currentPath);
+        const sub = hasLocalePrefix ? (currentPath.substring(firstSeg.length + 1) || '/') : currentPath;
+        const cleanSub = sub.startsWith('/') ? sub : '/' + sub;
+        if (selectedCode === 'en-ng') {
+          window.location.href = '/en-ng' + cleanSub;
+        } else if (hasLocalePrefix) {
+          window.location.href = cleanSub === '/' ? '/en-ng/' : cleanSub;
         }
-        window.location.href = newPath;
       });
     });
   })();
