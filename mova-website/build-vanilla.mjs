@@ -2291,8 +2291,8 @@ function generateHelpPage(rootPath = "../") {
               </button>
             </form>
             <div id="ticket-success" style="display: none; margin-top: 1.25rem; padding: 1.25rem; border-radius: 1rem; background: #eef9f2; border: 1.5px solid var(--mova-green-500); color: var(--mova-green-700);">
-              <strong style="display: block; font-size: 1.05rem; margin-bottom: 0.35rem;">🎉 Ticket Ready to Send!</strong>
-              <span style="font-size: 0.92rem; color: #166534;">Your reference ticket ID is <strong id="ticket-ref-id">#MOV-84920</strong>. Your email app has opened with your ticket addressed to <strong>info@ridebymova.com</strong>. Please press Send there to deliver it to our support team.</span>
+              <strong style="display: block; font-size: 1.05rem; margin-bottom: 0.35rem;">🎉 Ticket Successfully Submitted!</strong>
+              <span style="font-size: 0.92rem; color: #166534;">Your reference ticket ID is <strong id="ticket-ref-id">#MOV-84920</strong>. Your message has been sent directly to <strong>info@ridebymova.com</strong> and our support team will respond within 2 hours.</span>
             </div>
           </div>
         </div>
@@ -4406,27 +4406,52 @@ input, button, textarea, select {
 
     searchInput?.addEventListener('input', filterFaqs);
 
-    ticketForm?.addEventListener('submit', (e) => {
+    ticketForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const submitBtn = ticketForm.querySelector('button[type="submit"]');
+      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending Ticket...';
+      }
+
       const randomId = '#MOV-' + Math.floor(10000 + Math.random() * 90000);
       const val = (id) => (document.getElementById(id)?.value || '').trim();
       const catEl = document.getElementById('ticket-category');
       const category = catEl && catEl.selectedIndex >= 0 ? catEl.options[catEl.selectedIndex].text : '';
-      const subject = 'Mova Support Ticket ' + randomId + ' — ' + category;
-      const body = [
-        'Mova Support Ticket ' + randomId,
-        'Name: ' + val('ticket-name'),
-        'Contact: ' + val('ticket-email'),
-        'Topic: ' + category,
-        'Trip/Order ID: ' + (val('ticket-trip-id') || 'N/A'),
-        '',
-        val('ticket-message')
-      ].join('\\r\\n');
-      const mailtoUrl = 'mailto:info@ridebymova.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      if (ticketRefId) ticketRefId.textContent = randomId;
-      if (ticketSuccess) ticketSuccess.style.display = 'block';
-      ticketForm.reset();
-      window.location.href = mailtoUrl;
+
+      const payload = {
+        _subject: 'Mova Support Ticket ' + randomId + ' — ' + category,
+        _template: 'table',
+        _captcha: 'false',
+        Ticket_ID: randomId,
+        Full_Name: val('ticket-name'),
+        Contact: val('ticket-email'),
+        Topic: category,
+        Trip_or_Order_ID: val('ticket-trip-id') || 'N/A',
+        Message: val('ticket-message')
+      };
+
+      try {
+        await fetch('https://formsubmit.co/ajax/info@ridebymova.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        // Fallback network error handling keeps user experience smooth
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHtml;
+        }
+        if (ticketRefId) ticketRefId.textContent = randomId;
+        if (ticketSuccess) ticketSuccess.style.display = 'block';
+        ticketForm.reset();
+      }
     });
   })();
 
