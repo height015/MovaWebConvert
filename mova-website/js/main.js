@@ -800,7 +800,7 @@
     let activeLocale = hasLocalePrefix ? firstSeg : (safeGetStorage('mova_region') || 'en-ng');
     updateHeaderDisplay(activeLocale);
 
-    if (!safeGetStorage('mova_region_manual') && (!hasLocalePrefix || currentPath === '/' || currentPath === '/index.html')) {
+    if (!safeGetStorage('mova_region_manual') && !hasLocalePrefix) {
       fetch('https://ipapi.co/json/')
         .then(res => res.json())
         .then(data => {
@@ -814,20 +814,9 @@
 
           updateHeaderDisplay(detected);
           safeSetStorage('mova_region', detected);
-
-          if (currentPath === '/' || currentPath === '/index.html') {
-            const targetPath = '/' + detected + '/';
-            if (window.history && window.history.replaceState) {
-              window.history.replaceState(null, '', targetPath);
-            }
-          }
         })
         .catch(() => {
-          if (currentPath === '/' || currentPath === '/index.html') {
-            if (window.history && window.history.replaceState) {
-              window.history.replaceState(null, '', '/en-ng/');
-            }
-          }
+          updateHeaderDisplay('en-ng');
         });
     }
 

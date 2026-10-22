@@ -39,17 +39,23 @@ const server = http.createServer((req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host || HOST}`);
   let pathname = decodeURIComponent(parsedUrl.pathname);
 
-  // Match and strip ONLY supported locale prefixes (/en-ng/, /en-gh/, /en-ke/, /en-za/, /en-gb/, /en/)
-  const localeRegex = /^\/(en-ng|en-gh|en-ke|en-za|en-gb|en)(\/.*)?$/i;
-  const match = pathname.match(localeRegex);
-  let effectivePath = pathname;
-  if (match) {
-    effectivePath = match[2] || "/";
-  }
-
   // Safety: prevent directory traversal
-  const safePath = path.normalize(effectivePath).replace(/^(\.\.[\/\\])+/, "");
-  let filePath = path.join(__dirname, safePath);
+  const directSafePath = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, "");
+  let filePath = path.join(__dirname, directSafePath);
+
+  // If the direct path does not exist on disk, check if it's a virtual locale prefix
+  if (!fs.existsSync(filePath)) {
+    const localeRegex = /^\/(en-ng|en-gh|en-ke|en-za|en-gb|en)(\/.*)?$/i;
+    const match = pathname.match(localeRegex);
+    if (match) {
+      const strippedPath = match[2] || "/";
+      const fallbackSafePath = path.normalize(strippedPath).replace(/^(\.\.[\/\\])+/, "");
+      const fallbackPath = path.join(__dirname, fallbackSafePath);
+      if (fs.existsSync(fallbackPath) || fs.existsSync(fallbackPath + ".html") || fs.existsSync(path.join(fallbackPath, "index.html"))) {
+        filePath = fallbackPath;
+      }
+    }
+  }
 
   // Check file stat
   fs.stat(filePath, (err, stats) => {

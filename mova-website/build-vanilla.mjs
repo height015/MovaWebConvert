@@ -294,11 +294,67 @@ function renderHtmlShell({
     </script>
   ` : "";
 
+  const isRootHomepage = (canonicalPath === "/" && rootPath === "");
+  const geoIpScript = isRootHomepage ? `
+  <!-- Fast Geo-IP Location Detection & Automatic Routing (Root Only) -->
+  <script>
+    (function() {
+      // 1. Strictly run ONLY when directly on root '/' or '/index.html'
+      var currentPath = window.location.pathname;
+      if (currentPath !== '/' && currentPath !== '/index.html') {
+        return;
+      }
+
+      // 2. Loop prevention: Never redirect more than once per browser session
+      if (sessionStorage.getItem('mova_geo_redirected')) {
+        return;
+      }
+
+      function safeRedirect(targetLocale) {
+        var target = '/' + targetLocale + '/';
+        if (window.location.pathname === target) {
+          return;
+        }
+        sessionStorage.setItem('mova_geo_redirected', 'true');
+        window.location.replace(target);
+      }
+
+      // 3. Check previously saved region preference
+      try {
+        var saved = localStorage.getItem('mova_region');
+        if (saved && saved !== 'en') {
+          safeRedirect(saved);
+          return;
+        }
+      } catch (e) {}
+
+      // 4. Fast Geo-IP detection
+      fetch('https://ipapi.co/json/')
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var country = (data && data.country_code) ? data.country_code.toUpperCase() : 'NG';
+          var locale = 'en-ng';
+          if (country === 'GH') locale = 'en-gh';
+          else if (country === 'KE') locale = 'en-ke';
+          else if (country === 'ZA') locale = 'en-za';
+          else if (country === 'GB') locale = 'en-gb';
+          else if (country === 'NG') locale = 'en-ng';
+          else locale = 'en-ng';
+          
+          try { localStorage.setItem('mova_region', locale); } catch(e){}
+          safeRedirect(locale);
+        })
+        .catch(function() {
+          safeRedirect('en-ng');
+        });
+    })();
+  </script>` : "";
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">${geoIpScript}
   <title>${fullTitle}</title>
   <meta name="description" content="${description}">
   <link rel="canonical" href="${canonicalUrl}">
@@ -4130,7 +4186,7 @@ input, button, textarea, select {
     let activeLocale = hasLocalePrefix ? firstSeg : (safeGetStorage('mova_region') || 'en-ng');
     updateHeaderDisplay(activeLocale);
 
-    if (!safeGetStorage('mova_region_manual') && (!hasLocalePrefix || currentPath === '/' || currentPath === '/index.html')) {
+    if (!safeGetStorage('mova_region_manual') && !hasLocalePrefix) {
       fetch('https://ipapi.co/json/')
         .then(res => res.json())
         .then(data => {
@@ -4144,20 +4200,9 @@ input, button, textarea, select {
 
           updateHeaderDisplay(detected);
           safeSetStorage('mova_region', detected);
-
-          if (currentPath === '/' || currentPath === '/index.html') {
-            const targetPath = '/' + detected + '/';
-            if (window.history && window.history.replaceState) {
-              window.history.replaceState(null, '', targetPath);
-            }
-          }
         })
         .catch(() => {
-          if (currentPath === '/' || currentPath === '/index.html') {
-            if (window.history && window.history.replaceState) {
-              window.history.replaceState(null, '', '/en-ng/');
-            }
-          }
+          updateHeaderDisplay('en-ng');
         });
     }
 
