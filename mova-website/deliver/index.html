@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mova Delivery — Fast On-Demand Courier & Merchant Logistics</title>
+  <meta name="description" content="Send parcels, food, documents, and bulk cargo across Nigerian cities. Live GPS courier tracking, recipient OTP verification, and merchant API.">
+  <link rel="canonical" href="https://mova.ng/deliver">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mova Delivery — Fast On-Demand Courier & Merchant Logistics">
+  <meta property="og:description" content="Send parcels, food, documents, and bulk cargo across Nigerian cities. Live GPS courier tracking, recipient OTP verification, and merchant API.">
+  <meta property="og:url" content="https://mova.ng/deliver">
+  <meta property="og:site_name" content="Mova">
+  <meta property="og:locale" content="en_NG">
+  <meta property="og:image" content="https://mova.ng/brand/mova-logo-official.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mova Delivery — Fast On-Demand Courier & Merchant Logistics">
+  <meta name="twitter:description" content="Send parcels, food, documents, and bulk cargo across Nigerian cities. Live GPS courier tracking, recipient OTP verification, and merchant API.">
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="../brand/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../brand/mova-favicon.png">
+  <link rel="apple-touch-icon" href="../brand/mova-favicon.png">
+  <meta name="theme-color" content="#071b2b">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../css/maplibre-gl.css">
+  <link rel="stylesheet" href="../css/style.css">
+  
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  
+  <!-- Site Header -->
+  <header class="site-header header-fidelity" id="site-header">
+    <div class="container header-inner">
+      <a href="../" class="brand-logo" aria-label="Mova home">
+        <img src="../brand/mova-logo-web.png" width="900" height="300" alt="Mova" loading="eager">
+      </a>
+      
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="../ride/">Ride</a><a href="../drive/">Drive</a><a href="../deliver/" class="is-active" aria-current="page">Deliver</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a><a href="../about/">About</a><a href="../help/">Help</a>
+      </nav>
+      
+      <div class="desktop-actions">
+        <button class="region-selector-btn" id="region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
+          <span class="region-flag" id="header-region-flag">🇳🇬</span>
+          <span id="header-region-name">Nigeria (EN)</span>
+          <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </button>
+        <a class="button button--primary" href="../#get-mova">
+          Get Mova
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+        </a>
+      </div>
+      
+      <!-- Mobile navigation toggle -->
+      <button class="menu-trigger" id="mobile-menu-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228,128a12,12,0,0,1-12,12H40a12,12,0,0,1,0-24H216A12,12,0,0,1,228,128ZM40,76H216a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24ZM216,180H40a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Z"/></svg>
+      </button>
+    </div>
+  </header>
+  <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
+  
+  <!-- Mobile Navigation Modal -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
+    <div class="mobile-menu__top">
+      <span class="mobile-menu__label">Menu</span>
+      <button class="menu-trigger" id="mobile-menu-close" type="button" aria-label="Close menu">
+        <svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></svg>
+      </button>
+    </div>
+    <nav aria-label="Mobile navigation">
+      <a href="../ride/">Ride</a><a href="../drive/">Drive</a><a href="../deliver/">Deliver</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a><a href="../about/">About</a><a href="../help/">Help</a>
+    </nav>
+    <div class="mobile-menu__actions">
+      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button">
+        <span class="region-flag" id="mobile-region-flag">🇳🇬</span>
+        <span id="mobile-region-name">Nigeria (EN)</span>
+      </button>
+      <a class="button button--primary" href="../#get-mova">
+        Get Mova
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  
+    <main id="main-content" class="public-page public-page--deliver">
+      <!-- Enterprise Hero Section -->
+      <section class="enterprise-hero">
+        <div class="ambient-glow-orb" aria-hidden="true"></div>
+        <div class="container enterprise-hero-grid">
+          <div class="enterprise-hero-copy">
+            <p class="eyebrow"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"/><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"/></svg> MOVA EXPRESS DELIVERY</p>
+            <h1>Move packages fast.<br>Across the city in minutes.</h1>
+            <p>
+              On-demand courier dispatch for individuals, online sellers, and growing businesses. From urgent legal contracts to bulk inventory transfers, track your deliveries in real-time with tamper-proof OTP recipient verification.
+            </p>
+            <div class="enterprise-hero-actions">
+              <a class="button button--primary" href="#delivery-fleet">
+                Send a Package Now
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+              </a>
+              <a class="button button--secondary" href="#business-logistics">
+                Business Logistics API
+              </a>
+            </div>
+          </div>
+          <div class="enterprise-hero-visual">
+            <img src="../images/marketing/courier-hero.jpg" alt="Mova motorcycle courier delivering parcel with digital verification" loading="eager">
+            <div class="hero-floating-stat">
+              <i></i>
+              <span>28 mins avg. urban delivery time · 99.8% safe handoff rate</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Delivery Fleet Modalities -->
+      <section class="section" id="delivery-fleet">
+        <div class="container">
+          <div class="section-header text-center">
+            <p class="eyebrow">VERSATILE FLEET OPTIONS</p>
+            <h2>The right vehicle for every shipment.</h2>
+            <p class="section-lead" style="max-width: 680px; margin-inline: auto;">
+              Whether you need an express motorcycle to beat gridlock or a dedicated cargo van for inventory, Mova has you covered.
+            </p>
+          </div>
+
+          <div class="category-card-grid">
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"/></svg></div>
+              <h3>Mova Bike Express</h3>
+              <p>Fastest urban dispatch for documents, food, medicines, apparel, and parcels up to 10kg. Zips through traffic for rapid delivery.</p>
+              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                <li>Max payload: 10kg (insulated top-box)</li>
+                <li>Avg. delivery time: 25 - 35 mins</li>
+                <li>Real-time GPS tracking & recipient OTP</li>
+              </ul>
+              <div class="category-card-meta">
+                <span>FASTEST DISPATCH</span>
+                <strong>From ₦1,200</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16v-8h96v8a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM80,152H56a8,8,0,0,1,0-16H80a8,8,0,0,1,0,16Zm120,0H176a8,8,0,0,1,0-16h24a8,8,0,0,1,0,16ZM44.31,104,69.2,48H186.8l24.89,56Z"/></svg></div>
+              <h3>Sedan Courier</h3>
+              <p>Air-conditioned vehicle transport for fragile birthday cakes, delicate electronics, high-end fashion, and parcels up to 50kg.</p>
+              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                <li>Max payload: 50kg (trunk & rear seat)</li>
+                <li>Climate-controlled for perishables</li>
+                <li>Zero jostling or dust exposure</li>
+              </ul>
+              <div class="category-card-meta">
+                <span>FRAGILE & HIGH-VALUE</span>
+                <strong>From ₦3,500</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M234.35,129,152,152,129,234.35a8,8,0,0,1-15.21.27l-65.28-176A8,8,0,0,1,58.63,48.46l176,65.28A8,8,0,0,1,234.35,129Z" opacity="0.2"/><path d="M237.33,106.21,61.41,41l-.16-.05A16,16,0,0,0,40.9,61.25a1,1,0,0,0,.05.16l65.26,175.92A15.77,15.77,0,0,0,121.28,248h.3a15.77,15.77,0,0,0,15-11.29l.06-.2,21.84-78,78-21.84.2-.06a16,16,0,0,0,.62-30.38ZM149.84,144.3a8,8,0,0,0-5.54,5.54L121.3,232l-.06-.17L56,56l175.82,65.22.16.06Z"/></svg></div>
+              <h3>Cargo Van & Truck</h3>
+              <p>Medium and heavy logistics for wholesale distribution, warehouse stock transfers, furniture, and eCommerce batch inventory.</p>
+              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                <li>Payload: 500kg up to 2,000kg</li>
+                <li>Scheduled or same-day dispatch</li>
+                <li>Dedicated driver and loading assistance</li>
+              </ul>
+              <div class="category-card-meta">
+                <span>BULK & HEAVY</span>
+                <strong>Custom Commercial</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216,56v56c0,96-88,120-88,120S40,208,40,112V56a8,8,0,0,1,8-8H208A8,8,0,0,1,216,56Z" opacity="0.2"/><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></svg></div>
+              <h3>Priority Express Dispatch</h3>
+              <p>High-priority business dispatch with live corridor GPS tracking, direct phone-call verification at pickup and drop-off, and dedicated dispute resolution.</p>
+              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                <li>Live GPS corridor tracking</li>
+                <li>Senior vetted courier assignment</li>
+                <li>Direct recipient OTP verification</li>
+              </ul>
+              <div class="category-card-meta">
+                <span>PRIORITY DISPATCH</span>
+                <strong>VIP Handling</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Business & eCommerce Solutions -->
+      <section class="section" id="business-logistics" style="background: #fbfdfc; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+        <div class="container">
+          <div class="section-header text-center">
+            <p class="eyebrow">ENTERPRISE LOGISTICS & APIS</p>
+            <h2>Powering logistics for modern African merchants.</h2>
+          </div>
+
+          <div class="category-card-grid">
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M248,121.58a15.76,15.76,0,0,1-11.29,15l-.2.06-78,21.84-21.84,78-.06.2a15.77,15.77,0,0,1-15,11.29h-.3a15.77,15.77,0,0,1-15.07-10.67L41,61.41a1,1,0,0,1-.05-.16A16,16,0,0,1,61.25,40.9l.16.05,175.92,65.26A15.78,15.78,0,0,1,248,121.58Z"/></svg></div>
+              <h3>Developer API Integration</h3>
+              <p>Plug Mova Delivery directly into your custom web application, Shopify, or WooCommerce store for automated fulfillment on checkout.</p>
+              <div class="category-card-meta">
+                <span>RESTFUL API</span>
+                <strong>Instant Webhooks</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228.92,49.69a8,8,0,0,0-6.86-1.45L160.93,63.52,99.58,32.84a8,8,0,0,0-5.52-.6l-64,16A8,8,0,0,0,24,56V200a8,8,0,0,0,9.94,7.76l61.13-15.28,61.35,30.68A8.15,8.15,0,0,0,160,224a8,8,0,0,0,1.94-.24l64-16A8,8,0,0,0,232,200V56A8,8,0,0,0,228.92,49.69ZM104,52.94l48,24V203.06l-48-24ZM40,62.25l48-12v127.5l-48,12Zm176,131.5-48,12V78.25l48-12Z"/></svg></div>
+              <h3>Multi-Stop Route Optimizer</h3>
+              <p>Dispatch up to 20 deliveries in a single batch. Our intelligent routing engine minimizes courier distance, cutting your delivery costs by up to 35%.</p>
+              <div class="category-card-meta">
+                <span>BATCH DISPATCH</span>
+                <strong>Save 35%</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a28,28,0,0,1-28,28h-4v8a8,8,0,0,1-16,0v-8H104a8,8,0,0,1,0-16h36a12,12,0,0,0,0-24H116a28,28,0,0,1,0-56h4V72a8,8,0,0,1,16,0v8h16a8,8,0,0,1,0,16H116a12,12,0,0,0,0,24h24A28,28,0,0,1,168,148Z"/></svg></div>
+              <h3>Consolidated VAT Invoicing</h3>
+              <p>Monthly corporate billing with comprehensive itemized reports, VAT tax documentation, and dedicated enterprise account management.</p>
+              <div class="category-card-meta">
+                <span>CORPORATE ACCOUNTS</span>
+                <strong>Monthly Billing</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg></div>
+              <h3>Proof-of-Delivery OTP</h3>
+              <p>No parcels left unattended. Recipient must provide a dynamic 4-digit code generated in-app or via SMS before the courier can complete the dropoff.</p>
+              <div class="category-card-meta">
+                <span>TAMPER-PROOF</span>
+                <strong>Zero Loss</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Steps -->
+      <section class="section">
+        <div class="container">
+          <div class="section-header text-center">
+            <p class="eyebrow">EFFORTLESS 4-STEP PROCESS</p>
+            <h2>How sending a package works on Mova.</h2>
+          </div>
+
+          <div class="public-steps" style="margin-top: 2rem;">
+            <div>
+              <article>
+                <b>01</b>
+                <span><strong>Enter Delivery Details</strong><br>Specify pickup and recipient address, package category, and weight in the Mova app.</span>
+              </article>
+              <article>
+                <b>02</b>
+                <span><strong>Doorstep Courier Pickup</strong><br>The closest courier is matched in minutes and arrives at your door to safely collect and verify the package.</span>
+              </article>
+              <article>
+                <b>03</b>
+                <span><strong>Live Map Tracking</strong><br>Both sender and recipient receive a live tracking link with courier telemetry and real-time ETA updates.</span>
+              </article>
+              <article>
+                <b>04</b>
+                <span><strong>Secure OTP Handoff</strong><br>Recipient inspects the parcel, shares their 4-digit verification code, and instant proof of delivery is logged.</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="public-page-actions" style="margin-top: 3rem;">
+            <a class="button button--primary" href="../#get-mova">
+              Send a Package
+              <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+            </a>
+            <a class="button button--secondary" href="../help/">
+              Delivery Questions
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../" class="brand-logo brand-logo--inverse" aria-label="Mova home">
+            <img src="../brand/mova-logo-web.png" width="900" height="300" alt="Mova">
+          </a>
+          <p class="footer-company">MOVA INTEGRATED MOBILITY LTD</p>
+          <p>Your ride. Your price. Your choice.</p>
+          <p class="footer-contact">
+            <span>Call us</span>
+            <a href="tel:+2347047838642">+2347047838642</a>
+          </p>
+          <p class="launch-note">Launching first in Nigeria.</p>
+        </div>
+        
+        
+    <div class="footer-group">
+      <h2>Mova</h2>
+      <a href="../about/">About</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Ride</h2>
+      <a href="../ride/">Ride with Mova</a><a href="../help/">Help</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Earn</h2>
+      <a href="../drive/">Drive</a><a href="../deliver/">Deliver</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Legal</h2>
+      <a href="../legal/">Legal Center</a><a href="../legal/privacy/">Privacy Draft</a><a href="../legal/terms/">Terms Draft</a>
+    </div>
+  
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2026 MOVA INTEGRATED MOBILITY LTD. All rights reserved.</p>
+        <p>Built to move with you.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Region / Locale Selector Modal -->
+  <div class="region-modal-backdrop" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
+    <div class="region-modal-card">
+      <div class="region-modal-header">
+        <div>
+          <h3>Choose your region</h3>
+          <p>Select your country to view local pricing, driver earnings, and services.</p>
+        </div>
+        <button class="region-modal-close" id="region-modal-close" type="button" aria-label="Close region selector">
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></svg>
+        </button>
+      </div>
+      <div class="region-search-box">
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
+        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off">
+      </div>
+      <div class="region-grid" id="region-options-list">
+        <div class="region-card is-active" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
+          <span class="region-card-flag">🇳🇬</span>
+          <div class="region-card-info">
+            <strong>Nigeria</strong>
+            <small>English · NGN (₦) · Active Market</small>
+          </div>
+          <span class="region-status-badge">Active</span>
+        </div>
+        <div class="region-card" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
+          <span class="region-card-flag">🇬🇭</span>
+          <div class="region-card-info">
+            <strong>Ghana</strong>
+            <small>English · GHS (GH₵) · Accra Metro</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
+          <span class="region-card-flag">🇰🇪</span>
+          <div class="region-card-info">
+            <strong>Kenya</strong>
+            <small>English · KES (KSh) · Nairobi Hub</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
+          <span class="region-card-flag">🇿🇦</span>
+          <div class="region-card-info">
+            <strong>South Africa</strong>
+            <small>English · ZAR (R) · Joburg & Cape Town</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
+          <span class="region-card-flag">🇬🇧</span>
+          <div class="region-card-info">
+            <strong>United Kingdom</strong>
+            <small>English · GBP (£) · Global HQ</small>
+          </div>
+          <span class="region-status-badge region-status-badge--global">Corporate</span>
+        </div>
+        <div class="region-card" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
+          <span class="region-card-flag">🌐</span>
+          <div class="region-card-info">
+            <strong>International / Global</strong>
+            <small>English · USD ($) · Global Gateway</small>
+          </div>
+          <span class="region-status-badge region-status-badge--global">Global</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vanilla Scripts -->
+  <script src="../js/maplibre-gl.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

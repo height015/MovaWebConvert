@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mova — Move your way</title>
+  <meta name="description" content="Choose how you move with flexible ride pricing, driver opportunities, and delivery—all in one Mova app.">
+  <link rel="canonical" href="https://mova.ng/">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mova — Move your way">
+  <meta property="og:description" content="Choose how you move with flexible ride pricing, driver opportunities, and delivery—all in one Mova app.">
+  <meta property="og:url" content="https://mova.ng/">
+  <meta property="og:site_name" content="Mova">
+  <meta property="og:locale" content="en_NG">
+  <meta property="og:image" content="https://mova.ng/brand/mova-logo-official.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mova — Move your way">
+  <meta name="twitter:description" content="Choose how you move with flexible ride pricing, driver opportunities, and delivery—all in one Mova app.">
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="brand/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="brand/mova-favicon.png">
+  <link rel="apple-touch-icon" href="brand/mova-favicon.png">
+  <meta name="theme-color" content="#071b2b">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/maplibre-gl.css">
+  <link rel="stylesheet" href="css/style.css">
+  
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"Organization","name":"Mova","url":"https://mova.ng","description":"Choose how you move with flexible ride pricing, driver opportunities, and delivery—all in one Mova app.","logo":"https://mova.ng/brand/mova-logo-official.png","address":{"@type":"PostalAddress","addressCountry":"NG"}}
+    </script>
+  
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  
+  <!-- Site Header -->
+  <header class="site-header header-fidelity" id="site-header">
+    <div class="container header-inner">
+      <a href="./" class="brand-logo" aria-label="Mova home">
+        <img src="brand/mova-logo-web.png" width="900" height="300" alt="Mova" loading="eager">
+      </a>
+      
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="ride/">Ride</a><a href="drive/">Drive</a><a href="deliver/">Deliver</a><a href="safety/">Safety</a><a href="cities/">Cities</a><a href="about/">About</a><a href="help/">Help</a>
+      </nav>
+      
+      <div class="desktop-actions">
+        <button class="region-selector-btn" id="region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
+          <span class="region-flag" id="header-region-flag">🇳🇬</span>
+          <span id="header-region-name">Nigeria (EN)</span>
+          <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </button>
+        <a class="button button--primary" href="#get-mova">
+          Get Mova
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+        </a>
+      </div>
+      
+      <!-- Mobile navigation toggle -->
+      <button class="menu-trigger" id="mobile-menu-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228,128a12,12,0,0,1-12,12H40a12,12,0,0,1,0-24H216A12,12,0,0,1,228,128ZM40,76H216a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24ZM216,180H40a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Z"/></svg>
+      </button>
+    </div>
+  </header>
+  <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
+  
+  <!-- Mobile Navigation Modal -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
+    <div class="mobile-menu__top">
+      <span class="mobile-menu__label">Menu</span>
+      <button class="menu-trigger" id="mobile-menu-close" type="button" aria-label="Close menu">
+        <svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></svg>
+      </button>
+    </div>
+    <nav aria-label="Mobile navigation">
+      <a href="ride/">Ride</a><a href="drive/">Drive</a><a href="deliver/">Deliver</a><a href="safety/">Safety</a><a href="cities/">Cities</a><a href="about/">About</a><a href="help/">Help</a>
+    </nav>
+    <div class="mobile-menu__actions">
+      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button">
+        <span class="region-flag" id="mobile-region-flag">🇳🇬</span>
+        <span id="mobile-region-name">Nigeria (EN)</span>
+      </button>
+      <a class="button button--primary" href="#get-mova">
+        Get Mova
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  
+  <main id="main-content">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Mobility, made yours</p>
+          <h1>Move your <span>way.</span></h1>
+          <p class="hero-manifesto">Your ride. Your price. Your choice.</p>
+          <p class="hero-description">Request a ride, make an offer, choose a fixed-price trip, or go metered.</p>
+          
+          <div class="hero-choices" aria-label="Mova ride pricing choices">
+            <span>Make an offer</span>
+            <span>Fixed price</span>
+            <span>Metered</span>
+          </div>
+          
+          <div class="button-row">
+            <a class="button button--primary" href="#get-mova">
+              Get Mova
+              <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+            </a>
+            <a class="button button--secondary" href="#ride-modes">
+              Explore ride modes
+            </a>
+          </div>
+          
+          <div class="hero-proof">
+            <span>
+              <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M200,224H150.54A266.56,266.56,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25a88,88,0,0,0-176,0c0,31.4,14.51,64.68,42,96.25A266.56,266.56,0,0,0,105.46,224H56a8,8,0,0,0,0,16H200a8,8,0,0,0,0-16ZM128,72a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/></svg>
+              Launching in Nigeria
+            </span>
+            <span>
+              <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+              Three ways to ride
+            </span>
+            <span>
+              <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm-34.32,69.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+              Built around choice
+            </span>
+          </div>
+        </div>
+        
+        <!-- Hero Visual with Interactive animations -->
+        <div class="hero-visual" id="hero-visual-container">
+          <div class="ambient-glow-orb" aria-hidden="true"></div>
+          <img class="hero-photo" src="images/marketing/rider-hero.jpg" alt="A rider entering a car in a modern Nigerian city" loading="eager">
+          
+          <div class="hero-route" aria-hidden="true">
+            <span class="hero-route__start"></span>
+            <span class="hero-route__end"></span>
+            <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M240,112H211.31L168,68.69A15.86,15.86,0,0,0,156.69,64H44.28A16,16,0,0,0,31,71.12L1.34,115.56A8.07,8.07,0,0,0,0,120v48a16,16,0,0,0,16,16H33a32,32,0,0,0,62,0h66a32,32,0,0,0,62,0h17a16,16,0,0,0,16-16V128A16,16,0,0,0,240,112ZM44.28,80H156.69l32,32H23ZM64,192a16,16,0,1,1,16-16A16,16,0,0,1,64,192Zm128,0a16,16,0,1,1,16-16A16,16,0,0,1,192,192Z"/></svg>
+          </div>
+          
+          <div class="driver-search" aria-hidden="true">
+            <i></i><span>Finding a driver</span>
+          </div>
+          
+          <div class="hero-trip-card" data-tilt aria-label="Illustrative matched-driver details">
+            <p>
+              <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+              Driver matched <em>4 min away</em>
+            </p>
+            <div class="matched-driver">
+              <span class="driver-avatar">KA</span>
+              <span>
+                <strong>Kareem A.</strong>
+                <small>Silver sedan · <span class="counter-num" data-target="4.9" data-decimals="1">4.9</span> ★ · <span class="counter-num" data-target="1420" data-format="comma">1,420</span> trips</small>
+              </span>
+            </div>
+            <div class="trip-point">
+              <span><svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/></svg></span>
+              <small>Pickup</small>
+              <strong>Your location</strong>
+            </div>
+            <div class="trip-point">
+              <span><svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M248,121.58a15.76,15.76,0,0,1-11.29,15l-.2.06-78,21.84-21.84,78-.06.2a15.77,15.77,0,0,1-15,11.29h-.3a15.77,15.77,0,0,1-15.07-10.67L41,61.41a1,1,0,0,1-.05-.16A16,16,0,0,1,61.25,40.9l.16.05,175.92,65.26A15.78,15.78,0,0,1,248,121.58Z"/></svg></span>
+              <small>Destination</small>
+              <strong>Choose where to go</strong>
+            </div>
+          </div>
+          
+          <div class="hero-offer-card" data-tilt>
+            <small>Rider choice selected</small>
+            <strong>Make an Offer</strong>
+            <span>Illustrative fare · ₦4,500</span>
+            <p>Fixed ₦5,200 · Metered available</p>
+          </div>
+          
+          <div class="driver-chip" data-tilt>
+            <div class="avatar">KA</div>
+            <div>
+              <small>Ready for your trip</small>
+              <strong>Kareem <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"/></svg> 4.9</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIDE MODES SECTION -->
+    <section class="section ride-modes-section" id="ride-modes">
+      <div class="container">
+        <div class="section-heading section-heading--center">
+          <p class="eyebrow">The power of choice</p>
+          <h2>How do you want to ride today?</h2>
+          <p class="section-copy">Different journeys call for different pricing approaches. Mova gives you three clear ways to choose before every request.</p>
+        </div>
+
+        <!-- Choice Engine Trip Simulator -->
+        <div class="choice-engine-box" role="region" aria-label="Interactive trip and pricing simulator">
+          <div class="choice-engine-header">
+            <div>
+              <span class="choice-engine-badge"><i aria-hidden="true"></i> Choice Simulator</span>
+              <h3>Simulate your journey & compare all 3 models</h3>
+            </div>
+            <div class="distance-pill-group" role="tablist" aria-label="Trip distance presets">
+              <button type="button" class="distance-pill" data-km="4">Short Hop (4 km)</button>
+              <button type="button" class="distance-pill is-active" data-km="12">City Cruise (12 km)</button>
+              <button type="button" class="distance-pill" data-km="24">Cross-Town (24 km)</button>
+              <button type="button" class="distance-pill" data-km="36">Airport Run (36 km)</button>
+            </div>
+          </div>
+          <div class="slider-meta-row">
+            <span>Trip Distance: <strong id="sim-distance-val">12.0 km</strong></span>
+            <span>Estimated Duration: <strong id="sim-duration-val">~24 mins</strong></span>
+            <span>Market Context: <strong>Lagos Metro (NGN)</strong></span>
+          </div>
+          <input type="range" min="3" max="45" value="12" step="1" id="sim-distance-slider" class="mova-range-slider" aria-label="Adjust trip distance in kilometers">
+        </div>
+        
+        <div class="mode-connector" aria-hidden="true"></div>
+        
+        <div class="ride-mode-grid ride-mode-grid--detailed" role="region" aria-label="Mova ride options">
+          <!-- Card 1: Make an Offer -->
+          <article class="ride-mode-card spotlight-card">
+            <div class="mode-card-head">
+              <span class="mode-icon mode-icon--gradient"><svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M200,152l-40,40L96,176,40,136,72.68,70.63,128,56l55.32,14.63L183.6,72H144L98.34,116.29a8,8,0,0,0,1.38,12.42C117.23,139.9,141,139.13,160,120Z" opacity="0.2"/><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></svg></span>
+              <span class="mode-badge">More choice</span>
+            </div>
+            <h3>Make an Offer</h3>
+            <p class="mode-subtitle">More say in what you pay</p>
+            <p>Suggest a fare within Mova’s configured pricing boundaries. Drivers may accept or respond with a counteroffer where supported.</p>
+            
+            <div class="mode-ui">
+              <div class="mode-ui-label">
+                <span>Suggested bracket</span>
+                <strong id="offer-suggested-fare">₦4,200 – ₦5,200</strong>
+              </div>
+              <div class="offer-control">
+                <button type="button" id="offer-decrease" aria-label="Decrease illustrative offer"><svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128Z"/></svg></button>
+                <div>
+                  <small>Your offer</small>
+                  <strong id="offer-value">₦4,800</strong>
+                </div>
+                <button type="button" id="offer-increase" aria-label="Increase illustrative offer"><svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></button>
+              </div>
+              <p class="ui-note">Adjust with +/- or drag the distance simulator above</p>
+            </div>
+          </article>
+          
+          <!-- Card 2: Fixed Price (Featured) -->
+          <article class="ride-mode-card ride-mode-card--selected spotlight-card">
+            <span class="featured-label">Upfront price</span>
+            <div class="mode-card-head">
+              <span class="mode-icon mode-icon--navy"><svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208,88H48a8,8,0,0,0-8,8V208a8,8,0,0,0,8,8H208a8,8,0,0,0,8-8V96A8,8,0,0,0,208,88Zm-80,72a20,20,0,1,1,20-20A20,20,0,0,1,128,160Z" opacity="0.2"/><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Zm-80-96a28,28,0,0,0-8,54.83V184a8,8,0,0,0,16,0V166.83A28,28,0,0,0,128,112Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,128,152Z"/></svg></span>
+              <span class="mode-badge">Clear before booking</span>
+            </div>
+            <h3>Fixed Price</h3>
+            <p class="mode-subtitle">Certainty before you step in</p>
+            <p>See the price before the trip and choose whether to proceed. The agreed amount is presented clearly before booking.</p>
+            
+            <div class="mode-ui">
+              <div class="mode-ui-label">
+                <span>Upfront price</span>
+                <strong>Agreed before trip</strong>
+              </div>
+              <div class="fixed-total">
+                <div>
+                  <small>Guaranteed total</small>
+                  <strong id="fixed-total-fare">₦5,200</strong>
+                </div>
+                <svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+              </div>
+              <p class="ui-note">Fixed upfront fare based on real-time route analysis</p>
+            </div>
+          </article>
+          
+          <!-- Card 3: Metered Ride -->
+          <article class="ride-mode-card spotlight-card">
+            <div class="mode-card-head">
+              <span class="mode-icon mode-icon--blue"><svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,200a24,24,0,1,1-24-24A24,24,0,0,1,224,200Z" opacity="0.2"/><path d="M200,168a32.06,32.06,0,0,0-31,24H72a32,32,0,0,1,0-64h96a40,40,0,0,0,0-80H72a8,8,0,0,0,0,16h96a24,24,0,0,1,0,48H72a48,48,0,0,0,0,96h97a32,32,0,1,0,31-40Zm0,48a16,16,0,1,1,16-16A16,16,0,0,1,200,216Z"/></svg></span>
+              <span class="mode-badge">Journey based</span>
+            </div>
+            <h3>Metered Ride</h3>
+            <p class="mode-subtitle mode-subtitle--blue">Fare based on the journey</p>
+            <p>Fare reflects the actual journey according to Mova’s metered pricing model, including applicable distance and time.</p>
+            
+            <div class="mode-ui">
+              <div class="mode-ui-label">
+                <span>Journey progress</span>
+                <strong class="live-label"><i></i> Live</strong>
+              </div>
+              <div class="meter-total">
+                <div>
+                  <small>Distance / time</small>
+                  <strong id="meter-dist-time">12.0 km <em>· 24m</em></strong>
+                </div>
+                <div>
+                  <small>Estimated fare</small>
+                  <strong id="meter-total-fare">₦4,650</strong>
+                </div>
+              </div>
+              <p class="ui-note"><svg width="13" height="13" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228.92,49.69a8,8,0,0,0-6.86-1.45L160.93,63.52,99.58,32.84a8,8,0,0,0-5.52-.6l-64,16A8,8,0,0,0,24,56V200a8,8,0,0,0,9.94,7.76l61.13-15.28,61.35,30.68A8.15,8.15,0,0,0,160,224a8,8,0,0,0,1.94-.24l64-16A8,8,0,0,0,232,200V56A8,8,0,0,0,228.92,49.69ZM104,52.94l48,24V203.06l-48-24ZM40,62.25l48-12v127.5l-48,12Zm176,131.5-48,12V78.25l48-12Z"/></svg> Live calibrated metered journey</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ECOSYSTEM SECTION -->
+    <section class="section section--muted">
+      <div class="container">
+        <div class="section-heading section-heading--center">
+          <p class="eyebrow">The Mova ecosystem</p>
+          <h2>One Mova. More ways to move.</h2>
+        </div>
+        
+        <div class="ecosystem-grid" role="region" aria-label="Mova services">
+          <article class="ecosystem-card">
+            <div class="ecosystem-photo">
+              <img src="images/marketing/rider-hero.jpg" alt="A Mova rider travelling with a driver" loading="lazy">
+            </div>
+            <div>
+              <p class="tag">For riders</p>
+              <h3>Ride</h3>
+              <p>Book a trip with the pricing approach that fits you.</p>
+              <a class="button button--ghost" href="ride/">
+                Explore rides
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+              </a>
+            </div>
+          </article>
+          
+          <article class="ecosystem-card">
+            <div class="ecosystem-photo">
+              <img src="images/marketing/driver-hero.jpg" alt="A driver at the wheel" loading="lazy">
+            </div>
+            <div>
+              <p class="tag">For drivers</p>
+              <h3>Drive</h3>
+              <p>Find flexible opportunities and choose trips with clear information.</p>
+              <a class="button button--ghost" href="drive/">
+                Explore driving
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+              </a>
+            </div>
+          </article>
+          
+          <article class="ecosystem-card">
+            <div class="ecosystem-photo">
+              <img src="images/marketing/courier-hero.jpg" alt="A courier preparing a package" loading="lazy">
+            </div>
+            <div>
+              <p class="tag">For deliveries</p>
+              <h3>Deliver</h3>
+              <p>Send packages or discover courier opportunities through Mova.</p>
+              <a class="button button--ghost" href="deliver/">
+                Explore delivery
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIDER EXPERIENCE SECTION -->
+    <section class="section section--white">
+      <div class="container rider-layout">
+        <div class="rider-photo">
+          <img src="images/marketing/rider-hero.jpg" alt="A rider enjoying a Mova journey" loading="lazy">
+          <div class="rider-status">
+            <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+            <span><small>Active trip</small>Details close at hand</span>
+          </div>
+        </div>
+        
+        <div>
+          <div class="section-heading">
+            <p class="eyebrow">The rider experience</p>
+            <h2>Wherever you’re headed, move on your terms.</h2>
+            <p class="section-copy">From pickup to arrival, Mova keeps your options clear and your active trip information within reach.</p>
+          </div>
+          
+          <div class="benefit-list">
+            <div class="benefit">
+              <span><svg width="23" height="23" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a28,28,0,0,1-28,28h-4v8a8,8,0,0,1-16,0v-8H104a8,8,0,0,1,0-16h36a12,12,0,0,0,0-24H116a28,28,0,0,1,0-56h4V72a8,8,0,0,1,16,0v8h16a8,8,0,0,1,0,16H116a12,12,0,0,0,0,24h24A28,28,0,0,1,168,148Z"/></svg></span>
+              <div>
+                <h3>Pricing choice</h3>
+                <p>Choose the ride and pricing experience that works for the moment.</p>
+              </div>
+            </div>
+            <div class="benefit">
+              <span><svg width="23" height="23" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M192,56V200H64V56Z" opacity="0.2"/><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM72,64H184V192H72Zm8-32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z"/></svg></span>
+              <div>
+                <h3>Easy booking</h3>
+                <p>Set your pickup, choose your destination, and select how you want to ride.</p>
+              </div>
+            </div>
+            <div class="benefit">
+              <span><svg width="23" height="23" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M234.35,129,152,152,129,234.35a8,8,0,0,1-15.21.27l-65.28-176A8,8,0,0,1,58.63,48.46l176,65.28A8,8,0,0,1,234.35,129Z" opacity="0.2"/><path d="M237.33,106.21,61.41,41l-.16-.05A16,16,0,0,0,40.9,61.25a1,1,0,0,0,.05.16l65.26,175.92A15.77,15.77,0,0,0,121.28,248h.3a15.77,15.77,0,0,0,15-11.29l.06-.2,21.84-78,78-21.84.2-.06a16,16,0,0,0,.62-30.38ZM149.84,144.3a8,8,0,0,0-5.54,5.54L121.3,232l-.06-.17L56,56l175.82,65.22.16.06Z"/></svg></span>
+              <div>
+                <h3>Trip visibility</h3>
+                <p>Follow your active trip and keep the important details close.</p>
+              </div>
+            </div>
+            <div class="benefit">
+              <span><svg width="23" height="23" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128A96,96,0,0,1,79.93,211.11h0L42.54,223.58a8,8,0,0,1-10.12-10.12l12.47-37.39h0A96,96,0,1,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-4-1.08,7.85,7.85,0,0,0-2.53.42L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Zm12-88a12,12,0,1,1-12-12A12,12,0,0,1,140,128Zm-44,0a12,12,0,1,1-12-12A12,12,0,0,1,96,128Zm88,0a12,12,0,1,1-12-12A12,12,0,0,1,184,128Z"/></svg></span>
+              <div>
+                <h3>Stay connected</h3>
+                <p>Communicate with your matched driver during an active service.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DRIVER OPPORTUNITY SECTION -->
+    <section class="section section--navy">
+      <div class="viewport-stage">
+        <div class="container driver-layout">
+          <div>
+            <div class="section-heading section-heading--inverse">
+              <p class="eyebrow">Drive with Mova</p>
+              <h2>Your time. Your opportunities.</h2>
+              <p class="section-copy">Find ride opportunities, see useful trip information, and choose what works for you—all on one Mova platform.</p>
+            </div>
+            
+            <ul class="check-list">
+              <li><svg width="19" height="19" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg> Flexible earning opportunities</li>
+              <li><svg width="19" height="19" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg> Choice over the trips you take</li>
+              <li><svg width="19" height="19" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg> Accept or counter where supported</li>
+            </ul>
+            
+            <a class="button button--inverse" href="drive/">
+              Drive with Mova
+              <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+            </a>
+          </div>
+          
+          <div class="driver-visual">
+            <img src="images/marketing/driver-hero.jpg" alt="A Mova driver ready for a trip" loading="lazy">
+            <div class="opportunity-card opportunity-card--detailed" aria-label="Illustrative new ride opportunity">
+              <div class="opportunity-head">
+                <span><i></i><svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216Z"/></svg> New ride opportunity</span>
+                <small>Illustrative UI</small>
+              </div>
+              <div class="opportunity-meta">
+                <strong>8 min</strong>
+                <span>Estimated pickup</span>
+              </div>
+              <div class="opportunity-route">
+                <div>
+                  <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/></svg>
+                  <p><small>Pickup</small>Current area</p>
+                </div>
+                <i></i>
+                <div>
+                  <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M248,121.58a15.76,15.76,0,0,1-11.29,15l-.2.06-78,21.84-21.84,78-.06.2a15.77,15.77,0,0,1-15,11.29h-.3a15.77,15.77,0,0,1-15.07-10.67L41,61.41a1,1,0,0,1-.05-.16A16,16,0,0,1,61.25,40.9l.16.05,175.92,65.26A15.78,15.78,0,0,1,248,121.58Z"/></svg>
+                  <p><small>Destination</small>Trip destination</p>
+                </div>
+              </div>
+              <div class="opportunity-offer">
+                <span>Rider offer</span>
+                <strong>₦4,500</strong>
+              </div>
+              <div class="opportunity-actions">
+                <button type="button">Counter</button>
+                <button type="button">Accept <svg width="13" height="13" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURIER SECTION -->
+    <section class="section courier-section">
+      <div class="container courier-layout">
+        <div class="courier-photo">
+          <img src="images/marketing/courier-hero.jpg" alt="A courier preparing a package for delivery" loading="lazy">
+          <div class="parcel-status">
+            <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+            <div>
+              <small>Delivery status</small>
+              <strong>Courier assigned</strong>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="section-heading">
+            <p class="eyebrow">Mova Courier</p>
+            <h2>Fast, connected city parcel dispatch.</h2>
+            <p class="section-copy">A clear delivery experience for people sending packages and couriers moving them through the city.</p>
+          </div>
+          
+          <div class="courier-audiences">
+            <div>
+              <svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"/></svg>
+              <h3>For senders</h3>
+              <p>Arrange a package delivery and follow its active lifecycle.</p>
+            </div>
+            <div>
+              <svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,40V76a8,8,0,0,1-16,0V48H180a8,8,0,0,1,0-16h36A8,8,0,0,1,224,40Zm-8,132a8,8,0,0,0-8,8v28H180a8,8,0,0,0,0,16h36a8,8,0,0,0,8-8V180A8,8,0,0,0,216,172ZM76,208H48V180a8,8,0,0,0-16,0v36a8,8,0,0,0,8,8H76a8,8,0,0,0,0-16ZM40,84a8,8,0,0,0,8-8V48H76a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8V76A8,8,0,0,0,40,84Zm136,92a8,8,0,0,1-6.41-3.19,52,52,0,0,0-83.2,0,8,8,0,1,1-12.8-9.62A67.94,67.94,0,0,1,101,141.51a40,40,0,1,1,53.94,0,67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,176,176Zm-48-40a24,24,0,1,0-24-24A24,24,0,0,0,128,136Z"/></svg>
+              <h3>For couriers</h3>
+              <p>Review delivery opportunities and useful assignment details.</p>
+            </div>
+          </div>
+          
+          <a class="button button--secondary" href="deliver/">
+            Deliver with Mova
+            <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SAFETY SECTION -->
+    <section class="section section--white">
+      <div class="container">
+        <div class="safety-panel">
+          <div>
+            <div class="section-heading">
+              <p class="eyebrow">Safety at every step</p>
+              <h2>Move with greater confidence.</h2>
+              <p class="section-copy">Mova is designed to keep relevant trip information visible and help riders and drivers stay connected during an active service.</p>
+            </div>
+            <a class="button button--secondary" href="safety/">
+              Explore safety
+              <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+            </a>
+          </div>
+          
+          <div class="safety-grid">
+            <div>
+              <svg width="27" height="27" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></svg>
+              <h3>Trip visibility</h3>
+              <p>Follow key details through an active trip.</p>
+            </div>
+            <div>
+              <svg width="27" height="27" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,112a28,28,0,0,0-8,54.83V184a8,8,0,0,0,16,0V166.83A28,28,0,0,0,128,112Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,128,152Zm80-72H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Z"/></svg>
+              <h3>Account security</h3>
+              <p>Protection designed into the Mova experience.</p>
+            </div>
+            <div>
+              <svg width="27" height="27" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM84,116a12,12,0,1,0,12,12A12,12,0,0,0,84,116Zm88,0a12,12,0,1,0,12,12A12,12,0,0,0,172,116Zm60,12A104,104,0,0,1,79.12,219.82L45.07,231.17a16,16,0,0,1-20.24-20.24l11.35-34.05A104,104,0,1,1,232,128Zm-16,0A88,88,0,1,0,51.81,172.06a8,8,0,0,1,.66,6.54L40,216,77.4,203.53a7.85,7.85,0,0,1,2.53-.42,8,8,0,0,1,4,1.08A88,88,0,0,0,216,128Z"/></svg>
+              <h3>Active communication</h3>
+              <p>Connect with your match when you need to.</p>
+            </div>
+            <div>
+              <svg width="27" height="27" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,40V76a8,8,0,0,1-16,0V48H180a8,8,0,0,1,0-16h36A8,8,0,0,1,224,40Zm-8,132a8,8,0,0,0-8,8v28H180a8,8,0,0,0,0,16h36a8,8,0,0,0,8-8V180A8,8,0,0,0,216,172ZM76,208H48V180a8,8,0,0,0-16,0v36a8,8,0,0,0,8,8H76a8,8,0,0,0,0-16ZM40,84a8,8,0,0,0,8-8V48H76a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8V76A8,8,0,0,0,40,84Zm136,92a8,8,0,0,1-6.41-3.19,52,52,0,0,0-83.2,0,8,8,0,1,1-12.8-9.62A67.94,67.94,0,0,1,101,141.51a40,40,0,1,1,53.94,0,67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,176,176Zm-48-40a24,24,0,1,0-24-24A24,24,0,0,0,128,136Z"/></svg>
+              <h3>Support access</h3>
+              <p>Find help and report an issue through Mova.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKET & MAP SECTION -->
+    <section class="section section--muted market-section">
+      <div class="viewport-stage">
+        <div class="container market-layout">
+          <div class="market-copy">
+            <div class="market-eyebrow">
+              <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M200,220H160.73c5.18-5,10.75-10.71,16.33-17.13C205.15,170.57,220,136.37,220,104a92,92,0,0,0-184,0c0,50,34.12,91.94,59.18,116H56a12,12,0,0,0,0,24H200a12,12,0,0,0,0-24ZM60,104a68,68,0,0,1,136,0c0,33.31-20,63.37-36.7,82.71A249.35,249.35,0,0,1,128,216.89a249.35,249.35,0,0,1-31.3-30.18C80,167.37,60,137.31,60,104Zm68,44a44,44,0,1,0-44-44A44.05,44.05,0,0,0,128,148Zm0-64a20,20,0,1,1-20,20A20,20,0,0,1,128,84Z"/></svg>
+              SCALE &amp; FOOTPRINT
+            </div>
+            <h2>Starting in Nigeria.<br>Built to go further.</h2>
+            <p class="market-description">Mova is launching first in Nigeria, with a platform designed to support more markets over time.</p>
+            
+            <div class="market-status-list">
+              <div>
+                <i></i>
+                <span>
+                  <strong>Nigeria</strong>
+                  <small>First launch market</small>
+                </span>
+                <b>Launching first</b>
+              </div>
+              <div>
+                <i></i>
+                <span>
+                  <strong>Multi-market ready</strong>
+                  <small>Country-aware services and pricing</small>
+                </span>
+              </div>
+              <div>
+                <i></i>
+                <span>
+                  <strong>Availability updates</strong>
+                  <small>Confirmed cities will be published as rollout plans are finalised</small>
+                </span>
+              </div>
+            </div>
+            
+            <a class="button button--secondary" href="cities/">
+              View market updates
+              <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+            </a>
+          </div>
+          
+          <!-- Interactive Live Map with Open-Source Cartography -->
+          <div class="interactive-map-wrapper" role="region" aria-label="Interactive Lagos map representing Nigeria as Mova's first launch market">
+            <div class="map-market-badge">
+              <small>OSM OpenMapTiles</small>
+              <strong>Nigeria · Lagos Launch Market</strong>
+            </div>
+            
+            <div id="mova-interactive-map" class="mova-interactive-map" aria-label="Interactive map of Lagos Nigeria powered by OpenMapTiles">
+              <!-- Fallback if JS or tiles are loading -->
+              <figure class="active-map urban-map" role="group" aria-label="Illustrative Lagos map">
+                <span class="map-ping map-ping--one" aria-hidden="true"><i></i><b></b></span>
+                <span class="map-ping map-ping--two" aria-hidden="true"><i></i><b></b></span>
+              </figure>
+            </div>
+            
+            <div class="map-hud-bar">
+              <span class="hubs-label">Live Transit Hubs:</span>
+              <div class="hub-pill-row" role="tablist" aria-label="Lagos transit hubs">
+                <button type="button" class="hub-pill-btn is-active" data-lat="6.4281" data-lng="3.4219" data-zoom="13" data-hub="vi">Victoria Island</button>
+                <button type="button" class="hub-pill-btn" data-lat="6.4474" data-lng="3.4731" data-zoom="13" data-hub="lekki">Lekki Phase 1</button>
+                <button type="button" class="hub-pill-btn" data-lat="6.5954" data-lng="3.3533" data-zoom="13" data-hub="ikeja">Ikeja Central</button>
+                <button type="button" class="hub-pill-btn" data-lat="6.5774" data-lng="3.3212" data-zoom="13" data-hub="airport">Airport (LOS)</button>
+                <button type="button" class="hub-pill-btn" data-lat="6.4549" data-lng="3.3888" data-zoom="13" data-hub="island">Marina / Island</button>
+              </div>
+            </div>
+            
+            <div class="map-attribution">
+              <a href="https://openmaptiles.org/" target="_blank" rel="noreferrer">© OpenMapTiles</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap contributors</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APP SHOWCASE SECTION -->
+    <section class="section app-section" id="get-mova">
+      <div class="viewport-stage">
+        <div class="container">
+          <div class="section-heading section-heading--center section-heading--inverse">
+            <p class="eyebrow">The Mova app</p>
+            <h2>Engineered for effortless control.</h2>
+            <p class="section-copy">Interact with illustrative product views below to see how rides, live routes, and parcel dispatches come together in one focused experience.</p>
+          </div>
+          
+          <!-- Interactive App Showcase -->
+          <div class="app-showcase-interactive" role="region" aria-label="Interactive Mova app preview">
+            <!-- Mode switcher tabs -->
+            <div class="app-tab-switcher" role="tablist" aria-label="Choose product view">
+              <button type="button" class="app-tab-btn is-active" data-app-tab="mode" role="tab" aria-selected="true">
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M200,152l-40,40L96,176,40,136,72.68,70.63,128,56l55.32,14.63L183.6,72H144L98.34,116.29a8,8,0,0,0,1.38,12.42C117.23,139.9,141,139.13,160,120Z" opacity="0.2"/><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></svg>
+                <span>1. Choose Mode</span>
+              </button>
+              <button type="button" class="app-tab-btn" data-app-tab="journey" role="tab" aria-selected="false">
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M234.35,129,152,152,129,234.35a8,8,0,0,1-15.21.27l-65.28-176A8,8,0,0,1,58.63,48.46l176,65.28A8,8,0,0,1,234.35,129Z" opacity="0.2"/><path d="M237.33,106.21,61.41,41l-.16-.05A16,16,0,0,0,40.9,61.25a1,1,0,0,0,.05.16l65.26,175.92A15.77,15.77,0,0,0,121.28,248h.3a15.77,15.77,0,0,0,15-11.29l.06-.2,21.84-78,78-21.84.2-.06a16,16,0,0,0,.62-30.38ZM149.84,144.3a8,8,0,0,0-5.54,5.54L121.3,232l-.06-.17L56,56l175.82,65.22.16.06Z"/></svg>
+                <span>2. Live Journey</span>
+              </button>
+              <button type="button" class="app-tab-btn" data-app-tab="dispatch" role="tab" aria-selected="false">
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"/><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"/></svg>
+                <span>3. Parcel Dispatch</span>
+              </button>
+            </div>
+            
+            <!-- Flagship Smartphone Chassis -->
+            <div class="phone-chassis">
+              <div class="phone-screen-viewport">
+                <!-- Dynamic island & top bar -->
+                <div class="phone-dynamic-island">
+                  <i></i>
+                  <span></span>
+                </div>
+                <div class="phone-status-bar">
+                  <span>9:41</span>
+                  <span>5G 100%</span>
+                </div>
+                
+                <!-- Screen Pane 1: Ride Mode Selection -->
+                <div class="phone-screen-pane is-active" id="pane-mode">
+                  <div class="phone-pane-header">
+                    <small>Step 1</small>
+                    <h4>Select Ride Mode</h4>
+                  </div>
+                  <div class="phone-mode-selector">
+                    <div class="phone-mode-item" data-phone-mode="offer">
+                      <strong>Make an Offer</strong>
+                      <span>Suggest your price</span>
+                      <em>₦4,800</em>
+                    </div>
+                    <div class="phone-mode-item is-selected" data-phone-mode="fixed">
+                      <strong>Fixed Price</strong>
+                      <span>Upfront guarantee</span>
+                      <em>₦5,200</em>
+                    </div>
+                    <div class="phone-mode-item" data-phone-mode="metered">
+                      <strong>Metered Ride</strong>
+                      <span>Live distance & time</span>
+                      <em>₦4,650 est.</em>
+                    </div>
+                  </div>
+                  <button type="button" class="phone-confirm-btn" id="phone-request-btn">Request Trip</button>
+                </div>
+                
+                <!-- Screen Pane 2: Live Active Journey -->
+                <div class="phone-screen-pane" id="pane-journey">
+                  <div class="phone-pane-header">
+                    <small class="live-pill">● Trip in Progress</small>
+                    <h4>En Route to Destination</h4>
+                  </div>
+                  <div class="phone-live-map">
+                    <div class="phone-map-bg"></div>
+                    <div class="phone-route-svg">
+                      <svg viewBox="0 0 200 120" class="animated-trip-svg">
+                        <path id="phone-trip-track" d="M 20 100 Q 80 20 180 30" fill="none" stroke="#24c93b" stroke-width="4" stroke-linecap="round" stroke-dasharray="6,4"></path>
+                        <circle cx="20" cy="100" r="5" fill="#00172c"></circle>
+                        <circle cx="180" cy="30" r="6" fill="#24c93b"></circle>
+                      </svg>
+                      <div class="moving-car-icon" id="moving-car">
+                        <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16v-8h96v8a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM80,152H56a8,8,0,0,1,0-16H80a8,8,0,0,1,0,16Zm120,0H176a8,8,0,0,1,0-16h24a8,8,0,0,1,0,16ZM44.31,104,69.2,48H186.8l24.89,56Z"/></svg>
+                      </div>
+                    </div>
+                    <div class="phone-driver-mini">
+                      <span>KA</span>
+                      <div>
+                        <strong>Kareem A.</strong>
+                        <small>Silver sedan · 3 mins away</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="phone-trip-telemetry">
+                    <div>
+                      <small>Distance Left</small>
+                      <strong>3.4 km</strong>
+                    </div>
+                    <div>
+                      <small>Est. Arrival</small>
+                      <strong>12:48 PM</strong>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Screen Pane 3: Parcel Dispatch Lifecycle -->
+                <div class="phone-screen-pane" id="pane-dispatch">
+                  <div class="phone-pane-header">
+                    <small>Mova Courier</small>
+                    <h4>Parcel in Dispatch</h4>
+                  </div>
+                  <div class="phone-dispatch-timeline">
+                    <div class="dispatch-step is-complete">
+                      <i>✓</i>
+                      <div>
+                        <strong>Courier Assigned</strong>
+                        <small>Tunde M. accepted dispatch</small>
+                      </div>
+                    </div>
+                    <div class="dispatch-step is-complete">
+                      <i>✓</i>
+                      <div>
+                        <strong>Package Picked Up</strong>
+                        <small>Pickup verified at Lekki Phase 1</small>
+                      </div>
+                    </div>
+                    <div class="dispatch-step is-active">
+                      <i class="pulsing-step">●</i>
+                      <div>
+                        <strong>Out for Delivery</strong>
+                        <small>In transit to recipient handoff</small>
+                      </div>
+                    </div>
+                    <div class="dispatch-step">
+                      <i>4</i>
+                      <div>
+                        <strong>Completed</strong>
+                        <small>Recipient PIN confirmation</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="phone-parcel-code">
+                    <small>Tracking Verification Code</small>
+                    <strong>MV-9482-NG</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="store-row store-row--center">
+            <button type="button" disabled>
+              <span>Coming soon on</span>
+              <strong>App Store</strong>
+            </button>
+            <button type="button" disabled>
+              <span>Coming soon on</span>
+              <strong>Google Play</strong>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="section section--white">
+      <div class="container faq-layout">
+        <div class="section-heading">
+          <p class="eyebrow">Questions, answered</p>
+          <h2>A few things to know about Mova.</h2>
+          <p class="section-copy">Straightforward answers before your first trip.</p>
+        </div>
+        
+        <div class="faq-list">
+          <details>
+            <summary>What is Mova?<span aria-hidden="true">+</span></summary>
+            <p>Mova is a mobility platform that brings rides, driver opportunities, and delivery experiences together in one place.</p>
+          </details>
+          <details>
+            <summary>How does making an offer work?<span aria-hidden="true">+</span></summary>
+            <p>For supported trips, you can suggest a fare within Mova’s pricing boundaries and respond to offers from available drivers.</p>
+          </details>
+          <details>
+            <summary>Can I choose a fixed-price ride?<span aria-hidden="true">+</span></summary>
+            <p>Yes. Fixed-price booking lets you see and agree to the trip price before your journey begins.</p>
+          </details>
+          <details>
+            <summary>What is a metered ride?<span aria-hidden="true">+</span></summary>
+            <p>A metered ride calculates the fare from the actual journey using Mova’s metered pricing model.</p>
+          </details>
+          <details>
+            <summary>How do I become a Driver?<span aria-hidden="true">+</span></summary>
+            <p>Visit the Drive page to learn about the onboarding process and register your interest.</p>
+          </details>
+          <details>
+            <summary>Does Mova offer delivery?<span aria-hidden="true">+</span></summary>
+            <p>Mova Courier is being built for package delivery and courier opportunities through the same Mova platform.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSING CTA SECTION -->
+    <section class="section section--white section--closing">
+      <div class="container">
+        <div class="closing-cta">
+          <p class="eyebrow">Move with Mova</p>
+          <h2>Ready to move your way?</h2>
+          <p>Your ride. Your price. Your choice.</p>
+          <div class="button-row">
+            <a class="button button--inverse" href="#get-mova">
+              Get Mova
+              <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+            </a>
+            <a class="button button--ghost" href="drive/">
+              Drive with Mova
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="./" class="brand-logo brand-logo--inverse" aria-label="Mova home">
+            <img src="brand/mova-logo-web.png" width="900" height="300" alt="Mova">
+          </a>
+          <p class="footer-company">MOVA INTEGRATED MOBILITY LTD</p>
+          <p>Your ride. Your price. Your choice.</p>
+          <p class="footer-contact">
+            <span>Call us</span>
+            <a href="tel:+2347047838642">+2347047838642</a>
+          </p>
+          <p class="launch-note">Launching first in Nigeria.</p>
+        </div>
+        
+        
+    <div class="footer-group">
+      <h2>Mova</h2>
+      <a href="about/">About</a><a href="safety/">Safety</a><a href="cities/">Cities</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Ride</h2>
+      <a href="ride/">Ride with Mova</a><a href="help/">Help</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Earn</h2>
+      <a href="drive/">Drive</a><a href="deliver/">Deliver</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Legal</h2>
+      <a href="legal/">Legal Center</a><a href="legal/privacy/">Privacy Draft</a><a href="legal/terms/">Terms Draft</a>
+    </div>
+  
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2026 MOVA INTEGRATED MOBILITY LTD. All rights reserved.</p>
+        <p>Built to move with you.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Region / Locale Selector Modal -->
+  <div class="region-modal-backdrop" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
+    <div class="region-modal-card">
+      <div class="region-modal-header">
+        <div>
+          <h3>Choose your region</h3>
+          <p>Select your country to view local pricing, driver earnings, and services.</p>
+        </div>
+        <button class="region-modal-close" id="region-modal-close" type="button" aria-label="Close region selector">
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></svg>
+        </button>
+      </div>
+      <div class="region-search-box">
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
+        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off">
+      </div>
+      <div class="region-grid" id="region-options-list">
+        <div class="region-card is-active" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
+          <span class="region-card-flag">🇳🇬</span>
+          <div class="region-card-info">
+            <strong>Nigeria</strong>
+            <small>English · NGN (₦) · Active Market</small>
+          </div>
+          <span class="region-status-badge">Active</span>
+        </div>
+        <div class="region-card" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
+          <span class="region-card-flag">🇬🇭</span>
+          <div class="region-card-info">
+            <strong>Ghana</strong>
+            <small>English · GHS (GH₵) · Accra Metro</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
+          <span class="region-card-flag">🇰🇪</span>
+          <div class="region-card-info">
+            <strong>Kenya</strong>
+            <small>English · KES (KSh) · Nairobi Hub</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
+          <span class="region-card-flag">🇿🇦</span>
+          <div class="region-card-info">
+            <strong>South Africa</strong>
+            <small>English · ZAR (R) · Joburg & Cape Town</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
+          <span class="region-card-flag">🇬🇧</span>
+          <div class="region-card-info">
+            <strong>United Kingdom</strong>
+            <small>English · GBP (£) · Global HQ</small>
+          </div>
+          <span class="region-status-badge region-status-badge--global">Corporate</span>
+        </div>
+        <div class="region-card" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
+          <span class="region-card-flag">🌐</span>
+          <div class="region-card-info">
+            <strong>International / Global</strong>
+            <small>English · USD ($) · Global Gateway</small>
+          </div>
+          <span class="region-status-badge region-status-badge--global">Global</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vanilla Scripts -->
+  <script src="js/maplibre-gl.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

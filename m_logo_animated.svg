@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="1000" height="560" role="img" aria-label="Animated navy M logo with flowing green ribbon, orbit trail, and glint">
+<defs>
+ <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08192e"/><stop offset="1" stop-color="#132b44"/></linearGradient>
+ <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9aed4d"/><stop offset=".45" stop-color="#51d86a"/><stop offset="1" stop-color="#087b60"/></linearGradient>
+ <linearGradient id="orbit" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#81ee4b" stop-opacity="0"/><stop offset=".42" stop-color="#43e866"/><stop offset=".75" stop-color="#0b8258"/><stop offset="1" stop-color="#83f045" stop-opacity="0"/></linearGradient>
+ <radialGradient id="shine"><stop stop-color="white" stop-opacity="1"/><stop offset=".25" stop-color="#b7ffbb" stop-opacity=".83"/><stop offset="1" stop-color="#70ff94" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-120%" y="-120%" width="340%" height="340%"><feGaussianBlur stdDeviation="4"/></filter>
+ <clipPath id="ribbonReveal"><rect x="177" y="65" width="170" height="130"><animate attributeName="width" values="0;0;65;170;170;170" keyTimes="0;.10;.19;.32;.88;1" dur="10s" repeatCount="indefinite"/></rect></clipPath>
+</defs>
+<!-- subtle ground shadow -->
+<ellipse cx="250" cy="236" rx="98" ry="6" fill="#10243a" opacity="0"><animate attributeName="opacity" values="0;.08;.13;.13;.08" keyTimes="0;.25;.43;.83;1" dur="10s" repeatCount="indefinite"/></ellipse>
+<!-- primary deep-navy M silhouette -->
+<path d="M151 189 V110 C151 91 164 79 181 79 C191 79 199 84 206 93 L243 139 L287 92 C299 79 308 76 318 80 C333 83 340 95 340 110 V210 H323 C311 210 305 203 304 190 L300 115 L265 157 C253 171 238 178 226 164 L190 118 V209 H172 C158 209 151 202 151 189 Z" fill="url(#navy)">
+ <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.11;.82;.95;1" dur="10s" repeatCount="indefinite"/>
+</path>
+<!-- green flow ribbon -->
+<g clip-path="url(#ribbonReveal)">
+ <path d="M188 112 C195 105 205 105 213 112 L243 142 L284 95 C296 82 307 76 318 80 C330 83 337 91 340 101 C325 96 316 106 307 117 L268 163 C251 184 237 187 221 170 L192 139 C184 130 184 119 188 112 Z" fill="url(#green)"/>
+ <path d="M241 143 L282 95 C297 78 309 76 318 80 C331 84 337 92 340 101 C325 96 316 106 307 117 L268 163 C257 177 247 181 238 178 C250 170 252 155 241 143 Z" fill="#77eb58" opacity=".45"/>
+</g>
+<!-- flying orbit: appears only during central reveal -->
+<g opacity="0">
+ <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.12;.19;.32;.42;1" dur="10s" repeatCount="indefinite"/>
+ <g transform="translate(245 129)">
+  <g><animateTransform attributeName="transform" type="rotate" values="-28;65;230;340" keyTimes="0;.32;.68;1" dur="2.8s" begin="1.2s" repeatCount="1" fill="freeze"/>
+   <ellipse cx="0" cy="0" rx="105" ry="26" fill="none" stroke="url(#orbit)" stroke-width="10" stroke-linecap="round" transform="rotate(-12)" stroke-dasharray="370 300"/>
+   <ellipse cx="0" cy="0" rx="107" ry="29" fill="none" stroke="#78fa52" stroke-opacity=".5" stroke-width="3" transform="rotate(-12)" stroke-dasharray="160 520"/>
+  </g>
+ </g>
+</g>
+<!-- glimmer across final logo -->
+<g opacity="0">
+ <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;.40;.49;.59;1" dur="10s" repeatCount="indefinite"/>
+ <g><animateTransform attributeName="transform" type="translate" values="174 150;228 145;306 135" keyTimes="0;.5;1" dur="1.9s" begin="4s" repeatCount="1" fill="freeze"/>
+  <circle r="31" fill="url(#shine)"/>
+  <path d="M-34 0H34 M0 -32V32" stroke="#f3fff1" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+ </g>
+</g>
+<!-- slight final breathing motion on whole artwork is deliberately avoided to match video hold -->
+</svg>

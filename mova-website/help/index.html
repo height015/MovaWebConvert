@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mova Help Center — 24/7 Dedicated Support & FAQ Knowledge Base</title>
+  <meta name="description" content="Get answers to your questions about Mova ride options, driver earnings, delivery tracking, account security, and 24/7 customer support.">
+  <link rel="canonical" href="https://mova.ng/help">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mova Help Center — 24/7 Dedicated Support & FAQ Knowledge Base">
+  <meta property="og:description" content="Get answers to your questions about Mova ride options, driver earnings, delivery tracking, account security, and 24/7 customer support.">
+  <meta property="og:url" content="https://mova.ng/help">
+  <meta property="og:site_name" content="Mova">
+  <meta property="og:locale" content="en_NG">
+  <meta property="og:image" content="https://mova.ng/brand/mova-logo-official.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mova Help Center — 24/7 Dedicated Support & FAQ Knowledge Base">
+  <meta name="twitter:description" content="Get answers to your questions about Mova ride options, driver earnings, delivery tracking, account security, and 24/7 customer support.">
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="../brand/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../brand/mova-favicon.png">
+  <link rel="apple-touch-icon" href="../brand/mova-favicon.png">
+  <meta name="theme-color" content="#071b2b">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../css/maplibre-gl.css">
+  <link rel="stylesheet" href="../css/style.css">
+  
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  
+  <!-- Site Header -->
+  <header class="site-header header-fidelity" id="site-header">
+    <div class="container header-inner">
+      <a href="../" class="brand-logo" aria-label="Mova home">
+        <img src="../brand/mova-logo-web.png" width="900" height="300" alt="Mova" loading="eager">
+      </a>
+      
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="../ride/">Ride</a><a href="../drive/">Drive</a><a href="../deliver/">Deliver</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a><a href="../about/">About</a><a href="../help/" class="is-active" aria-current="page">Help</a>
+      </nav>
+      
+      <div class="desktop-actions">
+        <button class="region-selector-btn" id="region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
+          <span class="region-flag" id="header-region-flag">🇳🇬</span>
+          <span id="header-region-name">Nigeria (EN)</span>
+          <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </button>
+        <a class="button button--primary" href="../#get-mova">
+          Get Mova
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+        </a>
+      </div>
+      
+      <!-- Mobile navigation toggle -->
+      <button class="menu-trigger" id="mobile-menu-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228,128a12,12,0,0,1-12,12H40a12,12,0,0,1,0-24H216A12,12,0,0,1,228,128ZM40,76H216a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24ZM216,180H40a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Z"/></svg>
+      </button>
+    </div>
+  </header>
+  <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
+  
+  <!-- Mobile Navigation Modal -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
+    <div class="mobile-menu__top">
+      <span class="mobile-menu__label">Menu</span>
+      <button class="menu-trigger" id="mobile-menu-close" type="button" aria-label="Close menu">
+        <svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></svg>
+      </button>
+    </div>
+    <nav aria-label="Mobile navigation">
+      <a href="../ride/">Ride</a><a href="../drive/">Drive</a><a href="../deliver/">Deliver</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a><a href="../about/">About</a><a href="../help/">Help</a>
+    </nav>
+    <div class="mobile-menu__actions">
+      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button">
+        <span class="region-flag" id="mobile-region-flag">🇳🇬</span>
+        <span id="mobile-region-name">Nigeria (EN)</span>
+      </button>
+      <a class="button button--primary" href="../#get-mova">
+        Get Mova
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  
+    <main id="main-content" class="public-page public-page--help">
+      <!-- Enterprise Hero Section -->
+      <section class="enterprise-hero">
+        <div class="container text-center">
+          <p class="eyebrow"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128A96,96,0,0,1,79.93,211.11h0L42.54,223.58a8,8,0,0,1-10.12-10.12l12.47-37.39h0A96,96,0,1,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-4-1.08,7.85,7.85,0,0,0-2.53.42L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Zm12-88a12,12,0,1,1-12-12A12,12,0,0,1,140,128Zm-44,0a12,12,0,1,1-12-12A12,12,0,0,1,96,128Zm88,0a12,12,0,1,1-12-12A12,12,0,0,1,184,128Z"/></svg> MOVA 24/7 SUPPORT CENTER</p>
+          <h1 style="max-width: 820px; margin-inline: auto;">How can we help you<br>move today?</h1>
+          <p style="max-width: 620px; margin-inline: auto; margin-bottom: 2rem;">
+            Search our knowledge base for instant answers or connect directly with our round-the-clock support agents.
+          </p>
+
+          <div class="help-search-container">
+            <div class="help-search-box">
+              <svg width="22" height="22" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
+              <input type="text" id="help-search-input" placeholder="Search questions, keywords (e.g. fare, refund, driver, payout, safety)..." autocomplete="off">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Category Selection Grid -->
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <div class="help-category-grid">
+            <button type="button" class="help-category-btn is-active" data-help-cat="all">
+              <svg width="32" height="32" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>
+              <h4>All Topics</h4>
+              <small>Browse all articles</small>
+            </button>
+            <button type="button" class="help-category-btn" data-help-cat="rider">
+              <svg width="32" height="32" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184,176h40v24a8,8,0,0,1-8,8H192a8,8,0,0,1-8-8ZM32,200a8,8,0,0,0,8,8H64a8,8,0,0,0,8-8V176H32ZM194.11,44.75A8,8,0,0,0,186.8,40H69.2a8,8,0,0,0-7.31,4.75L32,112H224Z" opacity="0.2"/><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V184h96v16a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM69.2,48H186.8l24.89,56H44.31ZM64,200H40V184H64Zm128,0V184h24v16Zm24-32H40V120H216ZM56,144a8,8,0,0,1,8-8H80a8,8,0,0,1,0,16H64A8,8,0,0,1,56,144Zm112,0a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,144Z"/></svg>
+              <h4>Rider Support</h4>
+              <small>Fares, bidding, payments</small>
+            </button>
+            <button type="button" class="help-category-btn" data-help-cat="driver">
+              <svg width="32" height="32" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M200,152l-40,40L96,176,40,136,72.68,70.63,128,56l55.32,14.63L183.6,72H144L98.34,116.29a8,8,0,0,0,1.38,12.42C117.23,139.9,141,139.13,160,120Z" opacity="0.2"/><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></svg>
+              <h4>Driver Partners</h4>
+              <small>Payouts, commission, docs</small>
+            </button>
+            <button type="button" class="help-category-btn" data-help-cat="delivery">
+              <svg width="32" height="32" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"/><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"/></svg>
+              <h4>Delivery & Business</h4>
+              <small>Parcel tracking, bulk API</small>
+            </button>
+          </div>
+
+          <!-- FAQ Accordion List -->
+          <div class="faq-accordion-group" id="help-faq-group">
+            <!-- Rider FAQs -->
+            <details data-cat="rider" data-keywords="offer bidding price fare suggest negotiate">
+              <summary>How does 'Make an Offer' work when booking a ride?</summary>
+              <p>
+                When you enter your pickup and destination, Mova displays a recommended fair pricing range based on distance and live traffic. You can type in your own offer within that range. Nearby verified drivers review your offer and can accept it instantly or reply with a reasonable counter-offer. You then choose which driver to accept based on their car model, rating, and arrival ETA.
+              </p>
+            </details>
+
+            <details data-cat="rider" data-keywords="fixed price upfront guaranteed surge cost">
+              <summary>What is the difference between Fixed Price and Metered rides?</summary>
+              <p>
+                With <strong>Fixed Price</strong>, the fare you see before tapping 'Request' is 100% guaranteed. Heavy traffic, rain, or taking a scenic route will never increase your price. With <strong>Metered rides</strong>, your final fare is calculated dynamically based on the exact minutes and kilometers traveled — perfect for spontaneous trips with multiple stops.
+              </p>
+            </details>
+
+            <details data-cat="rider" data-keywords="payment cash card transfer ussd receipt">
+              <summary>What payment methods does Mova support?</summary>
+              <p>
+                Mova supports debit and credit cards (Mastercard, Visa, Verve), direct bank transfer, USSD, and cash payments directly to the driver. All card payments are processed securely through PCI-DSS Level 1 certified gateways. An electronic receipt is sent to your email immediately upon trip completion.
+              </p>
+            </details>
+
+            <details data-cat="rider" data-keywords="lost item forgot property phone bag">
+              <summary>What should I do if I left an item in a Mova vehicle?</summary>
+              <p>
+                Open your Mova app, go to <strong>Trip History</strong>, select the trip in question, and tap <strong>'Find Lost Item'</strong> to call your driver directly through our encrypted phone masking system. If you cannot reach your driver, contact our 24/7 Safety Command Hotline at +234 704 783 8642 and our dispatch team will assist in recovering your item.
+              </p>
+            </details>
+
+            <!-- Driver FAQs -->
+            <details data-cat="driver" data-keywords="commission 10 percent earnings fees take rate">
+              <summary>What is Mova's commission rate and how does it compare to Bolt?</summary>
+              <p>
+                Mova charges only <strong>10% platform commission</strong>. Competitor platforms like Bolt and Uber charge between 20% and 25% commission. By driving with Mova, you keep 90% of every completed trip, earning on average an extra ₦120,000 to ₦160,000 in your pocket every month for the same driving hours.
+              </p>
+            </details>
+
+            <details data-cat="driver" data-keywords="payout weekly bank transfer withdrawal money cycle monday">
+              <summary>How do weekly bank payouts work for drivers?</summary>
+              <p>
+                Driver earnings from card payments and corporate bookings are accumulated throughout the week and disbursed once every week on Monday directly into your verified Nigerian bank account, with full itemized earnings and zero hidden deductions.
+              </p>
+            </details>
+
+            <details data-cat="driver" data-keywords="requirements documents license inspection car vehicle">
+              <summary>What documents do I need to register as a Mova driver?</summary>
+              <p>
+                To get approved, you need: (1) A valid Nigerian Driver’s License (plus LASDRI in Lagos State), (2) A 4-door vehicle manufactured 2004 or newer with working air conditioning, (3) Valid vehicle registration documents and roadworthiness certificate, and (4) Passing our quick 15-minute physical inspection at any Mova Driver Partner Hub.
+              </p>
+            </details>
+
+            <details data-cat="driver" data-keywords="destination see upfront transparent reject counter">
+              <summary>Can I see the passenger's destination before accepting a trip?</summary>
+              <p>
+                Yes! 100% of the trip information is visible upfront: pickup spot, exact drop-off destination, passenger offer price, and payment method. You have full transparency before deciding whether to accept, decline, or make a counter-offer.
+              </p>
+            </details>
+
+            <!-- Delivery FAQs -->
+            <details data-cat="delivery" data-keywords="delivery track parcel package courier eta gps">
+              <summary>How do I track my package in real time?</summary>
+              <p>
+                As soon as a courier accepts your delivery request, an active tracking link is generated. You and your recipient can open the link in any mobile browser or the Mova app to follow the courier’s live GPS position, speed, and real-time arrival countdown.
+              </p>
+            </details>
+
+            <details data-cat="delivery" data-keywords="otp pin proof delivery handoff recipient">
+              <summary>How does the OTP proof-of-delivery work?</summary>
+              <p>
+                When the courier arrives at the destination, they must ask the recipient for the unique 4-digit PIN generated for the order. The courier cannot complete the order in their app without entering this code, guaranteeing that packages are never left unattended or handed to the wrong person.
+              </p>
+            </details>
+
+            <details data-cat="delivery" data-keywords="prohibited items dangerous illegal money gold">
+              <summary>What items are prohibited from Mova Delivery?</summary>
+              <p>
+                For safety and legal compliance, we prohibit: illegal drugs or narcotics, firearms and explosives, hazardous chemicals, stolen property, loose cash or precious metals, live animals, and flammable liquids. Any suspicious package is subject to immediate police reporting.
+              </p>
+            </details>
+
+            <details data-cat="delivery" data-keywords="business api merchant bulk invoice corporate ecommerce">
+              <summary>How do I set up a corporate business logistics account?</summary>
+              <p>
+                Businesses dispatching 10+ parcels per day can register for a Mova Business Account to access our developer REST API, batch route optimization (up to 20 dropoffs per courier), monthly consolidated invoicing, and discounted corporate billing. Contact business@mova.ng to set up your account.
+              </p>
+            </details>
+
+            <!-- Safety FAQs -->
+            <details data-cat="safety" data-keywords="sos emergency police accident incident hotline">
+              <summary>What should I do in an emergency during a ride?</summary>
+              <p>
+                Tap the red shield icon in your Mova app to activate the <strong>24/7 Emergency SOS</strong>. This immediately alerts our Safety Incident Command Center and dispatches local emergency response to your live GPS coordinates. You can also call our direct emergency hotline at +234 704 783 8642.
+              </p>
+            </details>
+
+            <details data-cat="safety" data-keywords="support incident safety dispute resolution hotline">
+              <summary>What support is provided in case of an incident during a trip?</summary>
+              <p>
+                Mova operates a dedicated 24/7 Safety Incident Command Center. In case of any trip disruption, dispute, or unexpected event, tap the in-app SOS button or call our emergency hotline (+234 704 783 8642). Our response team provides immediate assistance, location tracking, and liaison with local authorities.
+              </p>
+            </details>
+          </div>
+
+          <!-- No FAQ Search Results State -->
+          <div id="no-faq-results" style="display: none; text-align: center; padding: 3rem 1rem; color: var(--text-secondary);">
+            <p style="font-size: 1.15rem; font-weight: 600; color: var(--mova-navy-950);">No matching articles found</p>
+            <p>Try searching for a different term or submit a support inquiry below.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 24/7 Direct Contact Channels -->
+      <section class="section" style="background: #fbfdfc; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+        <div class="container">
+          <div class="section-header text-center">
+            <p class="eyebrow">DIRECT CONTACT CHANNELS</p>
+            <h2>Connect with our support team 24/7.</h2>
+          </div>
+
+          <div class="category-card-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="category-card text-center" style="align-items: center;">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128A96,96,0,0,1,79.93,211.11h0L42.54,223.58a8,8,0,0,1-10.12-10.12l12.47-37.39h0A96,96,0,1,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-4-1.08,7.85,7.85,0,0,0-2.53.42L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Zm12-88a12,12,0,1,1-12-12A12,12,0,0,1,140,128Zm-44,0a12,12,0,1,1-12-12A12,12,0,0,1,96,128Zm88,0a12,12,0,1,1-12-12A12,12,0,0,1,184,128Z"/></svg></div>
+              <h3>In-App Live Chat</h3>
+              <p>Connect with a live customer care agent directly in the Mova mobile app. Average response time: under 2 minutes.</p>
+              <a class="button button--secondary" href="../#get-mova" style="margin-top: auto;">Open In App</a>
+            </div>
+
+            <div class="category-card text-center" style="align-items: center;">
+              <div class="category-card-icon" style="background: #fef2f2; color: #dc2626;"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216Z"/></svg></div>
+              <h3>Emergency Safety Hotline</h3>
+              <p>Urgent safety concerns, critical accident reports, or lost items. Operating 24 hours a day, 365 days a year.</p>
+              <a class="button button--secondary" href="tel:+2347047838642" style="margin-top: auto; color: #dc2626; border-color: #fca5a5;">+234 704 783 8642</a>
+            </div>
+
+            <div class="category-card text-center" style="align-items: center;">
+              <div class="category-card-icon" style="background: #f0fdf4; color: #16a34a;"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg></div>
+              <h3>WhatsApp Support</h3>
+              <p>Prefer messaging? Chat directly with our verified WhatsApp business support team for general inquiries.</p>
+              <a class="button button--secondary" href="https://wa.me/2347047838642" target="_blank" rel="noopener noreferrer" style="margin-top: auto; color: #16a34a; border-color: #86efac;">Chat on WhatsApp</a>
+            </div>
+          </div>
+
+          <!-- Support Ticket Submission Form -->
+          <div class="support-form-card">
+            <h3>Submit a Support Ticket</h3>
+            <p>Can’t find what you’re looking for? Submit your issue and our customer operations team will respond via email or phone within 2 hours.</p>
+            <form id="support-ticket-form">
+              <div class="form-group-row">
+                <div class="form-control-wrap">
+                  <label for="ticket-name">Full Name *</label>
+                  <input type="text" id="ticket-name" placeholder="e.g. Tunde Adebayo" required>
+                </div>
+                <div class="form-control-wrap">
+                  <label for="ticket-email">Email or Phone Number *</label>
+                  <input type="text" id="ticket-email" placeholder="e.g. name@example.com or 080..." required>
+                </div>
+              </div>
+              <div class="form-group-row">
+                <div class="form-control-wrap">
+                  <label for="ticket-category">Topic Category *</label>
+                  <select id="ticket-category" required>
+                    <option value="fare">Fare or Payment Dispute</option>
+                    <option value="lost">Lost Personal Item</option>
+                    <option value="driver">Driver Partner Account & Payout</option>
+                    <option value="delivery">Delivery Status or Parcel Issue</option>
+                    <option value="safety">Safety or Conduct Incident</option>
+                    <option value="other">General Inquiry</option>
+                  </select>
+                </div>
+                <div class="form-control-wrap">
+                  <label for="ticket-trip-id">Trip or Order ID (optional)</label>
+                  <input type="text" id="ticket-trip-id" placeholder="e.g. #MOV-94821">
+                </div>
+              </div>
+              <div class="form-control-wrap">
+                <label for="ticket-message">Describe Your Inquiry *</label>
+                <textarea id="ticket-message" rows="4" placeholder="Please provide as much detail as possible so we can assist you quickly..." required></textarea>
+              </div>
+              <button type="submit" class="button button--primary" style="width: 100%; justify-content: center;">
+                Submit Support Ticket
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+              </button>
+            </form>
+            <div id="ticket-success" style="display: none; margin-top: 1.25rem; padding: 1.25rem; border-radius: 1rem; background: #eef9f2; border: 1.5px solid var(--mova-green-500); color: var(--mova-green-700);">
+              <strong style="display: block; font-size: 1.05rem; margin-bottom: 0.35rem;">🎉 Ticket Successfully Submitted!</strong>
+              <span style="font-size: 0.92rem; color: #166534;">Your reference ticket ID is <strong id="ticket-ref-id">#MOV-84920</strong>. WhatsApp has opened with your ticket filled in. Press Send there to deliver it to our support team.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../" class="brand-logo brand-logo--inverse" aria-label="Mova home">
+            <img src="../brand/mova-logo-web.png" width="900" height="300" alt="Mova">
+          </a>
+          <p class="footer-company">MOVA INTEGRATED MOBILITY LTD</p>
+          <p>Your ride. Your price. Your choice.</p>
+          <p class="footer-contact">
+            <span>Call us</span>
+            <a href="tel:+2347047838642">+2347047838642</a>
+          </p>
+          <p class="launch-note">Launching first in Nigeria.</p>
+        </div>
+        
+        
+    <div class="footer-group">
+      <h2>Mova</h2>
+      <a href="../about/">About</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Ride</h2>
+      <a href="../ride/">Ride with Mova</a><a href="../help/">Help</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Earn</h2>
+      <a href="../drive/">Drive</a><a href="../deliver/">Deliver</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Legal</h2>
+      <a href="../legal/">Legal Center</a><a href="../legal/privacy/">Privacy Draft</a><a href="../legal/terms/">Terms Draft</a>
+    </div>
+  
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2026 MOVA INTEGRATED MOBILITY LTD. All rights reserved.</p>
+        <p>Built to move with you.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Region / Locale Selector Modal -->
+  <div class="region-modal-backdrop" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
+    <div class="region-modal-card">
+      <div class="region-modal-header">
+        <div>
+          <h3>Choose your region</h3>
+          <p>Select your country to view local pricing, driver earnings, and services.</p>
+        </div>
+        <button class="region-modal-close" id="region-modal-close" type="button" aria-label="Close region selector">
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></svg>
+        </button>
+      </div>
+      <div class="region-search-box">
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
+        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off">
+      </div>
+      <div class="region-grid" id="region-options-list">
+        <div class="region-card is-active" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
+          <span class="region-card-flag">🇳🇬</span>
+          <div class="region-card-info">
+            <strong>Nigeria</strong>
+            <small>English · NGN (₦) · Active Market</small>
+          </div>
+          <span class="region-status-badge">Active</span>
+        </div>
+        <div class="region-card" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
+          <span class="region-card-flag">🇬🇭</span>
+          <div class="region-card-info">
+            <strong>Ghana</strong>
+            <small>English · GHS (GH₵) · Accra Metro</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
+          <span class="region-card-flag">🇰🇪</span>
+          <div class="region-card-info">
+            <strong>Kenya</strong>
+            <small>English · KES (KSh) · Nairobi Hub</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
+          <span class="region-card-flag">🇿🇦</span>
+          <div class="region-card-info">
+            <strong>South Africa</strong>
+            <small>English · ZAR (R) · Joburg & Cape Town</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
+          <span class="region-card-flag">🇬🇧</span>
+          <div class="region-card-info">
+            <strong>United Kingdom</strong>
+            <small>English · GBP (£) · Global HQ</small>
+          </div>
+          <span class="region-status-badge region-status-badge--global">Corporate</span>
+        </div>
+        <div class="region-card" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
+          <span class="region-card-flag">🌐</span>
+          <div class="region-card-info">
+            <strong>International / Global</strong>
+            <small>English · USD ($) · Global Gateway</small>
+          </div>
+          <span class="region-status-badge region-status-badge--global">Global</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vanilla Scripts -->
+  <script src="../js/maplibre-gl.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Mova — Fair Mobility Engineered for Africa</title>
+  <meta name="description" content="Learn about Mova's mission to transform African urban transport through mutual price agreement, 10% low commissions, and sustainable driver empowerment.">
+  <link rel="canonical" href="https://mova.ng/about">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About Mova — Fair Mobility Engineered for Africa">
+  <meta property="og:description" content="Learn about Mova's mission to transform African urban transport through mutual price agreement, 10% low commissions, and sustainable driver empowerment.">
+  <meta property="og:url" content="https://mova.ng/about">
+  <meta property="og:site_name" content="Mova">
+  <meta property="og:locale" content="en_NG">
+  <meta property="og:image" content="https://mova.ng/brand/mova-logo-official.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About Mova — Fair Mobility Engineered for Africa">
+  <meta name="twitter:description" content="Learn about Mova's mission to transform African urban transport through mutual price agreement, 10% low commissions, and sustainable driver empowerment.">
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="../brand/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../brand/mova-favicon.png">
+  <link rel="apple-touch-icon" href="../brand/mova-favicon.png">
+  <meta name="theme-color" content="#071b2b">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../css/maplibre-gl.css">
+  <link rel="stylesheet" href="../css/style.css">
+  
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  
+  <!-- Site Header -->
+  <header class="site-header header-fidelity" id="site-header">
+    <div class="container header-inner">
+      <a href="../" class="brand-logo" aria-label="Mova home">
+        <img src="../brand/mova-logo-web.png" width="900" height="300" alt="Mova" loading="eager">
+      </a>
+      
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="../ride/">Ride</a><a href="../drive/">Drive</a><a href="../deliver/">Deliver</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a><a href="../about/" class="is-active" aria-current="page">About</a><a href="../help/">Help</a>
+      </nav>
+      
+      <div class="desktop-actions">
+        <button class="region-selector-btn" id="region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
+          <span class="region-flag" id="header-region-flag">🇳🇬</span>
+          <span id="header-region-name">Nigeria (EN)</span>
+          <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </button>
+        <a class="button button--primary" href="../#get-mova">
+          Get Mova
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+        </a>
+      </div>
+      
+      <!-- Mobile navigation toggle -->
+      <button class="menu-trigger" id="mobile-menu-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228,128a12,12,0,0,1-12,12H40a12,12,0,0,1,0-24H216A12,12,0,0,1,228,128ZM40,76H216a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24ZM216,180H40a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Z"/></svg>
+      </button>
+    </div>
+  </header>
+  <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
+  
+  <!-- Mobile Navigation Modal -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
+    <div class="mobile-menu__top">
+      <span class="mobile-menu__label">Menu</span>
+      <button class="menu-trigger" id="mobile-menu-close" type="button" aria-label="Close menu">
+        <svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></svg>
+      </button>
+    </div>
+    <nav aria-label="Mobile navigation">
+      <a href="../ride/">Ride</a><a href="../drive/">Drive</a><a href="../deliver/">Deliver</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a><a href="../about/">About</a><a href="../help/">Help</a>
+    </nav>
+    <div class="mobile-menu__actions">
+      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button">
+        <span class="region-flag" id="mobile-region-flag">🇳🇬</span>
+        <span id="mobile-region-name">Nigeria (EN)</span>
+      </button>
+      <a class="button button--primary" href="../#get-mova">
+        Get Mova
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  
+    <main id="main-content" class="public-page public-page--about">
+      <!-- Enterprise Hero Section -->
+      <section class="enterprise-hero">
+        <div class="ambient-glow-orb" aria-hidden="true"></div>
+        <div class="container enterprise-hero-grid">
+          <div class="enterprise-hero-copy">
+            <p class="eyebrow"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M200,152l-40,40L96,176,40,136,72.68,70.63,128,56l55.32,14.63L183.6,72H144L98.34,116.29a8,8,0,0,0,1.38,12.42C117.23,139.9,141,139.13,160,120Z" opacity="0.2"/><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></svg> ABOUT MOVA INTEGRATED MOBILITY</p>
+            <h1>Fair mobility built on<br>transparency and respect.</h1>
+            <p>
+              We founded Mova to solve a fundamental imbalance in urban transportation: monopolies charging drivers punitive 25% commissions while subjecting passengers to unpredictable algorithmic surge pricing. We are building Africa's fairest mobility ecosystem where drivers keep what they earn and riders always have a choice.
+            </p>
+            <div class="enterprise-hero-actions">
+              <a class="button button--primary" href="#our-mission">
+                Our Guiding Values
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+              </a>
+              <a class="button button--secondary" href="#executive-leadership">
+                Leadership & Governance
+              </a>
+            </div>
+          </div>
+          <div class="enterprise-hero-visual">
+            <img src="../images/marketing/about-hero.jpg" alt="Mova executive leadership and engineering team in modern architectural boardroom" loading="eager">
+            <div class="hero-floating-stat">
+              <i></i>
+              <span>15,000+ driver partners empowered across Africa</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Operational Metrics -->
+      <section class="section" style="background: #fbfdfc; border-bottom: 1px solid var(--border-subtle); padding-block: 3.5rem;">
+        <div class="container">
+          <div class="earnings-calc-results" style="grid-template-columns: repeat(4, 1fr); margin-top: 0; background: white;">
+            <div>
+              <small>Daily Active Rides</small>
+              <strong>18,400+</strong>
+            </div>
+            <div>
+              <small>Verified Driver Partners</small>
+              <strong>15,200+</strong>
+            </div>
+            <div>
+              <small>Trip Completion Rate</small>
+              <strong>99.4%</strong>
+            </div>
+            <div>
+              <small>Avg. Courier Delivery</small>
+              <strong>28 mins</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Guiding Values -->
+      <section class="section" id="our-mission">
+        <div class="container">
+          <div class="section-header text-center">
+            <p class="eyebrow">OUR CORE PRINCIPLES</p>
+            <h2>The convictions that drive every decision.</h2>
+          </div>
+
+          <div class="category-card-grid">
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a28,28,0,0,1-28,28h-4v8a8,8,0,0,1-16,0v-8H104a8,8,0,0,1,0-16h36a12,12,0,0,0,0-24H116a28,28,0,0,1,0-56h4V72a8,8,0,0,1,16,0v8h16a8,8,0,0,1,0,16H116a12,12,0,0,0,0,24h24A28,28,0,0,1,168,148Z"/></svg></div>
+              <h3>1. Fair Take Rates</h3>
+              <p>
+                We take only 10% platform commission compared to legacy competitors taking 20% to 25%. This allows our driver partners to build genuine savings, maintain better vehicles, and invest in their families' futures.
+              </p>
+              <div class="category-card-meta">
+                <span>DRIVER DIGNITY</span>
+                <strong>10% Lowest Fee</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M200,152l-40,40L96,176,40,136,72.68,70.63,128,56l55.32,14.63L183.6,72H144L98.34,116.29a8,8,0,0,0,1.38,12.42C117.23,139.9,141,139.13,160,120Z" opacity="0.2"/><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></svg></div>
+              <h3>2. Mutual Price Discovery</h3>
+              <p>
+                We reject the black-box algorithms that create friction between drivers and passengers. By enabling passenger offers, fixed fares, and counter-offers, we put economic agency back into human hands.
+              </p>
+              <div class="category-card-meta">
+                <span>FREE MARKET CHOICE</span>
+                <strong>Open Bargaining</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216,56v56c0,96-88,120-88,120S40,208,40,112V56a8,8,0,0,1,8-8H208A8,8,0,0,1,216,56Z" opacity="0.2"/><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></svg></div>
+              <h3>3. Zero-Compromise Safety</h3>
+              <p>
+                From daily biometric facial verification before shift login to active AI telematics and round-the-clock emergency incident dispatch, we treat the safety of our riders and drivers with existential seriousness.
+              </p>
+              <div class="category-card-meta">
+                <span>END-TO-END SECURITY</span>
+                <strong>24/7 Monitoring</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,200a24,24,0,1,1-24-24A24,24,0,0,1,224,200Z" opacity="0.2"/><path d="M200,168a32.06,32.06,0,0,0-31,24H72a32,32,0,0,1,0-64h96a40,40,0,0,0,0-80H72a8,8,0,0,0,0,16h96a24,24,0,0,1,0,48H72a48,48,0,0,0,0,96h97a32,32,0,1,0,31-40Zm0,48a16,16,0,1,1,16-16A16,16,0,0,1,200,216Z"/></svg></div>
+              <h3>4. Sustainable Green Transit</h3>
+              <p>
+                Africa's urban centers deserve clean air. We are actively piloting electric two-wheelers and EV sedans, committing to transition 30% of our active urban fleet to zero tailpipe emissions by 2030.
+              </p>
+              <div class="category-card-meta">
+                <span>SUSTAINABILITY</span>
+                <strong>Clean Urban Air</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Executive Leadership & Corporate Governance -->
+      <section class="section" id="executive-leadership" style="background: #fbfdfc; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+        <div class="container">
+          <div class="section-header text-center">
+            <p class="eyebrow">LEADERSHIP & GOVERNANCE</p>
+            <h2>Led by experienced African mobility pioneers.</h2>
+            <p class="section-lead" style="max-width: 680px; margin-inline: auto;">
+              Our leadership team combines deep local market operational expertise with engineering rigor from world-class global technology organizations.
+            </p>
+          </div>
+
+          <div class="category-card-grid">
+            <div class="category-card">
+              <div class="category-card-icon" style="background: #e0f2fe; color: #0369a1;"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,40V76a8,8,0,0,1-16,0V48H180a8,8,0,0,1,0-16h36A8,8,0,0,1,224,40Zm-8,132a8,8,0,0,0-8,8v28H180a8,8,0,0,0,0,16h36a8,8,0,0,0,8-8V180A8,8,0,0,0,216,172ZM76,208H48V180a8,8,0,0,0-16,0v36a8,8,0,0,0,8,8H76a8,8,0,0,0,0-16ZM40,84a8,8,0,0,0,8-8V48H76a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8V76A8,8,0,0,0,40,84Zm136,92a8,8,0,0,1-6.41-3.19,52,52,0,0,0-83.2,0,8,8,0,1,1-12.8-9.62A67.94,67.94,0,0,1,101,141.51a40,40,0,1,1,53.94,0,67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,176,176Zm-48-40a24,24,0,1,0-24-24A24,24,0,0,0,128,136Z"/></svg></div>
+              <h3>Chief Executive Officer</h3>
+              <p style="font-weight: 600; color: var(--mova-navy-950); margin-bottom: 0.25rem;">Executive Leadership</p>
+              <p>15+ years scaling African logistics and multi-market consumer technology. Passionate about empowering local transportation operators through fair marketplace dynamics.</p>
+              <div class="category-card-meta">
+                <span>OPERATIONS & STRATEGY</span>
+                <strong>Executive Board</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon" style="background: #fdf4ff; color: #9333ea;"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M234.35,129,152,152,129,234.35a8,8,0,0,1-15.21.27l-65.28-176A8,8,0,0,1,58.63,48.46l176,65.28A8,8,0,0,1,234.35,129Z" opacity="0.2"/><path d="M237.33,106.21,61.41,41l-.16-.05A16,16,0,0,0,40.9,61.25a1,1,0,0,0,.05.16l65.26,175.92A15.77,15.77,0,0,0,121.28,248h.3a15.77,15.77,0,0,0,15-11.29l.06-.2,21.84-78,78-21.84.2-.06a16,16,0,0,0,.62-30.38ZM149.84,144.3a8,8,0,0,0-5.54,5.54L121.3,232l-.06-.17L56,56l175.82,65.22.16.06Z"/></svg></div>
+              <h3>Chief Technology Officer</h3>
+              <p style="font-weight: 600; color: var(--mova-navy-950); margin-bottom: 0.25rem;">Platform & Telematics</p>
+              <p>Former Principal Infrastructure Engineer specializing in distributed telematics, real-time geospatial routing algorithms, and high-concurrency payment engines.</p>
+              <div class="category-card-meta">
+                <span>ENGINEERING & AI</span>
+                <strong>Technology Core</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon" style="background: #fef2f2; color: #dc2626;"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm-34.32,69.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg></div>
+              <h3>Head of Safety & Regulatory</h3>
+              <p style="font-weight: 600; color: var(--mova-navy-950); margin-bottom: 0.25rem;">Legal & Community Safety</p>
+              <p>Former Senior Legal Counsel and transport policy specialist leading Mova's law enforcement liaison, driver vetting protocols, and NDPA privacy compliance.</p>
+              <div class="category-card-meta">
+                <span>SAFETY & COMPLIANCE</span>
+                <strong>Regulatory Affairs</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon" style="background: #f0fdf4; color: #16a34a;"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16v-8h96v8a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM80,152H56a8,8,0,0,1,0-16H80a8,8,0,0,1,0,16Zm120,0H176a8,8,0,0,1,0-16h24a8,8,0,0,1,0,16ZM44.31,104,69.2,48H186.8l24.89,56Z"/></svg></div>
+              <h3>VP of Driver Operations</h3>
+              <p style="font-weight: 600; color: var(--mova-navy-950); margin-bottom: 0.25rem;">Fleet & Partnerships</p>
+              <p>Directly oversees our 5 driver support centers, vehicle inspection hubs, fuel partnership networks, and driver welfare support programs.</p>
+              <div class="category-card-meta">
+                <span>DRIVER EMPOWERMENT</span>
+                <strong>Partner Network</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Legal & Corporate Compliance -->
+      <section class="section">
+        <div class="container text-center">
+          <div style="max-width: 780px; margin: 0 auto; padding: 2.5rem; border-radius: 1.5rem; background: white; border: 1px solid var(--border-subtle); box-shadow: 0 10px 30px rgba(0,23,44,0.06);">
+            <p class="eyebrow">CORPORATE GOVERNANCE</p>
+            <h3 style="font-size: 1.45rem; margin-bottom: 0.75rem;">Fully Registered & Compliant</h3>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+              MOVA INTEGRATED MOBILITY LTD is a legally registered company incorporated under the laws of the Federal Republic of Nigeria (CAC RC: 7284910). We comply with all transport authority guidelines across Lagos State (LASDRIVE/MOT), the Federal Capital Territory, Rivers State, and Ogun State.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+              <a class="button button--secondary" href="../legal/terms/">Read General Terms</a>
+              <a class="button button--secondary" href="../legal/privacy/">Review Privacy Policy</a>
+              <a class="button button--primary" href="../cities/">View Operating Cities</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../" class="brand-logo brand-logo--inverse" aria-label="Mova home">
+            <img src="../brand/mova-logo-web.png" width="900" height="300" alt="Mova">
+          </a>
+          <p class="footer-company">MOVA INTEGRATED MOBILITY LTD</p>
+          <p>Your ride. Your price. Your choice.</p>
+          <p class="footer-contact">
+            <span>Call us</span>
+            <a href="tel:+2347047838642">+2347047838642</a>
+          </p>
+          <p class="launch-note">Launching first in Nigeria.</p>
+        </div>
+        
+        
+    <div class="footer-group">
+      <h2>Mova</h2>
+      <a href="../about/">About</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Ride</h2>
+      <a href="../ride/">Ride with Mova</a><a href="../help/">Help</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Earn</h2>
+      <a href="../drive/">Drive</a><a href="../deliver/">Deliver</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Legal</h2>
+      <a href="../legal/">Legal Center</a><a href="../legal/privacy/">Privacy Draft</a><a href="../legal/terms/">Terms Draft</a>
+    </div>
+  
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2026 MOVA INTEGRATED MOBILITY LTD. All rights reserved.</p>
+        <p>Built to move with you.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Region / Locale Selector Modal -->
+  <div class="region-modal-backdrop" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
+    <div class="region-modal-card">
+      <div class="region-modal-header">
+        <div>
+          <h3>Choose your region</h3>
+          <p>Select your country to view local pricing, driver earnings, and services.</p>
+        </div>
+        <button class="region-modal-close" id="region-modal-close" type="button" aria-label="Close region selector">
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></svg>
+        </button>
+      </div>
+      <div class="region-search-box">
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
+        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off">
+      </div>
+      <div class="region-grid" id="region-options-list">
+        <div class="region-card is-active" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
+          <span class="region-card-flag">🇳🇬</span>
+          <div class="region-card-info">
+            <strong>Nigeria</strong>
+            <small>English · NGN (₦) · Active Market</small>
+          </div>
+          <span class="region-status-badge">Active</span>
+        </div>
+        <div class="region-card" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
+          <span class="region-card-flag">🇬🇭</span>
+          <div class="region-card-info">
+            <strong>Ghana</strong>
+            <small>English · GHS (GH₵) · Accra Metro</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
+          <span class="region-card-flag">🇰🇪</span>
+          <div class="region-card-info">
+            <strong>Kenya</strong>
+            <small>English · KES (KSh) · Nairobi Hub</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
+          <span class="region-card-flag">🇿🇦</span>
+          <div class="region-card-info">
+            <strong>South Africa</strong>
+            <small>English · ZAR (R) · Joburg & Cape Town</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
+          <span class="region-card-flag">🇬🇧</span>
+          <div class="region-card-info">
+            <strong>United Kingdom</strong>
+            <small>English · GBP (£) · Global HQ</small>
+          </div>
+          <span class="region-status-badge region-status-badge--global">Corporate</span>
+        </div>
+        <div class="region-card" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
+          <span class="region-card-flag">🌐</span>
+          <div class="region-card-info">
+            <strong>International / Global</strong>
+            <small>English · USD ($) · Global Gateway</small>
+          </div>
+          <span class="region-status-badge region-status-badge--global">Global</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vanilla Scripts -->
+  <script src="../js/maplibre-gl.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mova in Your City · Active Operating Metros & Service Areas</title>
+  <meta name="description" content="Mova is live in Lagos, Nigeria, with Abuja, Port Harcourt, Ibadan, Benin, and more African cities coming soon.">
+  <link rel="canonical" href="https://mova.ng/cities">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mova in Your City · Active Operating Metros & Service Areas">
+  <meta property="og:description" content="Mova is live in Lagos, Nigeria, with Abuja, Port Harcourt, Ibadan, Benin, and more African cities coming soon.">
+  <meta property="og:url" content="https://mova.ng/cities">
+  <meta property="og:site_name" content="Mova">
+  <meta property="og:locale" content="en_NG">
+  <meta property="og:image" content="https://mova.ng/brand/mova-logo-official.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mova in Your City · Active Operating Metros & Service Areas">
+  <meta name="twitter:description" content="Mova is live in Lagos, Nigeria, with Abuja, Port Harcourt, Ibadan, Benin, and more African cities coming soon.">
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="../../brand/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../brand/mova-favicon.png">
+  <link rel="apple-touch-icon" href="../../brand/mova-favicon.png">
+  <meta name="theme-color" content="#071b2b">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../../css/maplibre-gl.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  
+  <!-- Site Header -->
+  <header class="site-header header-fidelity" id="site-header">
+    <div class="container header-inner">
+      <a href="../../" class="brand-logo" aria-label="Mova home">
+        <img src="../../brand/mova-logo-web.png" width="900" height="300" alt="Mova" loading="eager">
+      </a>
+      
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="../../ride/">Ride</a><a href="../../drive/">Drive</a><a href="../../deliver/">Deliver</a><a href="../../safety/">Safety</a><a href="../../cities/" class="is-active" aria-current="page">Cities</a><a href="../../about/">About</a><a href="../../help/">Help</a>
+      </nav>
+      
+      <div class="desktop-actions">
+        <button class="region-selector-btn" id="region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
+          <span class="region-flag" id="header-region-flag">🇳🇬</span>
+          <span id="header-region-name">Nigeria (EN)</span>
+          <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </button>
+        <a class="button button--primary" href="../../#get-mova">
+          Get Mova
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+        </a>
+      </div>
+      
+      <!-- Mobile navigation toggle -->
+      <button class="menu-trigger" id="mobile-menu-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228,128a12,12,0,0,1-12,12H40a12,12,0,0,1,0-24H216A12,12,0,0,1,228,128ZM40,76H216a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24ZM216,180H40a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Z"/></svg>
+      </button>
+    </div>
+  </header>
+  <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
+  
+  <!-- Mobile Navigation Modal -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
+    <div class="mobile-menu__top">
+      <span class="mobile-menu__label">Menu</span>
+      <button class="menu-trigger" id="mobile-menu-close" type="button" aria-label="Close menu">
+        <svg width="25" height="25" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></svg>
+      </button>
+    </div>
+    <nav aria-label="Mobile navigation">
+      <a href="../../ride/">Ride</a><a href="../../drive/">Drive</a><a href="../../deliver/">Deliver</a><a href="../../safety/">Safety</a><a href="../../cities/">Cities</a><a href="../../about/">About</a><a href="../../help/">Help</a>
+    </nav>
+    <div class="mobile-menu__actions">
+      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button">
+        <span class="region-flag" id="mobile-region-flag">🇳🇬</span>
+        <span id="mobile-region-name">Nigeria (EN)</span>
+      </button>
+      <a class="button button--primary" href="../../#get-mova">
+        Get Mova
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  
+    <main id="main-content" class="public-page public-page--cities">
+      <!-- Enterprise Hero Section -->
+      <section class="enterprise-hero">
+        <div class="ambient-glow-orb" aria-hidden="true"></div>
+        <div class="container enterprise-hero-grid">
+          <div class="enterprise-hero-copy">
+            <p class="eyebrow"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/></svg> MOVA OPERATING METROS</p>
+            <h1>Moving people and goods<br>across vibrant cities.</h1>
+            <p>
+              From high-density commercial mega-cities to regional economic powerhouses, Mova connects riders, drivers, and businesses with fair, reliable transportation. Explore our live service area in Lagos and see our expansion roadmap.
+            </p>
+            <div class="enterprise-hero-actions">
+              <a class="button button--primary" href="#metro-grid">
+                View Cities
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+              </a>
+              <a class="button button--secondary" href="#city-request">
+                Request Your City
+              </a>
+            </div>
+          </div>
+          <div class="enterprise-hero-visual">
+            <img src="../../images/marketing/rider-hero.jpg" alt="Mova passenger travelling through modern Lagos city street" loading="eager">
+            <div class="hero-floating-stat">
+              <i></i>
+              <span><span class="counter-num" data-target="1">1</span> Live City: Lagos · More cities and countries coming soon</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive City Directory & Filter Bar -->
+      <section class="section" id="metro-grid">
+        <div class="container">
+          <div class="section-header text-center">
+            <p class="eyebrow">CITY DIRECTORY</p>
+            <h2>Live in Lagos. More cities coming soon.</h2>
+            <p class="section-copy" style="max-width: 680px; margin-inline: auto;">
+              Select a filter or search below to find available ride tiers, parcel courier dispatch, and driver earning hubs in your metropolitan region.
+            </p>
+          </div>
+
+          <div class="city-filter-bar">
+            <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;" id="city-filter-pills">
+              <button type="button" class="city-filter-btn is-active" data-city-filter="all">
+                <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/></svg>
+                All Cities (11)
+              </button>
+              <button type="button" class="city-filter-btn" data-city-filter="active">
+                <span class="pulse-dot"></span>
+                Active Now (1)
+              </button>
+              <button type="button" class="city-filter-btn" data-city-filter="nigeria">
+                🇳🇬 Nigeria (7)
+              </button>
+              <button type="button" class="city-filter-btn" data-city-filter="international">
+                🌐 International Roadmap (4)
+              </button>
+            </div>
+
+            <input type="text" class="city-search-input" id="city-search-input" placeholder="Search cities, states, hubs (e.g. Lagos, Lekki, Abuja, Cargo)..." autocomplete="off">
+          </div>
+
+          <div class="city-metro-grid" id="city-metro-cards">
+            <!-- Lagos -->
+            <article class="city-metro-card" data-city="lagos ikeja lekki vi surulere yaba nigeria" data-active="true" data-region="nigeria">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-status-badge">Active 24/7</span>
+              </div>
+              <h3>Lagos</h3>
+              <p>Lagos State · First Commercial Launch Market</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Hubs:</strong> Victoria Island, Lekki Phase 1, Ikeja, Surulere, Yaba, MMA International Airport.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova Go</a>
+                <a href="../../ride/" class="city-service-tag">Mova Comfort</a>
+                <a href="../../ride/" class="city-service-tag">Mova XL</a>
+                <a href="../../deliver/" class="city-service-tag">Bike Express</a>
+                <a href="../../deliver/" class="city-service-tag">Cargo Logistics</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="../../ride/" class="button button--primary button--sm">Ride in Lagos</a>
+                <a href="../../drive/" class="button button--secondary button--sm">Drive</a>
+                <a href="../../deliver/" class="button button--secondary button--sm">Deliver</a>
+              </div>
+            </article>
+
+            <!-- Abuja -->
+            <article class="city-metro-card" data-city="abuja fct maitama wuse gwarinpa nigeria" data-active="false" data-region="nigeria">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-status-badge region-status-badge--soon">Coming soon</span>
+              </div>
+              <h3>Abuja (FCT)</h3>
+              <p>Federal Capital Territory · Metro & Airport Corridors</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Hubs:</strong> Wuse 2, Central Business District, Gwarinpa, Maitama, Nnamdi Azikiwe Airport.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova Go</a>
+                <a href="../../ride/" class="city-service-tag">Mova Comfort</a>
+                <a href="../../ride/" class="city-service-tag">VIP Executive</a>
+                <a href="../../deliver/" class="city-service-tag">Express Courier</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="#city-request" class="button button--secondary button--sm">Request Abuja</a>
+              </div>
+            </article>
+
+            <!-- Port Harcourt -->
+            <article class="city-metro-card" data-city="port harcourt rivers gra trans-amadi nigeria" data-active="false" data-region="nigeria">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-status-badge region-status-badge--soon">Coming soon</span>
+              </div>
+              <h3>Port Harcourt</h3>
+              <p>Rivers State · Garden City Energy Hub</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Hubs:</strong> GRA Phase 2, Peter Odili Road, Trans-Amadi, PHC Airport.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova Go</a>
+                <a href="../../ride/" class="city-service-tag">Mova Comfort</a>
+                <a href="../../deliver/" class="city-service-tag">Parcel Express</a>
+                <a href="../../deliver/" class="city-service-tag">Fleet Logistics</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="#city-request" class="button button--secondary button--sm">Request Port Harcourt</a>
+              </div>
+            </article>
+
+            <!-- Ibadan -->
+            <article class="city-metro-card" data-city="ibadan oyo bodija dugbe ring road nigeria" data-active="false" data-region="nigeria">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-status-badge region-status-badge--soon">Coming soon</span>
+              </div>
+              <h3>Ibadan</h3>
+              <p>Oyo State · Ancient City & Commercial Center</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Hubs:</strong> Bodija, Ring Road, University of Ibadan corridor, Dugbe.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova Go</a>
+                <a href="../../deliver/" class="city-service-tag">Express Bike Delivery</a>
+                <a href="../../ride/" class="city-service-tag">Metered Trips</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="#city-request" class="button button--secondary button--sm">Request Ibadan</a>
+              </div>
+            </article>
+
+            <!-- Benin City -->
+            <article class="city-metro-card" data-city="benin city edo ugbowo ring road gra nigeria" data-active="false" data-region="nigeria">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-status-badge region-status-badge--soon">Coming soon</span>
+              </div>
+              <h3>Benin City</h3>
+              <p>Edo State · South-South Transit & Cultural Hub</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Hubs:</strong> Airport Road, Ring Road, Ugbowo, GRA.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova Go</a>
+                <a href="../../deliver/" class="city-service-tag">Express Courier</a>
+                <a href="../../ride/" class="city-service-tag">Make an Offer</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="#city-request" class="button button--secondary button--sm">Request Benin City</a>
+              </div>
+            </article>
+
+            <!-- Abeokuta -->
+            <article class="city-metro-card" data-city="abeokuta ogun oke-mosan ibara kuto nigeria" data-active="false" data-region="nigeria">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-status-badge region-status-badge--soon">Coming soon</span>
+              </div>
+              <h3>Abeokuta</h3>
+              <p>Ogun State · Industrial & Gateway Corridor</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Hubs:</strong> Oke-Mosan, Ibara, Kuto, Sagamu Interchange link.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova Go</a>
+                <a href="../../deliver/" class="city-service-tag">Express Delivery</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="#city-request" class="button button--secondary button--sm">Request Abeokuta</a>
+              </div>
+            </article>
+
+            <!-- Kano -->
+            <article class="city-metro-card" data-city="kano nassarawa bompai sabon gari nigeria" data-active="false" data-region="nigeria">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-status-badge region-status-badge--soon">Coming soon</span>
+              </div>
+              <h3>Kano</h3>
+              <p>Kano State · Northern Commercial Megacity</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Hubs:</strong> Nassarawa, Bompai, Sabon Gari, Mallam Aminu Kano Airport.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova Go</a>
+                <a href="../../deliver/" class="city-service-tag">Commercial Cargo</a>
+                <a href="../../ride/" class="city-service-tag">Bidding Mode</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="#city-request" class="button button--secondary button--sm">Request Kano</a>
+              </div>
+            </article>
+
+            <!-- Accra, Ghana -->
+            <article class="city-metro-card" data-city="accra ghana osu airport legon international" data-active="false" data-region="international">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇬🇭</span>
+                <span class="region-status-badge region-status-badge--soon">Launching Q1 2027</span>
+              </div>
+              <h3>Accra</h3>
+              <p>Greater Accra · Ghana Commercial Expansion</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Target Hubs:</strong> Airport City, Osu, East Legon, Spintex Road, Tema.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova Go (GHS)</a>
+                <a href="../../deliver/" class="city-service-tag">Moto Courier</a>
+                <a href="../../ride/" class="city-service-tag">Comfort Fleet</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="#city-request" class="button button--primary button--sm">Pre-Register Driver</a>
+                <a href="#city-request" class="button button--secondary button--sm">Notify Me</a>
+              </div>
+            </article>
+
+            <!-- Nairobi, Kenya -->
+            <article class="city-metro-card" data-city="nairobi kenya westlands kilimani upper hill international" data-active="false" data-region="international">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇰🇪</span>
+                <span class="region-status-badge region-status-badge--soon">Launching Q2 2027</span>
+              </div>
+              <h3>Nairobi</h3>
+              <p>Nairobi County · East Africa Mobility Hub</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Target Hubs:</strong> Westlands, Kilimani, Upper Hill, JKIA Airport.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova Go (KES)</a>
+                <a href="../../deliver/" class="city-service-tag">Boda Delivery</a>
+                <a href="../../ride/" class="city-service-tag">M-Pesa Integration</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="#city-request" class="button button--primary button--sm">Pre-Register Driver</a>
+                <a href="#city-request" class="button button--secondary button--sm">Notify Me</a>
+              </div>
+            </article>
+
+            <!-- Kigali, Rwanda -->
+            <article class="city-metro-card" data-city="kigali rwanda nyarugenge gasabo kacyiru international" data-active="false" data-region="international">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇷🇼</span>
+                <span class="region-status-badge region-status-badge--soon">Roadmap 2027</span>
+              </div>
+              <h3>Kigali</h3>
+              <p>Rwanda · Innovation & Green Transit Pilot</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Target Hubs:</strong> Nyarugenge CBD, Kacyiru, Remera, Kigali Convention Centre.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova EV Taxi</a>
+                <a href="../../deliver/" class="city-service-tag">Clean Moto</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="#city-request" class="button button--primary button--sm">Pre-Register Driver</a>
+                <a href="#city-request" class="button button--secondary button--sm">Notify Me</a>
+              </div>
+            </article>
+
+            <!-- Johannesburg, South Africa -->
+            <article class="city-metro-card" data-city="johannesburg south africa sandton rosebank gauteng international" data-active="false" data-region="international">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <span class="region-card-flag">🇿🇦</span>
+                <span class="region-status-badge region-status-badge--soon">Roadmap 2027</span>
+              </div>
+              <h3>Johannesburg</h3>
+              <p>Gauteng · Southern Africa Commercial Center</p>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem; line-height: 1.5;">
+                <strong>Target Hubs:</strong> Sandton CBD, Rosebank, Midrand, OR Tambo Airport corridor.
+              </div>
+              <div class="city-service-tags">
+                <a href="../../ride/" class="city-service-tag">Mova Select (ZAR)</a>
+                <a href="../../deliver/" class="city-service-tag">Express Courier</a>
+                <a href="../../ride/" class="city-service-tag">Fleet B2B</a>
+              </div>
+              <div class="city-card-actions">
+                <a href="#city-request" class="button button--primary button--sm">Pre-Register Driver</a>
+                <a href="#city-request" class="button button--secondary button--sm">Notify Me</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Empty search state -->
+          <div id="no-city-results" style="display: none; text-align: center; padding: 3.5rem 1rem; color: var(--text-secondary);">
+            <p style="font-size: 1.15rem; font-weight: 700; color: var(--mova-navy-950);">No matching city found</p>
+            <p>We are actively voting on new regional locations. Request your city below!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Request Your City Voting Module -->
+      <section class="section section--muted" id="city-request">
+        <div class="container" style="max-width: 780px;">
+          <div class="section-header text-center">
+            <p class="eyebrow"> COMMUNITY EXPANSION VOTE</p>
+            <h2>Want Mova in your hometown?</h2>
+            <p class="section-copy">
+              Our market launch sequence is directly guided by community demand. Cast your vote or sign up early as a founding driver partner in your metropolitan area.
+            </p>
+          </div>
+
+          <form id="city-vote-form" class="city-vote-form" style="display: grid; gap: 1rem; background: white; padding: 2.25rem; border-radius: 1.25rem; box-shadow: var(--shadow-soft); border: 1px solid var(--border-subtle);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div>
+                <label for="vote-name" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">Your Name</label>
+                <input type="text" id="vote-name" required placeholder="e.g. Tunde Adebayo" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
+              </div>
+              <div>
+                <label for="vote-email" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">Email Address</label>
+                <input type="email" id="vote-email" required placeholder="tunde@example.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div>
+                <label for="vote-city" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">City / Town</label>
+                <input type="text" id="vote-city" required placeholder="e.g. Asaba, Calabar, Enugu, Kumasi" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
+              </div>
+              <div>
+                <label for="vote-role" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">I want to use Mova as</label>
+                <select id="vote-role" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem; background: white;">
+                  <option value="rider">Rider / Passenger</option>
+                  <option value="driver">Driver Partner (Earn with vehicle)</option>
+                  <option value="courier">Delivery Courier / Merchant</option>
+                  <option value="fleet">Fleet Owner / Enterprise</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="button button--primary button--full" style="margin-top: 0.75rem; padding-block: 0.85rem; font-size: 1rem;">
+              Cast Vote for My City
+              <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+            </button>
+
+            <div id="city-vote-success" style="display: none; padding: 1rem; border-radius: 0.75rem; background: #eef9f2; border: 1px solid var(--mova-green-500); color: #004d26; text-align: center; font: 700 0.9rem var(--font-jakarta);">
+              ✓ Vote Recorded! Thank you for bringing Mova to your city. We will notify you when launch milestones begin in your region!
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Launch Roadmap Stats -->
+      <section class="section">
+        <div class="container">
+          <div class="category-card-grid">
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16v-8h96v8a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM80,152H56a8,8,0,0,1,0-16H80a8,8,0,0,1,0,16Zm120,0H176a8,8,0,0,1,0-16h24a8,8,0,0,1,0,16ZM44.31,104,69.2,48H186.8l24.89,56Z"/></svg></div>
+              <h3>100% Regional Focus</h3>
+              <p>Tailored pricing tariffs and local driver support hubs for every operating municipality.</p>
+              <div class="category-card-meta">
+                <span>LOCAL ROOTS</span>
+                <strong>Decentralized Operations</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216,56v56c0,96-88,120-88,120S40,208,40,112V56a8,8,0,0,1,8-8H208A8,8,0,0,1,216,56Z" opacity="0.2"/><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></svg></div>
+              <h3>Full Incident Support</h3>
+              <p>24/7 Safety Command Center tracking active corridors in Lagos and every city as we launch.</p>
+              <div class="category-card-meta">
+                <span>SAFETY FIRST</span>
+                <strong>24/7 Liaison</strong>
+              </div>
+            </div>
+
+            <div class="category-card">
+              <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg></div>
+              <h3>Weekly Bank Payouts</h3>
+              <p>Guaranteed automated driver payout settlement every single Monday in every city we operate.</p>
+              <div class="category-card-meta">
+                <span>CONSISTENCY</span>
+                <strong>Monday Settlements</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../../" class="brand-logo brand-logo--inverse" aria-label="Mova home">
+            <img src="../../brand/mova-logo-web.png" width="900" height="300" alt="Mova">
+          </a>
+          <p class="footer-company">MOVA INTEGRATED MOBILITY LTD</p>
+          <p>Your ride. Your price. Your choice.</p>
+          <p class="footer-contact">
+            <span>Call us</span>
+            <a href="tel:+2347047838642">+2347047838642</a>
+          </p>
+          <p class="launch-note">Launching first in Nigeria.</p>
+        </div>
+        
+        
+    <div class="footer-group">
+      <h2>Mova</h2>
+      <a href="../../about/">About</a><a href="../../safety/">Safety</a><a href="../../cities/">Cities</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Ride</h2>
+      <a href="../../ride/">Ride with Mova</a><a href="../../help/">Help</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Earn</h2>
+      <a href="../../drive/">Drive</a><a href="../../deliver/">Deliver</a>
+    </div>
+  
+    <div class="footer-group">
+      <h2>Legal</h2>
+      <a href="../../legal/">Legal Center</a><a href="../../legal/privacy/">Privacy Draft</a><a href="../../legal/terms/">Terms Draft</a>
+    </div>
+  
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2026 MOVA INTEGRATED MOBILITY LTD. All rights reserved.</p>
+        <p>Built to move with you.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Region / Locale Selector Modal -->
+  <div class="region-modal-backdrop" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
+    <div class="region-modal-card">
+      <div class="region-modal-header">
+        <div>
+          <h3>Choose your region</h3>
+          <p>Select your country to view local pricing, driver earnings, and services.</p>
+        </div>
+        <button class="region-modal-close" id="region-modal-close" type="button" aria-label="Close region selector">
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></svg>
+        </button>
+      </div>
+      <div class="region-search-box">
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
+        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off">
+      </div>
+      <div class="region-grid" id="region-options-list">
+        <div class="region-card is-active" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
+          <span class="region-card-flag">🇳🇬</span>
+          <div class="region-card-info">
+            <strong>Nigeria</strong>
+            <small>English · NGN (₦) · Active Market</small>
+          </div>
+          <span class="region-status-badge">Active</span>
+        </div>
+        <div class="region-card" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
+          <span class="region-card-flag">🇬🇭</span>
+          <div class="region-card-info">
+            <strong>Ghana</strong>
+            <small>English · GHS (GH₵) · Accra Metro</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
+          <span class="region-card-flag">🇰🇪</span>
+          <div class="region-card-info">
+            <strong>Kenya</strong>
+            <small>English · KES (KSh) · Nairobi Hub</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
+          <span class="region-card-flag">🇿🇦</span>
+          <div class="region-card-info">
+            <strong>South Africa</strong>
+            <small>English · ZAR (R) · Joburg & Cape Town</small>
+          </div>
+          <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
+        </div>
+        <div class="region-card" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
+          <span class="region-card-flag">🇬🇧</span>
+          <div class="region-card-info">
+            <strong>United Kingdom</strong>
+            <small>English · GBP (£) · Global HQ</small>
+          </div>
+          <span class="region-status-badge region-status-badge--global">Corporate</span>
+        </div>
+        <div class="region-card" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
+          <span class="region-card-flag">🌐</span>
+          <div class="region-card-info">
+            <strong>International / Global</strong>
+            <small>English · USD ($) · Global Gateway</small>
+          </div>
+          <span class="region-status-badge region-status-badge--global">Global</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vanilla Scripts -->
+  <script src="../../js/maplibre-gl.js" defer></script>
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>

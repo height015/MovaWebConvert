@@ -1,0 +1,13 @@
+{
+  "name": "mova-website",
+  "version": "1.0.0",
+  "description": "Public marketing website for Mova — Built with Vanilla HTML5, CSS3, and JavaScript.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "build": "node build-vanilla.mjs",
+    "preview": "node server.mjs"
+  }
+}
