@@ -2291,8 +2291,8 @@ function generateHelpPage(rootPath = "../") {
               </button>
             </form>
             <div id="ticket-success" style="display: none; margin-top: 1.25rem; padding: 1.25rem; border-radius: 1rem; background: #eef9f2; border: 1.5px solid var(--mova-green-500); color: var(--mova-green-700);">
-              <strong style="display: block; font-size: 1.05rem; margin-bottom: 0.35rem;">🎉 Ticket Successfully Submitted!</strong>
-              <span style="font-size: 0.92rem; color: #166534;">Your reference ticket ID is <strong id="ticket-ref-id">#MOV-84920</strong>. WhatsApp has opened with your ticket filled in. Press Send there to deliver it to our support team.</span>
+              <strong style="display: block; font-size: 1.05rem; margin-bottom: 0.35rem;">🎉 Ticket Ready to Send!</strong>
+              <span style="font-size: 0.92rem; color: #166534;">Your reference ticket ID is <strong id="ticket-ref-id">#MOV-84920</strong>. Your email app has opened with your ticket addressed to <strong>info@ridebymova.com</strong>. Please press Send there to deliver it to our support team.</span>
             </div>
           </div>
         </div>
@@ -4412,7 +4412,8 @@ input, button, textarea, select {
       const val = (id) => (document.getElementById(id)?.value || '').trim();
       const catEl = document.getElementById('ticket-category');
       const category = catEl && catEl.selectedIndex >= 0 ? catEl.options[catEl.selectedIndex].text : '';
-      const text = [
+      const subject = 'Mova Support Ticket ' + randomId + ' — ' + category;
+      const body = [
         'Mova Support Ticket ' + randomId,
         'Name: ' + val('ticket-name'),
         'Contact: ' + val('ticket-email'),
@@ -4420,12 +4421,12 @@ input, button, textarea, select {
         'Trip/Order ID: ' + (val('ticket-trip-id') || 'N/A'),
         '',
         val('ticket-message')
-      ].join('\\n');
-      const waUrl = 'https://wa.me/2348085524489?text=' + encodeURIComponent(text);
+      ].join('\\r\\n');
+      const mailtoUrl = 'mailto:info@ridebymova.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       if (ticketRefId) ticketRefId.textContent = randomId;
       if (ticketSuccess) ticketSuccess.style.display = 'block';
       ticketForm.reset();
-      window.open(waUrl, '_blank', 'noopener');
+      window.location.href = mailtoUrl;
     });
   })();
 

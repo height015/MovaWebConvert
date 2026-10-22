@@ -1070,7 +1070,8 @@
       const val = (id) => (document.getElementById(id)?.value || '').trim();
       const catEl = document.getElementById('ticket-category');
       const category = catEl && catEl.selectedIndex >= 0 ? catEl.options[catEl.selectedIndex].text : '';
-      const text = [
+      const subject = 'Mova Support Ticket ' + randomId + ' — ' + category;
+      const body = [
         'Mova Support Ticket ' + randomId,
         'Name: ' + val('ticket-name'),
         'Contact: ' + val('ticket-email'),
@@ -1078,12 +1079,12 @@
         'Trip/Order ID: ' + (val('ticket-trip-id') || 'N/A'),
         '',
         val('ticket-message')
-      ].join('\n');
-      const waUrl = 'https://wa.me/2348085524489?text=' + encodeURIComponent(text);
+      ].join('\r\n');
+      const mailtoUrl = 'mailto:info@ridebymova.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       if (ticketRefId) ticketRefId.textContent = randomId;
       if (ticketSuccess) ticketSuccess.style.display = 'block';
       ticketForm.reset();
-      window.open(waUrl, '_blank', 'noopener');
+      window.location.href = mailtoUrl;
     });
   })();
 
