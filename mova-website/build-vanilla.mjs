@@ -328,9 +328,10 @@ function renderHtmlShell({
   <meta name="twitter:description" content="${description}">
   
   <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="${rootPath}brand/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="${rootPath}brand/mova-favicon.png">
-  <link rel="apple-touch-icon" href="${rootPath}brand/mova-favicon.png">
+  <link rel="shortcut icon" href="${rootPath}brand/favicon.ico?v=2">
+  <link rel="icon" type="image/x-icon" href="${rootPath}brand/favicon.ico?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="${rootPath}brand/mova-favicon.png?v=2">
+  <link rel="apple-touch-icon" href="${rootPath}brand/mova-favicon.png?v=2">
   <meta name="theme-color" content="#071b2b">
   
   <!-- Modern Google Fonts -->
@@ -3274,6 +3275,7 @@ async function runBuild() {
   if (fs.existsSync("public/maps")) copyDir("public/maps", "maps");
   if (fs.existsSync("public/mova-bimi.svg")) fs.copyFileSync("public/mova-bimi.svg", "brand/mova-bimi.svg");
   if (fs.existsSync("../m_logo_animated.svg")) fs.copyFileSync("../m_logo_animated.svg", "brand/m_logo_animated.svg");
+  if (fs.existsSync("brand/favicon.ico")) fs.copyFileSync("brand/favicon.ico", "favicon.ico");
 
   // 2. Build CSS
   ensureDir("css");
