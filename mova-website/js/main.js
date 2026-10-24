@@ -33,37 +33,89 @@
     } catch (e) {}
   }
 
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- Accessible Focus Trap Helper for Modals and Drawers ---
+  function createFocusTrap(element, onEscape) {
+    const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    let previousActiveElement = null;
+
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        if (onEscape) onEscape();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+
+      const focusables = Array.from(element.querySelectorAll(focusableSelector)).filter(el => {
+        return el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0;
+      });
+      if (!focusables.length) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    return {
+      activate() {
+        previousActiveElement = document.activeElement;
+        element.addEventListener('keydown', handleKeyDown);
+      },
+      deactivate(restoreFocus = true) {
+        element.removeEventListener('keydown', handleKeyDown);
+        if (restoreFocus && previousActiveElement && typeof previousActiveElement.focus === 'function') {
+          previousActiveElement.focus();
+        }
+      }
+    };
+  }
+
   // =========================================================================
   // 1. Mobile Navigation Drawer
   // =========================================================================
   const menuOpenBtn = document.getElementById('mobile-menu-open');
   const menuCloseBtn = document.getElementById('mobile-menu-close');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuTrap = mobileMenu ? createFocusTrap(mobileMenu, closeMenu) : null;
 
   function openMenu() {
     if (!mobileMenu) return;
+    mobileMenu.classList.add('is-open');
+    mobileMenu.classList.remove('is-hidden');
     mobileMenu.style.display = 'block';
     menuOpenBtn?.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('modal-open');
     document.body.style.overflow = 'hidden';
+    mobileMenuTrap?.activate();
     menuCloseBtn?.focus();
   }
 
   function closeMenu() {
     if (!mobileMenu) return;
+    mobileMenu.classList.remove('is-open');
+    mobileMenu.classList.add('is-hidden');
     mobileMenu.style.display = 'none';
     menuOpenBtn?.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('modal-open');
     document.body.style.overflow = '';
-    menuOpenBtn?.focus();
+    mobileMenuTrap?.deactivate(true);
   }
 
   menuOpenBtn?.addEventListener('click', openMenu);
   menuCloseBtn?.addEventListener('click', closeMenu);
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileMenu && mobileMenu.style.display === 'block') {
-      closeMenu();
-    }
-  });
 
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMenu);
@@ -178,7 +230,7 @@
   const heroContainer = document.getElementById('hero-visual-container');
   const heroTiltCards = document.querySelectorAll('[data-tilt]');
 
-  if (heroContainer && heroTiltCards.length && window.matchMedia('(pointer: fine)').matches) {
+  if (!prefersReducedMotion && heroContainer && heroTiltCards.length && window.matchMedia('(pointer: fine)').matches) {
     heroContainer.addEventListener('mousemove', (e) => {
       const rect = heroContainer.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
@@ -200,7 +252,7 @@
 
   // Individual card tilt on hover
   const physicalCards = document.querySelectorAll('.category-card, .ride-mode-card, .city-metro-card, .ecosystem-card');
-  if (window.matchMedia('(pointer: fine)').matches) {
+  if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
     physicalCards.forEach((card) => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -286,11 +338,9 @@
 
     distancePills.forEach((pill) => {
       const pillKm = parseFloat(pill.getAttribute('data-km') || '0');
-      if (Math.abs(pillKm - distance) < 1.5) {
-        pill.classList.add('is-active');
-      } else {
-        pill.classList.remove('is-active');
-      }
+      const isActive = Math.abs(pillKm - distance) < 1.5;
+      pill.classList.toggle('is-active', isActive);
+      pill.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
 
     const phoneOfferEl = document.querySelector('[data-phone-mode="offer"] em');
@@ -302,6 +352,8 @@
     document.dispatchEvent(new Event('mova-fares'));
 
     if (distSlider) {
+      distSlider.setAttribute('aria-valuenow', distance.toFixed(1));
+      distSlider.setAttribute('aria-valuetext', distance.toFixed(1) + ' kilometers');
       const min = parseFloat(distSlider.min || '3');
       const max = parseFloat(distSlider.max || '45');
       const pct = Math.min(100, Math.max(0, ((distance - min) / (max - min)) * 100));
@@ -557,7 +609,7 @@
       selectHub('vi', false);
 
     } catch (err) {
-      console.warn('OpenMapTiles MapLibre initialization notice:', err);
+      container.setAttribute('data-map-fallback', 'static');
     }
   }
 
@@ -592,10 +644,11 @@
       const pane = phonePanes[key];
       if (pane) {
         pane.classList.toggle('is-active', key === tabKey);
+        pane.hidden = (key !== tabKey);
       }
     });
 
-    if (tabKey === 'journey') {
+    if (tabKey === 'journey' && !prefersReducedMotion) {
       const car = document.getElementById('moving-car');
       if (car) {
         car.style.animation = 'none';
@@ -617,6 +670,7 @@
 
   function startShowcaseTimer() {
     pauseShowcaseTimer();
+    if (prefersReducedMotion) return;
     showcaseInterval = setInterval(() => {
       const tabs = ['mode', 'journey', 'dispatch'];
       const currentIndex = tabs.indexOf(activeShowcaseTab);
@@ -705,6 +759,7 @@
     dispatchSteps.forEach((step, idx) => {
       step.classList.toggle('is-complete', idx < dispatchStage);
       step.classList.toggle('is-active', idx === dispatchStage);
+      step.setAttribute('aria-pressed', idx === dispatchStage ? 'true' : 'false');
       const i = step.querySelector('i');
       if (i) i.textContent = idx < dispatchStage ? '✓' : String(idx + 1);
     });
@@ -712,24 +767,40 @@
   if (dispatchSteps.length) {
     dispatchSteps.forEach((step, idx) => {
       step.style.cursor = 'pointer';
-      step.addEventListener('click', () => {
+      step.setAttribute('role', 'button');
+      step.setAttribute('tabindex', '0');
+      function selectStep() {
         setDispatchStage(idx);
         if (dispatchTimer) { clearInterval(dispatchTimer); dispatchTimer = null; }
+      }
+      step.addEventListener('click', selectStep);
+      step.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectStep(); }
       });
     });
-    dispatchTimer = setInterval(() => {
-      if (activeShowcaseTab === 'dispatch') setDispatchStage(dispatchStage + 1);
-    }, 2200);
+    if (!prefersReducedMotion) {
+      dispatchTimer = setInterval(() => {
+        if (activeShowcaseTab === 'dispatch') setDispatchStage(dispatchStage + 1);
+      }, 2200);
+    }
     setDispatchStage(0);
   }
   document.querySelectorAll('.phone-parcel-code').forEach((code) => {
     code.style.cursor = 'pointer';
-    code.addEventListener('click', () => {
-      const original = code.getAttribute('data-orig') || code.textContent;
-      code.setAttribute('data-orig', original);
+    code.setAttribute('role', 'button');
+    code.setAttribute('tabindex', '0');
+    code.setAttribute('aria-label', 'Copy tracking verification code MV-9482-NG');
+    function copyParcelCode() {
+      const strongEl = code.querySelector('strong') || code;
+      const original = strongEl.getAttribute('data-orig') || strongEl.textContent;
+      strongEl.setAttribute('data-orig', original);
       try { if (navigator.clipboard) navigator.clipboard.writeText(original.trim()); } catch (e) {}
-      code.textContent = 'Copied ✓';
-      setTimeout(() => { code.textContent = original; }, 1400);
+      strongEl.textContent = 'Copied ✓';
+      setTimeout(() => { strongEl.textContent = original; }, 1400);
+    }
+    code.addEventListener('click', copyParcelCode);
+    code.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copyParcelCode(); }
     });
   });
 
@@ -793,7 +864,9 @@
       if (mobileName) mobileName.textContent = info.name;
 
       regionCards.forEach(card => {
-        card.classList.toggle('is-active', card.getAttribute('data-region') === code);
+        const isCurrent = card.getAttribute('data-region') === code;
+        card.classList.toggle('is-active', isCurrent);
+        card.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
       });
     }
 
@@ -825,16 +898,31 @@
     const mobileOpenBtn = document.getElementById('mobile-region-selector-open');
     const closeBtn = document.getElementById('region-modal-close');
     const searchInput = document.getElementById('region-search-input');
+    const regionModalTrap = regionModal ? createFocusTrap(regionModal, closeRegionModal) : null;
 
     function openRegionModal() {
       if (regionModal) {
-        regionModal.style.display = 'flex';
+        regionModal.classList.add('is-open');
+        regionModal.classList.remove('is-hidden');
+        regionModal.style.display = 'grid';
+        openBtn?.setAttribute('aria-expanded', 'true');
+        mobileOpenBtn?.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('modal-open');
+        document.body.style.overflow = 'hidden';
+        regionModalTrap?.activate();
         searchInput?.focus();
       }
     }
     function closeRegionModal() {
       if (regionModal) {
+        regionModal.classList.remove('is-open');
+        regionModal.classList.add('is-hidden');
         regionModal.style.display = 'none';
+        openBtn?.setAttribute('aria-expanded', 'false');
+        mobileOpenBtn?.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        regionModalTrap?.deactivate(true);
       }
     }
 
@@ -847,11 +935,6 @@
     regionModal?.addEventListener('click', (e) => {
       if (e.target === regionModal) closeRegionModal();
     });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && regionModal && regionModal.style.display !== 'none') {
-        closeRegionModal();
-      }
-    });
 
     searchInput?.addEventListener('input', (e) => {
       const q = e.target.value.toLowerCase().trim();
@@ -862,7 +945,9 @@
     });
 
     regionCards.forEach(card => {
-      card.addEventListener('click', () => {
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      function selectRegion() {
         const selectedCode = card.getAttribute('data-region');
         safeSetStorage('mova_region', selectedCode);
         safeSetStorage('mova_region_manual', 'true');
@@ -876,6 +961,10 @@
         } else if (hasLocalePrefix) {
           window.location.href = cleanSub === '/' ? '/en-ng/' : cleanSub;
         }
+      }
+      card.addEventListener('click', selectRegion);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectRegion(); }
       });
     });
   })();
@@ -901,12 +990,10 @@
       btn.addEventListener('click', () => {
         tierBtns.forEach(b => {
           b.classList.remove('is-active');
-          b.style.borderColor = 'var(--border-subtle)';
-          b.style.background = 'white';
+          b.setAttribute('aria-checked', 'false');
         });
         btn.classList.add('is-active');
-        btn.style.borderColor = 'var(--mova-green-500)';
-        btn.style.background = '#eef9f2';
+        btn.setAttribute('aria-checked', 'true');
 
         const tier = btn.getAttribute('data-tier');
         if (tier === 'economy') avgFare = 4200;
@@ -923,6 +1010,8 @@
     function calculate() {
       const trips = parseInt(slider.value, 10);
       if (tripsVal) tripsVal.textContent = trips + ' trips';
+      slider.setAttribute('aria-valuenow', trips.toString());
+      slider.setAttribute('aria-valuetext', trips + ' trips per week');
       const gross = trips * avgFare;
       const movaFee = gross * 0.10;
       const movaNet = gross - movaFee;
@@ -983,6 +1072,7 @@
       });
 
       if (noResults) {
+        noResults.classList.toggle('is-hidden', visibleCount > 0);
         noResults.style.display = visibleCount === 0 ? 'block' : 'none';
       }
     }
@@ -990,8 +1080,12 @@
     filterBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        filterBtns.forEach(b => b.classList.remove('is-active'));
+        filterBtns.forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
         currentFilter = btn.getAttribute('data-city-filter') || 'all';
         applyFilter();
       });
@@ -1002,7 +1096,9 @@
     voteForm?.addEventListener('submit', (e) => {
       e.preventDefault();
       if (voteSuccess) {
+        voteSuccess.classList.remove('is-hidden');
         voteSuccess.style.display = 'block';
+        voteSuccess.focus();
         voteForm.reset();
         setTimeout(() => {
           voteSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1049,14 +1145,19 @@
       });
 
       if (noResults) {
+        noResults.classList.toggle('is-hidden', visibleCount > 0);
         noResults.style.display = visibleCount === 0 ? 'block' : 'none';
       }
     }
 
     categoryBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        categoryBtns.forEach(b => b.classList.remove('is-active'));
+        categoryBtns.forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
         currentCat = btn.getAttribute('data-help-cat') || 'all';
         filterFaqs();
       });
@@ -1107,7 +1208,11 @@
           submitBtn.innerHTML = originalBtnHtml;
         }
         if (ticketRefId) ticketRefId.textContent = randomId;
-        if (ticketSuccess) ticketSuccess.style.display = 'block';
+        if (ticketSuccess) {
+          ticketSuccess.classList.remove('is-hidden');
+          ticketSuccess.style.display = 'block';
+          ticketSuccess.focus();
+        }
         ticketForm.reset();
       }
     });

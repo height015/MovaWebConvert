@@ -54,7 +54,7 @@
       
       <div class="desktop-actions">
         <button class="region-selector-btn" id="region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
-          <span class="region-flag" id="header-region-flag">🇳🇬</span>
+          <span class="region-flag" id="header-region-flag" aria-hidden="true">🇳🇬</span>
           <span id="header-region-name">Nigeria (EN)</span>
           <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </button>
@@ -73,7 +73,7 @@
   <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
   
   <!-- Mobile Navigation Modal -->
-  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
+  <div class="mobile-menu is-hidden" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
     <div class="mobile-menu__top">
       <span class="mobile-menu__label">Menu</span>
       <button class="menu-trigger" id="mobile-menu-close" type="button" aria-label="Close menu">
@@ -81,11 +81,11 @@
       </button>
     </div>
     <nav aria-label="Mobile navigation">
-      <a href="../../ride/">Ride</a><a href="../../drive/">Drive</a><a href="../../deliver/">Deliver</a><a href="../../safety/">Safety</a><a href="../../cities/">Cities</a><a href="../../about/">About</a><a href="../../help/">Help</a>
+      <a href="../../ride/">Ride</a><a href="../../drive/">Drive</a><a href="../../deliver/">Deliver</a><a href="../../safety/">Safety</a><a href="../../cities/" class="is-active" aria-current="page">Cities</a><a href="../../about/">About</a><a href="../../help/">Help</a>
     </nav>
     <div class="mobile-menu__actions">
-      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button">
-        <span class="region-flag" id="mobile-region-flag">🇳🇬</span>
+      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
+        <span class="region-flag" id="mobile-region-flag" aria-hidden="true">🇳🇬</span>
         <span id="mobile-region-name">Nigeria (EN)</span>
       </button>
       <a class="button button--primary" href="../../#get-mova">
@@ -133,37 +133,40 @@
           <div class="section-header text-center">
             <p class="eyebrow">CITY DIRECTORY</p>
             <h2>Live in Lagos. More cities coming soon.</h2>
-            <p class="section-copy" style="max-width: 680px; margin-inline: auto;">
+            <p class="section-lead">
               Select a filter or search below to find available ride tiers, parcel courier dispatch, and driver earning hubs in your metropolitan region.
             </p>
           </div>
 
           <div class="city-filter-bar">
-            <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;" id="city-filter-pills">
-              <button type="button" class="city-filter-btn is-active" data-city-filter="all">
+            <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;" id="city-filter-pills" role="group" aria-label="City filter presets">
+              <button type="button" class="city-filter-btn is-active" data-city-filter="all" aria-pressed="true">
                 <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/></svg>
                 All Cities (11)
               </button>
-              <button type="button" class="city-filter-btn" data-city-filter="active">
+              <button type="button" class="city-filter-btn" data-city-filter="active" aria-pressed="false">
                 <span class="pulse-dot"></span>
                 Active Now (1)
               </button>
-              <button type="button" class="city-filter-btn" data-city-filter="nigeria">
+              <button type="button" class="city-filter-btn" data-city-filter="nigeria" aria-pressed="false">
                 🇳🇬 Nigeria (7)
               </button>
-              <button type="button" class="city-filter-btn" data-city-filter="international">
+              <button type="button" class="city-filter-btn" data-city-filter="international" aria-pressed="false">
                 🌐 International Roadmap (4)
               </button>
             </div>
 
-            <input type="text" class="city-search-input" id="city-search-input" placeholder="Search cities, states, hubs (e.g. Lagos, Lekki, Abuja, Cargo)..." autocomplete="off">
+            <div class="city-search-box">
+              <label for="city-search-input" class="visually-hidden">Search cities, states, and hubs</label>
+              <input type="text" class="city-search-input" id="city-search-input" placeholder="Search cities, states, hubs (e.g. Lagos, Lekki, Abuja, Cargo)..." autocomplete="off" aria-label="Search cities, states, and hubs">
+            </div>
           </div>
 
           <div class="city-metro-grid" id="city-metro-cards">
             <!-- Lagos -->
             <article class="city-metro-card" data-city="lagos ikeja lekki vi surulere yaba nigeria" data-active="true" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge">Active 24/7</span>
               </div>
               <h3>Lagos</h3>
@@ -188,7 +191,7 @@
             <!-- Abuja -->
             <article class="city-metro-card" data-city="abuja fct maitama wuse gwarinpa nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Abuja (FCT)</h3>
@@ -210,7 +213,7 @@
             <!-- Port Harcourt -->
             <article class="city-metro-card" data-city="port harcourt rivers gra trans-amadi nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Port Harcourt</h3>
@@ -232,7 +235,7 @@
             <!-- Ibadan -->
             <article class="city-metro-card" data-city="ibadan oyo bodija dugbe ring road nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Ibadan</h3>
@@ -253,7 +256,7 @@
             <!-- Benin City -->
             <article class="city-metro-card" data-city="benin city edo ugbowo ring road gra nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Benin City</h3>
@@ -274,7 +277,7 @@
             <!-- Abeokuta -->
             <article class="city-metro-card" data-city="abeokuta ogun oke-mosan ibara kuto nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Abeokuta</h3>
@@ -294,7 +297,7 @@
             <!-- Kano -->
             <article class="city-metro-card" data-city="kano nassarawa bompai sabon gari nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Kano</h3>
@@ -315,7 +318,7 @@
             <!-- Accra, Ghana -->
             <article class="city-metro-card" data-city="accra ghana osu airport legon international" data-active="false" data-region="international">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇬🇭</span>
+                <span class="region-card-flag" aria-hidden="true">🇬🇭</span>
                 <span class="region-status-badge region-status-badge--soon">Launching Q1 2027</span>
               </div>
               <h3>Accra</h3>
@@ -337,7 +340,7 @@
             <!-- Nairobi, Kenya -->
             <article class="city-metro-card" data-city="nairobi kenya westlands kilimani upper hill international" data-active="false" data-region="international">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇰🇪</span>
+                <span class="region-card-flag" aria-hidden="true">🇰🇪</span>
                 <span class="region-status-badge region-status-badge--soon">Launching Q2 2027</span>
               </div>
               <h3>Nairobi</h3>
@@ -359,7 +362,7 @@
             <!-- Kigali, Rwanda -->
             <article class="city-metro-card" data-city="kigali rwanda nyarugenge gasabo kacyiru international" data-active="false" data-region="international">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇷🇼</span>
+                <span class="region-card-flag" aria-hidden="true">🇷🇼</span>
                 <span class="region-status-badge region-status-badge--soon">Roadmap 2027</span>
               </div>
               <h3>Kigali</h3>
@@ -380,7 +383,7 @@
             <!-- Johannesburg, South Africa -->
             <article class="city-metro-card" data-city="johannesburg south africa sandton rosebank gauteng international" data-active="false" data-region="international">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇿🇦</span>
+                <span class="region-card-flag" aria-hidden="true">🇿🇦</span>
                 <span class="region-status-badge region-status-badge--soon">Roadmap 2027</span>
               </div>
               <h3>Johannesburg</h3>
@@ -401,7 +404,7 @@
           </div>
 
           <!-- Empty search state -->
-          <div id="no-city-results" style="display: none; text-align: center; padding: 3.5rem 1rem; color: var(--text-secondary);">
+          <div id="no-city-results" class="is-hidden" style="text-align: center; padding: 3.5rem 1rem; color: var(--text-secondary);">
             <p style="font-size: 1.15rem; font-weight: 700; color: var(--mova-navy-950);">No matching city found</p>
             <p>We are actively voting on new regional locations. Request your city below!</p>
           </div>
@@ -412,7 +415,7 @@
       <section class="section section--muted" id="city-request">
         <div class="container" style="max-width: 780px;">
           <div class="section-header text-center">
-            <p class="eyebrow"> COMMUNITY EXPANSION VOTE</p>
+            <p class="eyebrow"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/></svg> COMMUNITY EXPANSION VOTE</p>
             <h2>Want Mova in your hometown?</h2>
             <p class="section-copy">
               Our market launch sequence is directly guided by community demand. Cast your vote or sign up early as a founding driver partner in your metropolitan area.
@@ -423,18 +426,18 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div>
                 <label for="vote-name" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">Your Name</label>
-                <input type="text" id="vote-name" required placeholder="e.g. Tunde Adebayo" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
+                <input type="text" id="vote-name" required autocomplete="name" placeholder="e.g. Tunde Adebayo" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
               </div>
               <div>
                 <label for="vote-email" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">Email Address</label>
-                <input type="email" id="vote-email" required placeholder="tunde@example.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
+                <input type="email" id="vote-email" required autocomplete="email" placeholder="tunde@example.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
               </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div>
                 <label for="vote-city" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">City / Town</label>
-                <input type="text" id="vote-city" required placeholder="e.g. Asaba, Calabar, Enugu, Kumasi" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
+                <input type="text" id="vote-city" required autocomplete="address-level2" placeholder="e.g. Asaba, Calabar, Enugu, Kumasi" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
               </div>
               <div>
                 <label for="vote-role" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">I want to use Mova as</label>
@@ -449,10 +452,10 @@
 
             <button type="submit" class="button button--primary button--full" style="margin-top: 0.75rem; padding-block: 0.85rem; font-size: 1rem;">
               Cast Vote for My City
-              <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+              <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
             </button>
 
-            <div id="city-vote-success" style="display: none; padding: 1rem; border-radius: 0.75rem; background: #eef9f2; border: 1px solid var(--mova-green-500); color: #004d26; text-align: center; font: 700 0.9rem var(--font-jakarta);">
+            <div id="city-vote-success" class="is-hidden" role="status" aria-live="polite" tabindex="-1" style="padding: 1rem; border-radius: 0.75rem; background: #eef9f2; border: 1px solid var(--mova-green-500); color: #004d26; text-align: center; font: 700 0.9rem var(--font-jakarta);">
               ✓ Vote Recorded! Thank you for bringing Mova to your city. We will notify you when launch milestones begin in your region!
             </div>
           </form>
@@ -462,7 +465,7 @@
       <!-- Launch Roadmap Stats -->
       <section class="section">
         <div class="container">
-          <div class="category-card-grid">
+          <div class="category-card-grid category-card-grid--3">
             <div class="category-card">
               <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16v-8h96v8a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM80,152H56a8,8,0,0,1,0-16H80a8,8,0,0,1,0,16Zm120,0H176a8,8,0,0,1,0-16h24a8,8,0,0,1,0,16ZM44.31,104,69.2,48H186.8l24.89,56Z"/></svg></div>
               <h3>100% Regional Focus</h3>
@@ -517,22 +520,22 @@
         
         
     <div class="footer-group">
-      <h2>Mova</h2>
+      <h3 class="footer-group-title">Mova</h3>
       <a href="../../about/">About</a><a href="../../safety/">Safety</a><a href="../../cities/">Cities</a>
     </div>
   
     <div class="footer-group">
-      <h2>Ride</h2>
+      <h3 class="footer-group-title">Ride</h3>
       <a href="../../ride/">Ride with Mova</a><a href="../../help/">Help</a>
     </div>
   
     <div class="footer-group">
-      <h2>Earn</h2>
+      <h3 class="footer-group-title">Earn</h3>
       <a href="../../drive/">Drive</a><a href="../../deliver/">Deliver</a>
     </div>
   
     <div class="footer-group">
-      <h2>Legal</h2>
+      <h3 class="footer-group-title">Legal</h3>
       <a href="../../legal/">Legal Center</a><a href="../../legal/privacy/">Privacy Draft</a><a href="../../legal/terms/">Terms Draft</a>
     </div>
   
@@ -546,7 +549,7 @@
   </footer>
 
   <!-- Global Region / Locale Selector Modal -->
-  <div class="region-modal-backdrop" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
+  <div class="region-modal-backdrop is-hidden" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
     <div class="region-modal-card">
       <div class="region-modal-header">
         <div>
@@ -558,52 +561,53 @@
         </button>
       </div>
       <div class="region-search-box">
+        <label for="region-search-input" class="visually-hidden">Search countries or cities</label>
         <svg width="18" height="18" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
-        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off">
+        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off" aria-label="Search countries or cities">
       </div>
       <div class="region-grid" id="region-options-list">
-        <div class="region-card is-active" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
-          <span class="region-card-flag">🇳🇬</span>
+        <div class="region-card is-active" role="button" tabindex="0" aria-pressed="true" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
+          <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
           <div class="region-card-info">
             <strong>Nigeria</strong>
             <small>English · NGN (₦) · Active Market</small>
           </div>
           <span class="region-status-badge">Active</span>
         </div>
-        <div class="region-card" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
-          <span class="region-card-flag">🇬🇭</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
+          <span class="region-card-flag" aria-hidden="true">🇬🇭</span>
           <div class="region-card-info">
             <strong>Ghana</strong>
             <small>English · GHS (GH₵) · Accra Metro</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
-          <span class="region-card-flag">🇰🇪</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
+          <span class="region-card-flag" aria-hidden="true">🇰🇪</span>
           <div class="region-card-info">
             <strong>Kenya</strong>
             <small>English · KES (KSh) · Nairobi Hub</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
-          <span class="region-card-flag">🇿🇦</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
+          <span class="region-card-flag" aria-hidden="true">🇿🇦</span>
           <div class="region-card-info">
             <strong>South Africa</strong>
             <small>English · ZAR (R) · Joburg & Cape Town</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
-          <span class="region-card-flag">🇬🇧</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
+          <span class="region-card-flag" aria-hidden="true">🇬🇧</span>
           <div class="region-card-info">
             <strong>United Kingdom</strong>
             <small>English · GBP (£) · Global HQ</small>
           </div>
           <span class="region-status-badge region-status-badge--global">Corporate</span>
         </div>
-        <div class="region-card" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
-          <span class="region-card-flag">🌐</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
+          <span class="region-card-flag" aria-hidden="true">🌐</span>
           <div class="region-card-info">
             <strong>International / Global</strong>
             <small>English · USD ($) · Global Gateway</small>

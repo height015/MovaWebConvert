@@ -54,7 +54,7 @@
       
       <div class="desktop-actions">
         <button class="region-selector-btn" id="region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
-          <span class="region-flag" id="header-region-flag">🇳🇬</span>
+          <span class="region-flag" id="header-region-flag" aria-hidden="true">🇳🇬</span>
           <span id="header-region-name">Nigeria (EN)</span>
           <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </button>
@@ -73,7 +73,7 @@
   <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
   
   <!-- Mobile Navigation Modal -->
-  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
+  <div class="mobile-menu is-hidden" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
     <div class="mobile-menu__top">
       <span class="mobile-menu__label">Menu</span>
       <button class="menu-trigger" id="mobile-menu-close" type="button" aria-label="Close menu">
@@ -81,11 +81,11 @@
       </button>
     </div>
     <nav aria-label="Mobile navigation">
-      <a href="../../ride/">Ride</a><a href="../../drive/">Drive</a><a href="../../deliver/">Deliver</a><a href="../../safety/">Safety</a><a href="../../cities/">Cities</a><a href="../../about/">About</a><a href="../../help/">Help</a>
+      <a href="../../ride/">Ride</a><a href="../../drive/">Drive</a><a href="../../deliver/">Deliver</a><a href="../../safety/">Safety</a><a href="../../cities/">Cities</a><a href="../../about/">About</a><a href="../../help/" class="is-active" aria-current="page">Help</a>
     </nav>
     <div class="mobile-menu__actions">
-      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button">
-        <span class="region-flag" id="mobile-region-flag">🇳🇬</span>
+      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
+        <span class="region-flag" id="mobile-region-flag" aria-hidden="true">🇳🇬</span>
         <span id="mobile-region-name">Nigeria (EN)</span>
       </button>
       <a class="button button--primary" href="../../#get-mova">
@@ -101,15 +101,16 @@
       <section class="enterprise-hero">
         <div class="container text-center">
           <p class="eyebrow"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128A96,96,0,0,1,79.93,211.11h0L42.54,223.58a8,8,0,0,1-10.12-10.12l12.47-37.39h0A96,96,0,1,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-4-1.08,7.85,7.85,0,0,0-2.53.42L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Zm12-88a12,12,0,1,1-12-12A12,12,0,0,1,140,128Zm-44,0a12,12,0,1,1-12-12A12,12,0,0,1,96,128Zm88,0a12,12,0,1,1-12-12A12,12,0,0,1,184,128Z"/></svg> MOVA 24/7 SUPPORT CENTER</p>
-          <h1 style="max-width: 820px; margin-inline: auto;">How can we help you<br>move today?</h1>
-          <p style="max-width: 620px; margin-inline: auto; margin-bottom: 2rem;">
+          <h1>How can we help you<br>move today?</h1>
+          <p class="section-lead" style="margin-bottom: 2rem;">
             Search our knowledge base for instant answers or connect directly with our round-the-clock support agents.
           </p>
 
           <div class="help-search-container">
             <div class="help-search-box">
+              <label for="help-search-input" class="visually-hidden">Search support knowledge base</label>
               <svg width="22" height="22" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
-              <input type="text" id="help-search-input" placeholder="Search questions, keywords (e.g. fare, refund, driver, payout, safety)..." autocomplete="off">
+              <input type="text" id="help-search-input" placeholder="Search questions, keywords (e.g. fare, refund, driver, payout, safety)..." autocomplete="off" aria-label="Search support knowledge base">
             </div>
           </div>
         </div>
@@ -118,25 +119,25 @@
       <!-- Category Selection Grid -->
       <section class="section" style="padding-top: 0;">
         <div class="container">
-          <div class="help-category-grid">
-            <button type="button" class="help-category-btn is-active" data-help-cat="all">
+          <div class="help-category-grid" role="group" aria-label="Support topic categories">
+            <button type="button" class="help-category-btn is-active" data-help-cat="all" aria-pressed="true">
               <svg width="32" height="32" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>
-              <h4>All Topics</h4>
+              <strong class="help-category-title">All Topics</strong>
               <small>Browse all articles</small>
             </button>
-            <button type="button" class="help-category-btn" data-help-cat="rider">
+            <button type="button" class="help-category-btn" data-help-cat="rider" aria-pressed="false">
               <svg width="32" height="32" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184,176h40v24a8,8,0,0,1-8,8H192a8,8,0,0,1-8-8ZM32,200a8,8,0,0,0,8,8H64a8,8,0,0,0,8-8V176H32ZM194.11,44.75A8,8,0,0,0,186.8,40H69.2a8,8,0,0,0-7.31,4.75L32,112H224Z" opacity="0.2"/><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V184h96v16a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM69.2,48H186.8l24.89,56H44.31ZM64,200H40V184H64Zm128,0V184h24v16Zm24-32H40V120H216ZM56,144a8,8,0,0,1,8-8H80a8,8,0,0,1,0,16H64A8,8,0,0,1,56,144Zm112,0a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,144Z"/></svg>
-              <h4>Rider Support</h4>
+              <strong class="help-category-title">Rider Support</strong>
               <small>Fares, bidding, payments</small>
             </button>
-            <button type="button" class="help-category-btn" data-help-cat="driver">
+            <button type="button" class="help-category-btn" data-help-cat="driver" aria-pressed="false">
               <svg width="32" height="32" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M200,152l-40,40L96,176,40,136,72.68,70.63,128,56l55.32,14.63L183.6,72H144L98.34,116.29a8,8,0,0,0,1.38,12.42C117.23,139.9,141,139.13,160,120Z" opacity="0.2"/><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></svg>
-              <h4>Driver Partners</h4>
+              <strong class="help-category-title">Driver Partners</strong>
               <small>Payouts, commission, docs</small>
             </button>
-            <button type="button" class="help-category-btn" data-help-cat="delivery">
+            <button type="button" class="help-category-btn" data-help-cat="delivery" aria-pressed="false">
               <svg width="32" height="32" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"/><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"/></svg>
-              <h4>Delivery & Business</h4>
+              <strong class="help-category-title">Delivery & Business</strong>
               <small>Parcel tracking, bulk API</small>
             </button>
           </div>
@@ -247,7 +248,7 @@
           </div>
 
           <!-- No FAQ Search Results State -->
-          <div id="no-faq-results" style="display: none; text-align: center; padding: 3rem 1rem; color: var(--text-secondary);">
+          <div id="no-faq-results" class="is-hidden" style="text-align: center; padding: 3rem 1rem; color: var(--text-secondary);">
             <p style="font-size: 1.15rem; font-weight: 600; color: var(--mova-navy-950);">No matching articles found</p>
             <p>Try searching for a different term or submit a support inquiry below.</p>
           </div>
@@ -262,7 +263,7 @@
             <h2>Connect with our support team 24/7.</h2>
           </div>
 
-          <div class="category-card-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="category-card-grid category-card-grid--3">
             <div class="category-card text-center" style="align-items: center;">
               <div class="category-card-icon"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128A96,96,0,0,1,79.93,211.11h0L42.54,223.58a8,8,0,0,1-10.12-10.12l12.47-37.39h0A96,96,0,1,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-4-1.08,7.85,7.85,0,0,0-2.53.42L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Zm12-88a12,12,0,1,1-12-12A12,12,0,0,1,140,128Zm-44,0a12,12,0,1,1-12-12A12,12,0,0,1,96,128Zm88,0a12,12,0,1,1-12-12A12,12,0,0,1,184,128Z"/></svg></div>
               <h3>In-App Live Chat</h3>
@@ -278,7 +279,7 @@
             </div>
 
             <div class="category-card text-center" style="align-items: center;">
-              <div class="category-card-icon" style="background: #f0fdf4; color: #16a34a;"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg></div>
+              <div class="category-card-icon" style="background: #f0fdf4; color: #16a34a;"><svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128A96,96,0,0,1,79.93,211.11h0L42.54,223.58a8,8,0,0,1-10.12-10.12l12.47-37.39h0A96,96,0,1,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-4-1.08,7.85,7.85,0,0,0-2.53.42L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Zm12-88a12,12,0,1,1-12-12A12,12,0,0,1,140,128Zm-44,0a12,12,0,1,1-12-12A12,12,0,0,1,96,128Zm88,0a12,12,0,1,1-12-12A12,12,0,0,1,184,128Z"/></svg></div>
               <h3>WhatsApp Support</h3>
               <p>Prefer messaging? Chat directly with our verified WhatsApp business support team for general inquiries.</p>
               <a class="button button--secondary" href="https://wa.me/2347047838642" target="_blank" rel="noopener noreferrer" style="margin-top: auto; color: #16a34a; border-color: #86efac;">Chat on WhatsApp</a>
@@ -293,11 +294,11 @@
               <div class="form-group-row">
                 <div class="form-control-wrap">
                   <label for="ticket-name">Full Name *</label>
-                  <input type="text" id="ticket-name" placeholder="e.g. Tunde Adebayo" required>
+                  <input type="text" id="ticket-name" autocomplete="name" placeholder="e.g. Tunde Adebayo" required>
                 </div>
                 <div class="form-control-wrap">
                   <label for="ticket-email">Email or Phone Number *</label>
-                  <input type="text" id="ticket-email" placeholder="e.g. name@example.com or 080..." required>
+                  <input type="text" id="ticket-email" autocomplete="email" placeholder="e.g. name@example.com or 080..." required>
                 </div>
               </div>
               <div class="form-group-row">
@@ -323,11 +324,11 @@
               </div>
               <button type="submit" class="button button--primary" style="width: 100%; justify-content: center;">
                 Submit Support Ticket
-                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></svg>
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
               </button>
             </form>
-            <div id="ticket-success" style="display: none; margin-top: 1.25rem; padding: 1.25rem; border-radius: 1rem; background: #eef9f2; border: 1.5px solid var(--mova-green-500); color: var(--mova-green-700);">
-              <strong style="display: block; font-size: 1.05rem; margin-bottom: 0.35rem;">🎉 Ticket Successfully Submitted!</strong>
+            <div id="ticket-success" class="is-hidden" role="status" aria-live="polite" tabindex="-1" style="margin-top: 1.25rem; padding: 1.25rem; border-radius: 1rem; background: #eef9f2; border: 1.5px solid var(--mova-green-500); color: var(--mova-green-700);">
+              <strong style="display: block; font-size: 1.05rem; margin-bottom: 0.35rem;">✓ Ticket Successfully Submitted!</strong>
               <span style="font-size: 0.92rem; color: #166534;">Your reference ticket ID is <strong id="ticket-ref-id">#MOV-84920</strong>. Your message has been sent directly to <strong>info@ridebymova.com</strong> and our support team will respond within 2 hours.</span>
             </div>
           </div>
@@ -355,22 +356,22 @@
         
         
     <div class="footer-group">
-      <h2>Mova</h2>
+      <h3 class="footer-group-title">Mova</h3>
       <a href="../../about/">About</a><a href="../../safety/">Safety</a><a href="../../cities/">Cities</a>
     </div>
   
     <div class="footer-group">
-      <h2>Ride</h2>
+      <h3 class="footer-group-title">Ride</h3>
       <a href="../../ride/">Ride with Mova</a><a href="../../help/">Help</a>
     </div>
   
     <div class="footer-group">
-      <h2>Earn</h2>
+      <h3 class="footer-group-title">Earn</h3>
       <a href="../../drive/">Drive</a><a href="../../deliver/">Deliver</a>
     </div>
   
     <div class="footer-group">
-      <h2>Legal</h2>
+      <h3 class="footer-group-title">Legal</h3>
       <a href="../../legal/">Legal Center</a><a href="../../legal/privacy/">Privacy Draft</a><a href="../../legal/terms/">Terms Draft</a>
     </div>
   
@@ -384,7 +385,7 @@
   </footer>
 
   <!-- Global Region / Locale Selector Modal -->
-  <div class="region-modal-backdrop" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
+  <div class="region-modal-backdrop is-hidden" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
     <div class="region-modal-card">
       <div class="region-modal-header">
         <div>
@@ -396,52 +397,53 @@
         </button>
       </div>
       <div class="region-search-box">
+        <label for="region-search-input" class="visually-hidden">Search countries or cities</label>
         <svg width="18" height="18" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
-        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off">
+        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off" aria-label="Search countries or cities">
       </div>
       <div class="region-grid" id="region-options-list">
-        <div class="region-card is-active" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
-          <span class="region-card-flag">🇳🇬</span>
+        <div class="region-card is-active" role="button" tabindex="0" aria-pressed="true" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
+          <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
           <div class="region-card-info">
             <strong>Nigeria</strong>
             <small>English · NGN (₦) · Active Market</small>
           </div>
           <span class="region-status-badge">Active</span>
         </div>
-        <div class="region-card" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
-          <span class="region-card-flag">🇬🇭</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
+          <span class="region-card-flag" aria-hidden="true">🇬🇭</span>
           <div class="region-card-info">
             <strong>Ghana</strong>
             <small>English · GHS (GH₵) · Accra Metro</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
-          <span class="region-card-flag">🇰🇪</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
+          <span class="region-card-flag" aria-hidden="true">🇰🇪</span>
           <div class="region-card-info">
             <strong>Kenya</strong>
             <small>English · KES (KSh) · Nairobi Hub</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
-          <span class="region-card-flag">🇿🇦</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
+          <span class="region-card-flag" aria-hidden="true">🇿🇦</span>
           <div class="region-card-info">
             <strong>South Africa</strong>
             <small>English · ZAR (R) · Joburg & Cape Town</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
-          <span class="region-card-flag">🇬🇧</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
+          <span class="region-card-flag" aria-hidden="true">🇬🇧</span>
           <div class="region-card-info">
             <strong>United Kingdom</strong>
             <small>English · GBP (£) · Global HQ</small>
           </div>
           <span class="region-status-badge region-status-badge--global">Corporate</span>
         </div>
-        <div class="region-card" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
-          <span class="region-card-flag">🌐</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
+          <span class="region-card-flag" aria-hidden="true">🌐</span>
           <div class="region-card-info">
             <strong>International / Global</strong>
             <small>English · USD ($) · Global Gateway</small>

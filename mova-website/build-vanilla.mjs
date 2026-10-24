@@ -1,6 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 
+// Ensure process runs in script's directory
+if (import.meta.dirname) {
+  process.chdir(import.meta.dirname);
+}
+
 // 1. Icon definitions
 const iconsNeeded = [
   { name: "Car", weight: "fill", id: "car-fill" },
@@ -269,6 +274,7 @@ function renderHtmlShell({
 }) {
   const fullTitle = title.includes("Mova") ? title : `${title} | Mova`;
   const canonicalUrl = `${siteConfig.url}${canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`}`;
+  const getMovaHref = canonicalPath === "/404" ? `${rootPath || './'}#get-mova` : `${rootPath}#get-mova`;
 
   const navLinks = siteConfig.nav.map(item => {
     const isCurrent = activeSlug === item.slug;
@@ -277,13 +283,14 @@ function renderHtmlShell({
   }).join("");
 
   const mobileNavLinks = siteConfig.nav.map(item => {
+    const isCurrent = activeSlug === item.slug;
     const href = `${rootPath}${item.slug}/`;
-    return `<a href="${href}">${item.label}</a>`;
+    return `<a href="${href}"${isCurrent ? ' class="is-active" aria-current="page"' : ''}>${item.label}</a>`;
   }).join("");
 
   const footerGroupsHtml = siteConfig.footerGroups.map(group => `
     <div class="footer-group">
-      <h2>${group.title}</h2>
+      <h3 class="footer-group-title">${group.title}</h3>
       ${group.links.map(([label, href]) => `<a href="${rootPath}${href}">${label}</a>`).join("")}
     </div>
   `).join("");
@@ -360,11 +367,11 @@ function renderHtmlShell({
       
       <div class="desktop-actions">
         <button class="region-selector-btn" id="region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
-          <span class="region-flag" id="header-region-flag">🇳🇬</span>
+          <span class="region-flag" id="header-region-flag" aria-hidden="true">🇳🇬</span>
           <span id="header-region-name">Nigeria (EN)</span>
           <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </button>
-        <a class="button button--primary" href="${rootPath}#get-mova">
+        <a class="button button--primary" href="${getMovaHref}">
           Get Mova
           ${iconSvg("arrow-up-right", 18)}
         </a>
@@ -379,7 +386,7 @@ function renderHtmlShell({
   <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
   
   <!-- Mobile Navigation Modal -->
-  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
+  <div class="mobile-menu is-hidden" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
     <div class="mobile-menu__top">
       <span class="mobile-menu__label">Menu</span>
       <button class="menu-trigger" id="mobile-menu-close" type="button" aria-label="Close menu">
@@ -390,11 +397,11 @@ function renderHtmlShell({
       ${mobileNavLinks}
     </nav>
     <div class="mobile-menu__actions">
-      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button">
-        <span class="region-flag" id="mobile-region-flag">🇳🇬</span>
+      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
+        <span class="region-flag" id="mobile-region-flag" aria-hidden="true">🇳🇬</span>
         <span id="mobile-region-name">Nigeria (EN)</span>
       </button>
-      <a class="button button--primary" href="${rootPath}#get-mova">
+      <a class="button button--primary" href="${getMovaHref}">
         Get Mova
         ${iconSvg("arrow-up-right", 18)}
       </a>
@@ -431,7 +438,7 @@ function renderHtmlShell({
   </footer>
 
   <!-- Global Region / Locale Selector Modal -->
-  <div class="region-modal-backdrop" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
+  <div class="region-modal-backdrop is-hidden" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
     <div class="region-modal-card">
       <div class="region-modal-header">
         <div>
@@ -443,52 +450,53 @@ function renderHtmlShell({
         </button>
       </div>
       <div class="region-search-box">
+        <label for="region-search-input" class="visually-hidden">Search countries or cities</label>
         <svg width="18" height="18" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
-        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off">
+        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off" aria-label="Search countries or cities">
       </div>
       <div class="region-grid" id="region-options-list">
-        <div class="region-card is-active" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
-          <span class="region-card-flag">🇳🇬</span>
+        <div class="region-card is-active" role="button" tabindex="0" aria-pressed="true" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
+          <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
           <div class="region-card-info">
             <strong>Nigeria</strong>
             <small>English · NGN (₦) · Active Market</small>
           </div>
           <span class="region-status-badge">Active</span>
         </div>
-        <div class="region-card" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
-          <span class="region-card-flag">🇬🇭</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
+          <span class="region-card-flag" aria-hidden="true">🇬🇭</span>
           <div class="region-card-info">
             <strong>Ghana</strong>
             <small>English · GHS (GH₵) · Accra Metro</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
-          <span class="region-card-flag">🇰🇪</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
+          <span class="region-card-flag" aria-hidden="true">🇰🇪</span>
           <div class="region-card-info">
             <strong>Kenya</strong>
             <small>English · KES (KSh) · Nairobi Hub</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
-          <span class="region-card-flag">🇿🇦</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
+          <span class="region-card-flag" aria-hidden="true">🇿🇦</span>
           <div class="region-card-info">
             <strong>South Africa</strong>
             <small>English · ZAR (R) · Joburg & Cape Town</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
-          <span class="region-card-flag">🇬🇧</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
+          <span class="region-card-flag" aria-hidden="true">🇬🇧</span>
           <div class="region-card-info">
             <strong>United Kingdom</strong>
             <small>English · GBP (£) · Global HQ</small>
           </div>
           <span class="region-status-badge region-status-badge--global">Corporate</span>
         </div>
-        <div class="region-card" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
-          <span class="region-card-flag">🌐</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
+          <span class="region-card-flag" aria-hidden="true">🌐</span>
           <div class="region-card-info">
             <strong>International / Global</strong>
             <small>English · USD ($) · Global Gateway</small>
@@ -547,7 +555,7 @@ function generateRidePage(rootPath = "../") {
           <div class="section-header text-center">
             <p class="eyebrow">YOUR CHOICE BEFORE EVERY REQUEST</p>
             <h2>Three ways to ride. You pick what fits.</h2>
-            <p class="section-lead" style="max-width: 680px; margin-inline: auto;">
+            <p class="section-lead">
               Unlike traditional ride-hailing apps that lock you into inflexible algorithms, Mova gives you three transparent pricing options for every single trip.
             </p>
           </div>
@@ -605,12 +613,12 @@ function generateRidePage(rootPath = "../") {
       </section>
 
       <!-- Vehicle Categories & Fleet -->
-      <section class="section" id="fleet-classes" style="background: #fbfdfc; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <section class="section section--canvas section--bordered" id="fleet-classes">
         <div class="container">
           <div class="section-header text-center">
             <p class="eyebrow">OUR VEHICLE CATEGORIES</p>
             <h2>A vehicle class for every journey.</h2>
-            <p class="section-lead" style="max-width: 680px; margin-inline: auto;">
+            <p class="section-lead">
               Every car on Mova undergoes an annual 45-point mechanical inspection and must be equipped with working air conditioning and passenger safety equipment.
             </p>
           </div>
@@ -620,7 +628,7 @@ function generateRidePage(rootPath = "../") {
               <div class="category-card-icon">${iconSvg("car-fill", 28)}</div>
               <h3>Mova Go</h3>
               <p>Smart, reliable compact sedans and hatchbacks for everyday urban commuting. Fuel-efficient, clean, and budget-friendly.</p>
-              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              <ul class="spec-list">
                 <li>Toyota Corolla, Hyundai Elantra, Kia Rio</li>
                 <li>Seats up to 4 passengers</li>
                 <li>Air-conditioned & verified</li>
@@ -635,7 +643,7 @@ function generateRidePage(rootPath = "../") {
               <div class="category-card-icon">${iconSvg("star-fill", 28)}</div>
               <h3>Mova Comfort</h3>
               <p>Spacious, newer-model sedans with generous rear legroom, climate control, phone charging cables, and top-rated driver partners.</p>
-              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              <ul class="spec-list">
                 <li>Toyota Camry, Honda Accord, Hyundai Sonata</li>
                 <li>Extra legroom & phone chargers</li>
                 <li>Top 10% highest-rated drivers</li>
@@ -650,7 +658,7 @@ function generateRidePage(rootPath = "../") {
               <div class="category-card-icon">${iconSvg("car-profile-fill", 28)}</div>
               <h3>Mova XL</h3>
               <p>Three-row SUVs and premium minivans designed for airport runs, family trips, bulky shopping, and group outings across town.</p>
-              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              <ul class="spec-list">
                 <li>Toyota Sienna, Highlander, Honda Pilot</li>
                 <li>Seats up to 6 passengers + 4 large bags</li>
                 <li>Spacious luggage compartment</li>
@@ -665,7 +673,7 @@ function generateRidePage(rootPath = "../") {
               <div class="category-card-icon">${iconSvg("path-duotone", 28)}</div>
               <h3>Mova Electric</h3>
               <p>Zero-emission electric sedans and hybrid vehicles pioneering green urban transit in Lagos and Abuja. Whisper-quiet and eco-friendly.</p>
-              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              <ul class="spec-list">
                 <li>Modern EV Sedans & Hybrids</li>
                 <li>Zero tailpipe emissions</li>
                 <li>Quiet, ultra-smooth ride</li>
@@ -685,67 +693,67 @@ function generateRidePage(rootPath = "../") {
           <div class="section-header text-center">
             <p class="eyebrow">HEAD-TO-HEAD BENCHMARK</p>
             <h2>Why riders and drivers choose Mova over the rest.</h2>
-            <p class="section-lead" style="max-width: 680px; margin-inline: auto;">
+            <p class="section-lead">
               Compare Mova directly against legacy ride-hailing services operating in Nigeria and Africa.
             </p>
           </div>
 
-          <div class="comparison-table-wrap">
+          <div class="comparison-table-wrap" tabindex="0" role="region" aria-label="Platform feature comparison table">
             <table class="comparison-table">
               <thead>
                 <tr>
-                  <th>Platform Feature</th>
-                  <th class="mova-col">Mova</th>
-                  <th>Bolt</th>
-                  <th>inDrive</th>
-                  <th>Yellow Cabs</th>
+                  <th scope="col">Platform Feature</th>
+                  <th scope="col" class="mova-col">Mova</th>
+                  <th scope="col">Bolt</th>
+                  <th scope="col">inDrive</th>
+                  <th scope="col">Yellow Cabs</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Pricing Models</strong></td>
+                  <th scope="row"><strong>Pricing Models</strong></th>
                   <td class="mova-col">Choice of 3: Bid, Fixed, or Metered</td>
                   <td>Algorithm surge only</td>
                   <td>Bidding only</td>
                   <td>Street bargaining</td>
                 </tr>
                 <tr>
-                  <td><strong>Surge Pricing Multipliers</strong></td>
+                  <th scope="row"><strong>Surge Pricing Multipliers</strong></th>
                   <td class="mova-col">Capped, transparent & fair</td>
                   <td>Unannounced up to 3.5x</td>
                   <td>Dynamic</td>
                   <td>Arbitrary rain markup</td>
                 </tr>
                 <tr>
-                  <td><strong>Driver Commission</strong></td>
+                  <th scope="row"><strong>Driver Commission</strong></th>
                   <td class="mova-col">Only 10% (Driver keeps 90%)</td>
                   <td>20% – 25% + fees</td>
                   <td>10% – 12%</td>
                   <td>N/A (Owner takes 60%)</td>
                 </tr>
                 <tr>
-                  <td><strong>Driver Destination Visibility</strong></td>
+                  <th scope="row"><strong>Driver Destination Visibility</strong></th>
                   <td class="mova-col">100% visible before accept</td>
                   <td>Hidden until driver arrives</td>
                   <td>Visible</td>
                   <td>Direct inquiry</td>
                 </tr>
                 <tr>
-                  <td><strong>Driver Cancellation Rate</strong></td>
+                  <th scope="row"><strong>Driver Cancellation Rate</strong></th>
                   <td class="mova-col">Under 3.2% (mutual agreement)</td>
                   <td>Over 24% in peak traffic</td>
                   <td>Moderate</td>
                   <td>Frequent refusal</td>
                 </tr>
                 <tr>
-                  <td><strong>Safety & Emergency SOS</strong></td>
+                  <th scope="row"><strong>Safety & Emergency SOS</strong></th>
                   <td class="mova-col">24/7 Live Telematics + Police SOS</td>
                   <td>Basic in-app SOS</td>
                   <td>Basic SOS button</td>
                   <td>No tracking or records</td>
                 </tr>
                 <tr>
-                  <td><strong>Post-Trip Dispute Resolution</strong></td>
+                  <th scope="row"><strong>Post-Trip Dispute Resolution</strong></th>
                   <td class="mova-col">Dedicated 24/7 Safety Command</td>
                   <td>Standard ticket queue</td>
                   <td>Basic email support</td>
@@ -758,19 +766,19 @@ function generateRidePage(rootPath = "../") {
       </section>
 
       <!-- Download App CTA Banner -->
-      <section class="section" style="background: linear-gradient(135deg, #071b2b 0%, #00172c 100%); color: white; padding-block: 4.5rem;">
+      <section class="section subpage-cta">
         <div class="container text-center">
-          <p class="eyebrow" style="color: var(--mova-green-500);">GET STARTED TODAY</p>
-          <h2 style="color: white; font-size: clamp(2rem, 4vw, 3.2rem); margin-bottom: 1rem;">Experience fair urban mobility now.</h2>
-          <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem;">
+          <p class="eyebrow eyebrow--accent">GET STARTED TODAY</p>
+          <h2 class="subpage-cta__title">Experience fair urban mobility now.</h2>
+          <p class="subpage-cta__copy">
             Download the Mova app for iOS and Android. Request your first ride or make an offer in seconds.
           </p>
-          <div class="button-row" style="justify-content: center;">
+          <div class="button-row button-row--center">
             <a class="button button--primary" href="${rootPath}#get-mova">
               Download Mova App
               ${iconSvg("arrow-up-right", 18)}
             </a>
-            <a class="button button--secondary" href="${rootPath}safety/" style="color: white; border-color: rgba(255,255,255,0.25);">
+            <a class="button button--secondary button--subtle-light" href="${rootPath}safety/">
               Review Safety Protocols
             </a>
           </div>
@@ -828,28 +836,28 @@ function generateDrivePage(rootPath = "../") {
           <div class="section-header text-center">
             <p class="eyebrow">TRANSPARENT TAKE-HOME PAY</p>
             <h2>See how much more you keep with Mova.</h2>
-            <p class="section-lead" style="max-width: 680px; margin-inline: auto;">
+            <p class="section-lead">
               Use our interactive calculator to compare your net take-home earnings on Mova vs legacy platforms charging 25% commission.
             </p>
           </div>
 
           <div class="earnings-calc-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-              <label for="drive-trips-slider" style="font: 750 1.05rem var(--font-jakarta); color: var(--mova-navy-950);">
-                Weekly Completed Trips: <strong id="drive-trips-val" style="color: var(--mova-green-700);">50 trips</strong>
+            <div class="earnings-calc-header">
+              <label for="drive-trips-slider">
+                Weekly Completed Trips: <strong id="drive-trips-val">50 trips</strong>
               </label>
               <span style="font-size: 0.85rem; color: var(--text-secondary);">(~7 trips / day)</span>
             </div>
-            <input type="range" id="drive-trips-slider" min="10" max="120" step="5" value="50" style="width: 100%; accent-color: var(--mova-green-500); cursor: pointer;">
+            <input type="range" id="drive-trips-slider" min="10" max="120" step="5" value="50" class="mova-range-slider" aria-label="Weekly Completed Trips" aria-valuemin="10" aria-valuemax="120" aria-valuenow="50" aria-valuetext="50 trips per week">
 
-            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: center; flex-wrap: wrap;">
-              <button type="button" class="category-tier-btn is-active" data-tier="economy" style="padding: 0.5rem 1rem; border-radius: 999px; border: 1.5px solid var(--mova-green-500); background: #eef9f2; font: 700 0.82rem var(--font-jakarta); cursor: pointer;">
+            <div class="button-row button-row--center" style="margin-top: 1.5rem; flex-wrap: wrap;" role="radiogroup" aria-label="Vehicle category tier">
+              <button type="button" role="radio" aria-checked="true" class="category-tier-btn is-active" data-tier="economy">
                 Mova Go (₦4,200 avg/trip)
               </button>
-              <button type="button" class="category-tier-btn" data-tier="comfort" style="padding: 0.5rem 1rem; border-radius: 999px; border: 1.5px solid var(--border-subtle); background: white; font: 700 0.82rem var(--font-jakarta); cursor: pointer;">
+              <button type="button" role="radio" aria-checked="false" class="category-tier-btn" data-tier="comfort">
                 Mova Comfort (₦6,500 avg/trip)
               </button>
-              <button type="button" class="category-tier-btn" data-tier="xl" style="padding: 0.5rem 1rem; border-radius: 999px; border: 1.5px solid var(--border-subtle); background: white; font: 700 0.82rem var(--font-jakarta); cursor: pointer;">
+              <button type="button" role="radio" aria-checked="false" class="category-tier-btn" data-tier="xl">
                 Mova XL (₦9,800 avg/trip)
               </button>
             </div>
@@ -863,13 +871,13 @@ function generateDrivePage(rootPath = "../") {
                 <small>Mova 10% Platform Fee</small>
                 <strong id="calc-fee" style="color: #0284c7;">-₦21,000</strong>
               </div>
-              <div style="background: white; border-radius: 1rem; padding: 1rem; border: 1.5px solid var(--mova-green-500);">
+              <div class="earnings-calc-takehome">
                 <small style="color: var(--mova-green-700);">YOUR NET TAKE-HOME</small>
                 <strong id="calc-net" style="color: var(--mova-green-700);">₦189,000</strong>
               </div>
             </div>
 
-            <div style="margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: 1rem; background: #fffbeb; border: 1px solid #fde68a; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+            <div class="earnings-calc-savings">
               <div style="font-size: 0.92rem; color: #92400e;">
                 <strong>Extra cash in your pocket vs 25% competitor apps:</strong>
                 <span id="calc-extra-note">You earn <strong>+₦31,500 more</strong> every week!</span>
@@ -881,7 +889,7 @@ function generateDrivePage(rootPath = "../") {
       </section>
 
       <!-- 4 Core Pillars for Drivers -->
-      <section class="section" style="background: #fbfdfc; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <section class="section section--canvas section--bordered">
         <div class="container">
           <div class="section-header text-center">
             <p class="eyebrow">BUILT FOR DRIVER SUCCESS</p>
@@ -985,7 +993,7 @@ function generateDrivePage(rootPath = "../") {
       </section>
 
       <!-- Fast 4-Step Onboarding Process -->
-      <section class="section" id="driver-requirements" style="background: #fbfdfc; border-top: 1px solid var(--border-subtle);">
+      <section class="section section--canvas section--bordered" id="driver-requirements">
         <div class="container">
           <div class="section-header text-center">
             <p class="eyebrow">FAST ONBOARDING</p>
@@ -1076,7 +1084,7 @@ function generateDeliverPage(rootPath = "../") {
           <div class="section-header text-center">
             <p class="eyebrow">VERSATILE FLEET OPTIONS</p>
             <h2>The right vehicle for every shipment.</h2>
-            <p class="section-lead" style="max-width: 680px; margin-inline: auto;">
+            <p class="section-lead">
               Whether you need an express motorcycle to beat gridlock or a dedicated cargo van for inventory, Mova has you covered.
             </p>
           </div>
@@ -1086,7 +1094,7 @@ function generateDeliverPage(rootPath = "../") {
               <div class="category-card-icon">${iconSvg("package-regular", 28)}</div>
               <h3>Mova Bike Express</h3>
               <p>Fastest urban dispatch for documents, food, medicines, apparel, and parcels up to 10kg. Zips through traffic for rapid delivery.</p>
-              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              <ul class="spec-list">
                 <li>Max payload: 10kg (insulated top-box)</li>
                 <li>Avg. delivery time: 25 - 35 mins</li>
                 <li>Real-time GPS tracking & recipient OTP</li>
@@ -1101,7 +1109,7 @@ function generateDeliverPage(rootPath = "../") {
               <div class="category-card-icon">${iconSvg("car-fill", 28)}</div>
               <h3>Sedan Courier</h3>
               <p>Air-conditioned vehicle transport for fragile birthday cakes, delicate electronics, high-end fashion, and parcels up to 50kg.</p>
-              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              <ul class="spec-list">
                 <li>Max payload: 50kg (trunk & rear seat)</li>
                 <li>Climate-controlled for perishables</li>
                 <li>Zero jostling or dust exposure</li>
@@ -1113,10 +1121,10 @@ function generateDeliverPage(rootPath = "../") {
             </div>
 
             <div class="category-card">
-              <div class="category-card-icon">${iconSvg("navigation-duotone", 28)}</div>
+              <div class="category-card-icon">${iconSvg("car-profile-fill", 28)}</div>
               <h3>Cargo Van & Truck</h3>
               <p>Medium and heavy logistics for wholesale distribution, warehouse stock transfers, furniture, and eCommerce batch inventory.</p>
-              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              <ul class="spec-list">
                 <li>Payload: 500kg up to 2,000kg</li>
                 <li>Scheduled or same-day dispatch</li>
                 <li>Dedicated driver and loading assistance</li>
@@ -1131,7 +1139,7 @@ function generateDeliverPage(rootPath = "../") {
               <div class="category-card-icon">${iconSvg("shield-duotone", 28)}</div>
               <h3>Priority Express Dispatch</h3>
               <p>High-priority business dispatch with live corridor GPS tracking, direct phone-call verification at pickup and drop-off, and dedicated dispute resolution.</p>
-              <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              <ul class="spec-list">
                 <li>Live GPS corridor tracking</li>
                 <li>Senior vetted courier assignment</li>
                 <li>Direct recipient OTP verification</li>
@@ -1146,7 +1154,7 @@ function generateDeliverPage(rootPath = "../") {
       </section>
 
       <!-- Business & eCommerce Solutions -->
-      <section class="section" id="business-logistics" style="background: #fbfdfc; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <section class="section section--canvas section--bordered" id="business-logistics">
         <div class="container">
           <div class="section-header text-center">
             <p class="eyebrow">ENTERPRISE LOGISTICS & APIS</p>
@@ -1344,16 +1352,16 @@ function generateSafetyPage(rootPath = "../") {
       </section>
 
       <!-- Emergency Dispatch & Protocols -->
-      <section class="section" id="emergency-hotline" style="background: #fbfdfc; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <section class="section section--canvas section--bordered" id="emergency-hotline">
         <div class="container">
           <div class="section-header text-center">
             <p class="eyebrow">RAPID EMERGENCY INTERVENTION</p>
             <h2>Direct emergency response at your fingertips.</h2>
           </div>
 
-          <div class="category-card-grid" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="category-card" style="border-top: 4px solid var(--mova-green-500);">
-              <div class="category-card-icon">${iconSvg("bell-fill", 28)}</div>
+          <div class="category-card-grid category-card-grid--3">
+            <div class="category-card category-card--accent-green">
+              <div class="category-card-icon">${iconSvg("shield-fill", 28)}</div>
               <h3>In-App SOS Button</h3>
               <p>Tap the shield icon in the Mova app during any trip to trigger our rapid response team. Your live GPS coordinates, vehicle details, and driver identity are instantly transmitted to emergency responders.</p>
               <div class="category-card-meta">
@@ -1362,7 +1370,7 @@ function generateSafetyPage(rootPath = "../") {
               </div>
             </div>
 
-            <div class="category-card" style="border-top: 4px solid #0284c7;">
+            <div class="category-card category-card--accent-blue">
               <div class="category-card-icon">${iconSvg("path-duotone", 28)}</div>
               <h3>Share My Trip Link</h3>
               <p>Pre-configure up to 5 trusted family or friends. With a single tap, share your live moving vehicle location, driver name, photo, and estimated arrival time directly via WhatsApp or SMS.</p>
@@ -1372,8 +1380,8 @@ function generateSafetyPage(rootPath = "../") {
               </div>
             </div>
 
-            <div class="category-card" style="border-top: 4px solid #e11d48;">
-              <div class="category-card-icon">${iconSvg("shield-fill", 28)}</div>
+            <div class="category-card category-card--accent-rose">
+              <div class="category-card-icon">${iconSvg("bell-fill", 28)}</div>
               <h3>24/7 Safety Command Hotline</h3>
               <p>Our dedicated safety response command center operates 24 hours a day, 7 days a week, 365 days a year for urgent incident response and immediate assistance.</p>
               <div class="category-card-meta">
@@ -1477,37 +1485,40 @@ function generateCitiesPage(rootPath = "../") {
           <div class="section-header text-center">
             <p class="eyebrow">CITY DIRECTORY</p>
             <h2>Live in Lagos. More cities coming soon.</h2>
-            <p class="section-copy" style="max-width: 680px; margin-inline: auto;">
+            <p class="section-lead">
               Select a filter or search below to find available ride tiers, parcel courier dispatch, and driver earning hubs in your metropolitan region.
             </p>
           </div>
 
           <div class="city-filter-bar">
-            <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;" id="city-filter-pills">
-              <button type="button" class="city-filter-btn is-active" data-city-filter="all">
+            <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;" id="city-filter-pills" role="group" aria-label="City filter presets">
+              <button type="button" class="city-filter-btn is-active" data-city-filter="all" aria-pressed="true">
                 ${iconSvg("map-pin-fill", 15)}
                 All Cities (11)
               </button>
-              <button type="button" class="city-filter-btn" data-city-filter="active">
+              <button type="button" class="city-filter-btn" data-city-filter="active" aria-pressed="false">
                 <span class="pulse-dot"></span>
                 Active Now (1)
               </button>
-              <button type="button" class="city-filter-btn" data-city-filter="nigeria">
+              <button type="button" class="city-filter-btn" data-city-filter="nigeria" aria-pressed="false">
                 🇳🇬 Nigeria (7)
               </button>
-              <button type="button" class="city-filter-btn" data-city-filter="international">
+              <button type="button" class="city-filter-btn" data-city-filter="international" aria-pressed="false">
                 🌐 International Roadmap (4)
               </button>
             </div>
 
-            <input type="text" class="city-search-input" id="city-search-input" placeholder="Search cities, states, hubs (e.g. Lagos, Lekki, Abuja, Cargo)..." autocomplete="off">
+            <div class="city-search-box">
+              <label for="city-search-input" class="visually-hidden">Search cities, states, and hubs</label>
+              <input type="text" class="city-search-input" id="city-search-input" placeholder="Search cities, states, hubs (e.g. Lagos, Lekki, Abuja, Cargo)..." autocomplete="off" aria-label="Search cities, states, and hubs">
+            </div>
           </div>
 
           <div class="city-metro-grid" id="city-metro-cards">
             <!-- Lagos -->
             <article class="city-metro-card" data-city="lagos ikeja lekki vi surulere yaba nigeria" data-active="true" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge">Active 24/7</span>
               </div>
               <h3>Lagos</h3>
@@ -1532,7 +1543,7 @@ function generateCitiesPage(rootPath = "../") {
             <!-- Abuja -->
             <article class="city-metro-card" data-city="abuja fct maitama wuse gwarinpa nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Abuja (FCT)</h3>
@@ -1554,7 +1565,7 @@ function generateCitiesPage(rootPath = "../") {
             <!-- Port Harcourt -->
             <article class="city-metro-card" data-city="port harcourt rivers gra trans-amadi nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Port Harcourt</h3>
@@ -1576,7 +1587,7 @@ function generateCitiesPage(rootPath = "../") {
             <!-- Ibadan -->
             <article class="city-metro-card" data-city="ibadan oyo bodija dugbe ring road nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Ibadan</h3>
@@ -1597,7 +1608,7 @@ function generateCitiesPage(rootPath = "../") {
             <!-- Benin City -->
             <article class="city-metro-card" data-city="benin city edo ugbowo ring road gra nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Benin City</h3>
@@ -1618,7 +1629,7 @@ function generateCitiesPage(rootPath = "../") {
             <!-- Abeokuta -->
             <article class="city-metro-card" data-city="abeokuta ogun oke-mosan ibara kuto nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Abeokuta</h3>
@@ -1638,7 +1649,7 @@ function generateCitiesPage(rootPath = "../") {
             <!-- Kano -->
             <article class="city-metro-card" data-city="kano nassarawa bompai sabon gari nigeria" data-active="false" data-region="nigeria">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇳🇬</span>
+                <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
                 <span class="region-status-badge region-status-badge--soon">Coming soon</span>
               </div>
               <h3>Kano</h3>
@@ -1659,7 +1670,7 @@ function generateCitiesPage(rootPath = "../") {
             <!-- Accra, Ghana -->
             <article class="city-metro-card" data-city="accra ghana osu airport legon international" data-active="false" data-region="international">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇬🇭</span>
+                <span class="region-card-flag" aria-hidden="true">🇬🇭</span>
                 <span class="region-status-badge region-status-badge--soon">Launching Q1 2027</span>
               </div>
               <h3>Accra</h3>
@@ -1681,7 +1692,7 @@ function generateCitiesPage(rootPath = "../") {
             <!-- Nairobi, Kenya -->
             <article class="city-metro-card" data-city="nairobi kenya westlands kilimani upper hill international" data-active="false" data-region="international">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇰🇪</span>
+                <span class="region-card-flag" aria-hidden="true">🇰🇪</span>
                 <span class="region-status-badge region-status-badge--soon">Launching Q2 2027</span>
               </div>
               <h3>Nairobi</h3>
@@ -1703,7 +1714,7 @@ function generateCitiesPage(rootPath = "../") {
             <!-- Kigali, Rwanda -->
             <article class="city-metro-card" data-city="kigali rwanda nyarugenge gasabo kacyiru international" data-active="false" data-region="international">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇷🇼</span>
+                <span class="region-card-flag" aria-hidden="true">🇷🇼</span>
                 <span class="region-status-badge region-status-badge--soon">Roadmap 2027</span>
               </div>
               <h3>Kigali</h3>
@@ -1724,7 +1735,7 @@ function generateCitiesPage(rootPath = "../") {
             <!-- Johannesburg, South Africa -->
             <article class="city-metro-card" data-city="johannesburg south africa sandton rosebank gauteng international" data-active="false" data-region="international">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="region-card-flag">🇿🇦</span>
+                <span class="region-card-flag" aria-hidden="true">🇿🇦</span>
                 <span class="region-status-badge region-status-badge--soon">Roadmap 2027</span>
               </div>
               <h3>Johannesburg</h3>
@@ -1745,7 +1756,7 @@ function generateCitiesPage(rootPath = "../") {
           </div>
 
           <!-- Empty search state -->
-          <div id="no-city-results" style="display: none; text-align: center; padding: 3.5rem 1rem; color: var(--text-secondary);">
+          <div id="no-city-results" class="is-hidden" style="text-align: center; padding: 3.5rem 1rem; color: var(--text-secondary);">
             <p style="font-size: 1.15rem; font-weight: 700; color: var(--mova-navy-950);">No matching city found</p>
             <p>We are actively voting on new regional locations. Request your city below!</p>
           </div>
@@ -1756,7 +1767,7 @@ function generateCitiesPage(rootPath = "../") {
       <section class="section section--muted" id="city-request">
         <div class="container" style="max-width: 780px;">
           <div class="section-header text-center">
-            <p class="eyebrow">${iconSvg("thumbs-up-duotone", 16)} COMMUNITY EXPANSION VOTE</p>
+            <p class="eyebrow">${iconSvg("map-pin-fill", 16)} COMMUNITY EXPANSION VOTE</p>
             <h2>Want Mova in your hometown?</h2>
             <p class="section-copy">
               Our market launch sequence is directly guided by community demand. Cast your vote or sign up early as a founding driver partner in your metropolitan area.
@@ -1767,18 +1778,18 @@ function generateCitiesPage(rootPath = "../") {
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div>
                 <label for="vote-name" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">Your Name</label>
-                <input type="text" id="vote-name" required placeholder="e.g. Tunde Adebayo" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
+                <input type="text" id="vote-name" required autocomplete="name" placeholder="e.g. Tunde Adebayo" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
               </div>
               <div>
                 <label for="vote-email" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">Email Address</label>
-                <input type="email" id="vote-email" required placeholder="tunde@example.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
+                <input type="email" id="vote-email" required autocomplete="email" placeholder="tunde@example.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
               </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div>
                 <label for="vote-city" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">City / Town</label>
-                <input type="text" id="vote-city" required placeholder="e.g. Asaba, Calabar, Enugu, Kumasi" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
+                <input type="text" id="vote-city" required autocomplete="address-level2" placeholder="e.g. Asaba, Calabar, Enugu, Kumasi" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 0.65rem; font-size: 0.9rem;">
               </div>
               <div>
                 <label for="vote-role" style="display: block; font: 700 0.82rem var(--font-jakarta); margin-bottom: 0.4rem;">I want to use Mova as</label>
@@ -1793,10 +1804,10 @@ function generateCitiesPage(rootPath = "../") {
 
             <button type="submit" class="button button--primary button--full" style="margin-top: 0.75rem; padding-block: 0.85rem; font-size: 1rem;">
               Cast Vote for My City
-              ${iconSvg("arrow-up-right", 18)}
+              ${iconSvg("arrow-right", 18)}
             </button>
 
-            <div id="city-vote-success" style="display: none; padding: 1rem; border-radius: 0.75rem; background: #eef9f2; border: 1px solid var(--mova-green-500); color: #004d26; text-align: center; font: 700 0.9rem var(--font-jakarta);">
+            <div id="city-vote-success" class="is-hidden" role="status" aria-live="polite" tabindex="-1" style="padding: 1rem; border-radius: 0.75rem; background: #eef9f2; border: 1px solid var(--mova-green-500); color: #004d26; text-align: center; font: 700 0.9rem var(--font-jakarta);">
               ✓ Vote Recorded! Thank you for bringing Mova to your city. We will notify you when launch milestones begin in your region!
             </div>
           </form>
@@ -1806,7 +1817,7 @@ function generateCitiesPage(rootPath = "../") {
       <!-- Launch Roadmap Stats -->
       <section class="section">
         <div class="container">
-          <div class="category-card-grid">
+          <div class="category-card-grid category-card-grid--3">
             <div class="category-card">
               <div class="category-card-icon">${iconSvg("car-fill", 28)}</div>
               <h3>100% Regional Focus</h3>
@@ -1886,9 +1897,9 @@ function generateAboutPage(rootPath = "../") {
       </section>
 
       <!-- Key Operational Metrics -->
-      <section class="section" style="background: #fbfdfc; border-bottom: 1px solid var(--border-subtle); padding-block: 3.5rem;">
+      <section class="section section--canvas" style="border-bottom: 1px solid var(--border-subtle); padding-block: 3.5rem;">
         <div class="container">
-          <div class="earnings-calc-results" style="grid-template-columns: repeat(4, 1fr); margin-top: 0; background: white;">
+          <div class="metrics-strip">
             <div>
               <small>Daily Active Rides</small>
               <strong>18,400+</strong>
@@ -2065,15 +2076,16 @@ function generateHelpPage(rootPath = "../") {
       <section class="enterprise-hero">
         <div class="container text-center">
           <p class="eyebrow">${iconSvg("chat-duotone", 16)} MOVA 24/7 SUPPORT CENTER</p>
-          <h1 style="max-width: 820px; margin-inline: auto;">How can we help you<br>move today?</h1>
-          <p style="max-width: 620px; margin-inline: auto; margin-bottom: 2rem;">
+          <h1>How can we help you<br>move today?</h1>
+          <p class="section-lead" style="margin-bottom: 2rem;">
             Search our knowledge base for instant answers or connect directly with our round-the-clock support agents.
           </p>
 
           <div class="help-search-container">
             <div class="help-search-box">
+              <label for="help-search-input" class="visually-hidden">Search support knowledge base</label>
               <svg width="22" height="22" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
-              <input type="text" id="help-search-input" placeholder="Search questions, keywords (e.g. fare, refund, driver, payout, safety)..." autocomplete="off">
+              <input type="text" id="help-search-input" placeholder="Search questions, keywords (e.g. fare, refund, driver, payout, safety)..." autocomplete="off" aria-label="Search support knowledge base">
             </div>
           </div>
         </div>
@@ -2082,25 +2094,25 @@ function generateHelpPage(rootPath = "../") {
       <!-- Category Selection Grid -->
       <section class="section" style="padding-top: 0;">
         <div class="container">
-          <div class="help-category-grid">
-            <button type="button" class="help-category-btn is-active" data-help-cat="all">
+          <div class="help-category-grid" role="group" aria-label="Support topic categories">
+            <button type="button" class="help-category-btn is-active" data-help-cat="all" aria-pressed="true">
               ${iconSvg("check-duotone", 32)}
-              <h4>All Topics</h4>
+              <strong class="help-category-title">All Topics</strong>
               <small>Browse all articles</small>
             </button>
-            <button type="button" class="help-category-btn" data-help-cat="rider">
+            <button type="button" class="help-category-btn" data-help-cat="rider" aria-pressed="false">
               ${iconSvg("car-duotone", 32)}
-              <h4>Rider Support</h4>
+              <strong class="help-category-title">Rider Support</strong>
               <small>Fares, bidding, payments</small>
             </button>
-            <button type="button" class="help-category-btn" data-help-cat="driver">
+            <button type="button" class="help-category-btn" data-help-cat="driver" aria-pressed="false">
               ${iconSvg("handshake-duotone", 32)}
-              <h4>Driver Partners</h4>
+              <strong class="help-category-title">Driver Partners</strong>
               <small>Payouts, commission, docs</small>
             </button>
-            <button type="button" class="help-category-btn" data-help-cat="delivery">
+            <button type="button" class="help-category-btn" data-help-cat="delivery" aria-pressed="false">
               ${iconSvg("package-duotone", 32)}
-              <h4>Delivery & Business</h4>
+              <strong class="help-category-title">Delivery & Business</strong>
               <small>Parcel tracking, bulk API</small>
             </button>
           </div>
@@ -2211,7 +2223,7 @@ function generateHelpPage(rootPath = "../") {
           </div>
 
           <!-- No FAQ Search Results State -->
-          <div id="no-faq-results" style="display: none; text-align: center; padding: 3rem 1rem; color: var(--text-secondary);">
+          <div id="no-faq-results" class="is-hidden" style="text-align: center; padding: 3rem 1rem; color: var(--text-secondary);">
             <p style="font-size: 1.15rem; font-weight: 600; color: var(--mova-navy-950);">No matching articles found</p>
             <p>Try searching for a different term or submit a support inquiry below.</p>
           </div>
@@ -2226,7 +2238,7 @@ function generateHelpPage(rootPath = "../") {
             <h2>Connect with our support team 24/7.</h2>
           </div>
 
-          <div class="category-card-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="category-card-grid category-card-grid--3">
             <div class="category-card text-center" style="align-items: center;">
               <div class="category-card-icon">${iconSvg("chat-duotone", 28)}</div>
               <h3>In-App Live Chat</h3>
@@ -2242,7 +2254,7 @@ function generateHelpPage(rootPath = "../") {
             </div>
 
             <div class="category-card text-center" style="align-items: center;">
-              <div class="category-card-icon" style="background: #f0fdf4; color: #16a34a;">${iconSvg("check-fill", 28)}</div>
+              <div class="category-card-icon" style="background: #f0fdf4; color: #16a34a;">${iconSvg("chat-duotone", 28)}</div>
               <h3>WhatsApp Support</h3>
               <p>Prefer messaging? Chat directly with our verified WhatsApp business support team for general inquiries.</p>
               <a class="button button--secondary" href="https://wa.me/2347047838642" target="_blank" rel="noopener noreferrer" style="margin-top: auto; color: #16a34a; border-color: #86efac;">Chat on WhatsApp</a>
@@ -2257,11 +2269,11 @@ function generateHelpPage(rootPath = "../") {
               <div class="form-group-row">
                 <div class="form-control-wrap">
                   <label for="ticket-name">Full Name *</label>
-                  <input type="text" id="ticket-name" placeholder="e.g. Tunde Adebayo" required>
+                  <input type="text" id="ticket-name" autocomplete="name" placeholder="e.g. Tunde Adebayo" required>
                 </div>
                 <div class="form-control-wrap">
                   <label for="ticket-email">Email or Phone Number *</label>
-                  <input type="text" id="ticket-email" placeholder="e.g. name@example.com or 080..." required>
+                  <input type="text" id="ticket-email" autocomplete="email" placeholder="e.g. name@example.com or 080..." required>
                 </div>
               </div>
               <div class="form-group-row">
@@ -2287,11 +2299,11 @@ function generateHelpPage(rootPath = "../") {
               </div>
               <button type="submit" class="button button--primary" style="width: 100%; justify-content: center;">
                 Submit Support Ticket
-                ${iconSvg("arrow-up-right", 18)}
+                ${iconSvg("arrow-right", 18)}
               </button>
             </form>
-            <div id="ticket-success" style="display: none; margin-top: 1.25rem; padding: 1.25rem; border-radius: 1rem; background: #eef9f2; border: 1.5px solid var(--mova-green-500); color: var(--mova-green-700);">
-              <strong style="display: block; font-size: 1.05rem; margin-bottom: 0.35rem;">🎉 Ticket Successfully Submitted!</strong>
+            <div id="ticket-success" class="is-hidden" role="status" aria-live="polite" tabindex="-1" style="margin-top: 1.25rem; padding: 1.25rem; border-radius: 1rem; background: #eef9f2; border: 1.5px solid var(--mova-green-500); color: var(--mova-green-700);">
+              <strong style="display: block; font-size: 1.05rem; margin-bottom: 0.35rem;">✓ Ticket Successfully Submitted!</strong>
               <span style="font-size: 0.92rem; color: #166534;">Your reference ticket ID is <strong id="ticket-ref-id">#MOV-84920</strong>. Your message has been sent directly to <strong>info@ridebymova.com</strong> and our support team will respond within 2 hours.</span>
             </div>
           </div>
@@ -2425,6 +2437,7 @@ function generate404Page(rootPath = "") {
       <div class="container" style="text-align: center; padding-block: 4rem;">
         <p class="eyebrow">Mova</p>
         <h1 style="margin-inline: auto;">That page moved on.</h1>
+        <h2 class="visually-hidden">Explore Mova Destinations</h2>
         <p class="public-page__description" style="margin-inline: auto;">
           The page you requested is not available. Start again from a public Mova destination.
         </p>
@@ -2475,9 +2488,9 @@ function generateHomepage(rootPath = "") {
           <p class="hero-description">Request a ride, make an offer, choose a fixed-price trip, or go metered.</p>
           
           <div class="hero-choices" aria-label="Mova ride pricing choices">
-            <span>Make an offer</span>
-            <span>Fixed price</span>
-            <span>Metered</span>
+            <span>${iconSvg("handshake-duotone", 15)} Make an offer</span>
+            <span>${iconSvg("lock-duotone", 15)} Fixed price</span>
+            <span>${iconSvg("path-duotone", 15)} Metered</span>
           </div>
           
           <div class="button-row">
@@ -2579,11 +2592,11 @@ function generateHomepage(rootPath = "") {
               <span class="choice-engine-badge"><i aria-hidden="true"></i> Choice Simulator</span>
               <h3>Simulate your journey & compare all 3 models</h3>
             </div>
-            <div class="distance-pill-group" role="tablist" aria-label="Trip distance presets">
-              <button type="button" class="distance-pill" data-km="4">Short Hop (4 km)</button>
-              <button type="button" class="distance-pill is-active" data-km="12">City Cruise (12 km)</button>
-              <button type="button" class="distance-pill" data-km="24">Cross-Town (24 km)</button>
-              <button type="button" class="distance-pill" data-km="36">Airport Run (36 km)</button>
+            <div class="distance-pill-group" role="group" aria-label="Trip distance presets">
+              <button type="button" class="distance-pill" data-km="4" aria-pressed="false">Short Hop (4 km)</button>
+              <button type="button" class="distance-pill is-active" data-km="12" aria-pressed="true">City Cruise (12 km)</button>
+              <button type="button" class="distance-pill" data-km="24" aria-pressed="false">Cross-Town (24 km)</button>
+              <button type="button" class="distance-pill" data-km="36" aria-pressed="false">Airport Run (36 km)</button>
             </div>
           </div>
           <div class="slider-meta-row">
@@ -2591,7 +2604,7 @@ function generateHomepage(rootPath = "") {
             <span>Estimated Duration: <strong id="sim-duration-val">~24 mins</strong></span>
             <span>Market Context: <strong>Lagos Metro (NGN)</strong></span>
           </div>
-          <input type="range" min="3" max="45" value="12" step="1" id="sim-distance-slider" class="mova-range-slider" aria-label="Adjust trip distance in kilometers">
+          <input type="range" min="3" max="45" value="12" step="1" id="sim-distance-slider" class="mova-range-slider" aria-label="Adjust trip distance in kilometers" aria-valuemin="3" aria-valuemax="45" aria-valuenow="12" aria-valuetext="12.0 kilometers">
         </div>
         
         <div class="mode-connector" aria-hidden="true"></div>
@@ -2841,9 +2854,9 @@ function generateHomepage(rootPath = "") {
                 <span>Rider offer</span>
                 <strong>₦4,500</strong>
               </div>
-              <div class="opportunity-actions">
-                <button type="button">Counter</button>
-                <button type="button">Accept ${iconSvg("arrow-right", 13)}</button>
+              <div class="opportunity-actions" aria-hidden="true">
+                <button type="button" tabindex="-1">Counter</button>
+                <button type="button" tabindex="-1">Accept ${iconSvg("arrow-right", 13)}</button>
               </div>
             </div>
           </div>
@@ -2995,12 +3008,12 @@ function generateHomepage(rootPath = "") {
             
             <div class="map-hud-bar">
               <span class="hubs-label">Live Transit Hubs:</span>
-              <div class="hub-pill-row" role="tablist" aria-label="Lagos transit hubs">
-                <button type="button" class="hub-pill-btn is-active" data-lat="6.4281" data-lng="3.4219" data-zoom="13" data-hub="vi">Victoria Island</button>
-                <button type="button" class="hub-pill-btn" data-lat="6.4474" data-lng="3.4731" data-zoom="13" data-hub="lekki">Lekki Phase 1</button>
-                <button type="button" class="hub-pill-btn" data-lat="6.5954" data-lng="3.3533" data-zoom="13" data-hub="ikeja">Ikeja Central</button>
-                <button type="button" class="hub-pill-btn" data-lat="6.5774" data-lng="3.3212" data-zoom="13" data-hub="airport">Airport (LOS)</button>
-                <button type="button" class="hub-pill-btn" data-lat="6.4549" data-lng="3.3888" data-zoom="13" data-hub="island">Marina / Island</button>
+              <div class="hub-pill-row" role="group" aria-label="Lagos transit hubs">
+                <button type="button" class="hub-pill-btn is-active" data-lat="6.4281" data-lng="3.4219" data-zoom="13" data-hub="vi" aria-pressed="true">Victoria Island</button>
+                <button type="button" class="hub-pill-btn" data-lat="6.4474" data-lng="3.4731" data-zoom="13" data-hub="lekki" aria-pressed="false">Lekki Phase 1</button>
+                <button type="button" class="hub-pill-btn" data-lat="6.5954" data-lng="3.3533" data-zoom="13" data-hub="ikeja" aria-pressed="false">Ikeja Central</button>
+                <button type="button" class="hub-pill-btn" data-lat="6.5774" data-lng="3.3212" data-zoom="13" data-hub="airport" aria-pressed="false">Airport (LOS)</button>
+                <button type="button" class="hub-pill-btn" data-lat="6.4549" data-lng="3.3888" data-zoom="13" data-hub="island" aria-pressed="false">Marina / Island</button>
               </div>
             </div>
             
@@ -3026,15 +3039,15 @@ function generateHomepage(rootPath = "") {
           <div class="app-showcase-interactive" role="region" aria-label="Interactive Mova app preview">
             <!-- Mode switcher tabs -->
             <div class="app-tab-switcher" role="tablist" aria-label="Choose product view">
-              <button type="button" class="app-tab-btn is-active" data-app-tab="mode" role="tab" aria-selected="true">
+              <button type="button" class="app-tab-btn is-active" id="tab-mode" data-app-tab="mode" role="tab" aria-selected="true" aria-controls="pane-mode">
                 ${iconSvg("handshake-duotone", 18)}
                 <span>1. Choose Mode</span>
               </button>
-              <button type="button" class="app-tab-btn" data-app-tab="journey" role="tab" aria-selected="false">
+              <button type="button" class="app-tab-btn" id="tab-journey" data-app-tab="journey" role="tab" aria-selected="false" aria-controls="pane-journey">
                 ${iconSvg("navigation-duotone", 18)}
                 <span>2. Live Journey</span>
               </button>
-              <button type="button" class="app-tab-btn" data-app-tab="dispatch" role="tab" aria-selected="false">
+              <button type="button" class="app-tab-btn" id="tab-dispatch" data-app-tab="dispatch" role="tab" aria-selected="false" aria-controls="pane-dispatch">
                 ${iconSvg("package-duotone", 18)}
                 <span>3. Parcel Dispatch</span>
               </button>
@@ -3054,10 +3067,10 @@ function generateHomepage(rootPath = "") {
                 </div>
                 
                 <!-- Screen Pane 1: Ride Mode Selection -->
-                <div class="phone-screen-pane is-active" id="pane-mode">
+                <div class="phone-screen-pane is-active" id="pane-mode" role="tabpanel" aria-labelledby="tab-mode">
                   <div class="phone-pane-header">
                     <small>Step 1</small>
-                    <h4>Select Ride Mode</h4>
+                    <h3>Select Ride Mode</h3>
                   </div>
                   <div class="phone-mode-selector">
                     <div class="phone-mode-item" data-phone-mode="offer">
@@ -3080,10 +3093,10 @@ function generateHomepage(rootPath = "") {
                 </div>
                 
                 <!-- Screen Pane 2: Live Active Journey -->
-                <div class="phone-screen-pane" id="pane-journey">
+                <div class="phone-screen-pane" id="pane-journey" role="tabpanel" aria-labelledby="tab-journey">
                   <div class="phone-pane-header">
                     <small class="live-pill">● Trip in Progress</small>
-                    <h4>En Route to Destination</h4>
+                    <h3>En Route to Destination</h3>
                   </div>
                   <div class="phone-live-map">
                     <div class="phone-map-bg"></div>
@@ -3118,10 +3131,10 @@ function generateHomepage(rootPath = "") {
                 </div>
                 
                 <!-- Screen Pane 3: Parcel Dispatch Lifecycle -->
-                <div class="phone-screen-pane" id="pane-dispatch">
+                <div class="phone-screen-pane" id="pane-dispatch" role="tabpanel" aria-labelledby="tab-dispatch">
                   <div class="phone-pane-header">
                     <small>Mova Courier</small>
-                    <h4>Parcel in Dispatch</h4>
+                    <h3>Parcel in Dispatch</h3>
                   </div>
                   <div class="phone-dispatch-timeline">
                     <div class="dispatch-step is-complete">
@@ -3163,11 +3176,11 @@ function generateHomepage(rootPath = "") {
           </div>
           
           <div class="store-row store-row--center">
-            <button type="button" disabled>
+            <button type="button" disabled aria-label="Coming soon on App Store (iOS)">
               <span>Coming soon on</span>
               <strong>App Store</strong>
             </button>
-            <button type="button" disabled>
+            <button type="button" disabled aria-label="Coming soon on Google Play (Android)">
               <span>Coming soon on</span>
               <strong>Google Play</strong>
             </button>
@@ -3375,37 +3388,89 @@ input, button, textarea, select {
     } catch (e) {}
   }
 
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- Accessible Focus Trap Helper for Modals and Drawers ---
+  function createFocusTrap(element, onEscape) {
+    const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    let previousActiveElement = null;
+
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        if (onEscape) onEscape();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+
+      const focusables = Array.from(element.querySelectorAll(focusableSelector)).filter(el => {
+        return el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0;
+      });
+      if (!focusables.length) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    return {
+      activate() {
+        previousActiveElement = document.activeElement;
+        element.addEventListener('keydown', handleKeyDown);
+      },
+      deactivate(restoreFocus = true) {
+        element.removeEventListener('keydown', handleKeyDown);
+        if (restoreFocus && previousActiveElement && typeof previousActiveElement.focus === 'function') {
+          previousActiveElement.focus();
+        }
+      }
+    };
+  }
+
   // =========================================================================
   // 1. Mobile Navigation Drawer
   // =========================================================================
   const menuOpenBtn = document.getElementById('mobile-menu-open');
   const menuCloseBtn = document.getElementById('mobile-menu-close');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuTrap = mobileMenu ? createFocusTrap(mobileMenu, closeMenu) : null;
 
   function openMenu() {
     if (!mobileMenu) return;
+    mobileMenu.classList.add('is-open');
+    mobileMenu.classList.remove('is-hidden');
     mobileMenu.style.display = 'block';
     menuOpenBtn?.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('modal-open');
     document.body.style.overflow = 'hidden';
+    mobileMenuTrap?.activate();
     menuCloseBtn?.focus();
   }
 
   function closeMenu() {
     if (!mobileMenu) return;
+    mobileMenu.classList.remove('is-open');
+    mobileMenu.classList.add('is-hidden');
     mobileMenu.style.display = 'none';
     menuOpenBtn?.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('modal-open');
     document.body.style.overflow = '';
-    menuOpenBtn?.focus();
+    mobileMenuTrap?.deactivate(true);
   }
 
   menuOpenBtn?.addEventListener('click', openMenu);
   menuCloseBtn?.addEventListener('click', closeMenu);
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileMenu && mobileMenu.style.display === 'block') {
-      closeMenu();
-    }
-  });
 
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMenu);
@@ -3520,7 +3585,7 @@ input, button, textarea, select {
   const heroContainer = document.getElementById('hero-visual-container');
   const heroTiltCards = document.querySelectorAll('[data-tilt]');
 
-  if (heroContainer && heroTiltCards.length && window.matchMedia('(pointer: fine)').matches) {
+  if (!prefersReducedMotion && heroContainer && heroTiltCards.length && window.matchMedia('(pointer: fine)').matches) {
     heroContainer.addEventListener('mousemove', (e) => {
       const rect = heroContainer.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
@@ -3542,7 +3607,7 @@ input, button, textarea, select {
 
   // Individual card tilt on hover
   const physicalCards = document.querySelectorAll('.category-card, .ride-mode-card, .city-metro-card, .ecosystem-card');
-  if (window.matchMedia('(pointer: fine)').matches) {
+  if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
     physicalCards.forEach((card) => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -3628,11 +3693,9 @@ input, button, textarea, select {
 
     distancePills.forEach((pill) => {
       const pillKm = parseFloat(pill.getAttribute('data-km') || '0');
-      if (Math.abs(pillKm - distance) < 1.5) {
-        pill.classList.add('is-active');
-      } else {
-        pill.classList.remove('is-active');
-      }
+      const isActive = Math.abs(pillKm - distance) < 1.5;
+      pill.classList.toggle('is-active', isActive);
+      pill.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
 
     const phoneOfferEl = document.querySelector('[data-phone-mode="offer"] em');
@@ -3644,6 +3707,8 @@ input, button, textarea, select {
     document.dispatchEvent(new Event('mova-fares'));
 
     if (distSlider) {
+      distSlider.setAttribute('aria-valuenow', distance.toFixed(1));
+      distSlider.setAttribute('aria-valuetext', distance.toFixed(1) + ' kilometers');
       const min = parseFloat(distSlider.min || '3');
       const max = parseFloat(distSlider.max || '45');
       const pct = Math.min(100, Math.max(0, ((distance - min) / (max - min)) * 100));
@@ -3899,7 +3964,7 @@ input, button, textarea, select {
       selectHub('vi', false);
 
     } catch (err) {
-      console.warn('OpenMapTiles MapLibre initialization notice:', err);
+      container.setAttribute('data-map-fallback', 'static');
     }
   }
 
@@ -3934,10 +3999,11 @@ input, button, textarea, select {
       const pane = phonePanes[key];
       if (pane) {
         pane.classList.toggle('is-active', key === tabKey);
+        pane.hidden = (key !== tabKey);
       }
     });
 
-    if (tabKey === 'journey') {
+    if (tabKey === 'journey' && !prefersReducedMotion) {
       const car = document.getElementById('moving-car');
       if (car) {
         car.style.animation = 'none';
@@ -3959,6 +4025,7 @@ input, button, textarea, select {
 
   function startShowcaseTimer() {
     pauseShowcaseTimer();
+    if (prefersReducedMotion) return;
     showcaseInterval = setInterval(() => {
       const tabs = ['mode', 'journey', 'dispatch'];
       const currentIndex = tabs.indexOf(activeShowcaseTab);
@@ -4047,6 +4114,7 @@ input, button, textarea, select {
     dispatchSteps.forEach((step, idx) => {
       step.classList.toggle('is-complete', idx < dispatchStage);
       step.classList.toggle('is-active', idx === dispatchStage);
+      step.setAttribute('aria-pressed', idx === dispatchStage ? 'true' : 'false');
       const i = step.querySelector('i');
       if (i) i.textContent = idx < dispatchStage ? '\u2713' : String(idx + 1);
     });
@@ -4054,24 +4122,40 @@ input, button, textarea, select {
   if (dispatchSteps.length) {
     dispatchSteps.forEach((step, idx) => {
       step.style.cursor = 'pointer';
-      step.addEventListener('click', () => {
+      step.setAttribute('role', 'button');
+      step.setAttribute('tabindex', '0');
+      function selectStep() {
         setDispatchStage(idx);
         if (dispatchTimer) { clearInterval(dispatchTimer); dispatchTimer = null; }
+      }
+      step.addEventListener('click', selectStep);
+      step.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectStep(); }
       });
     });
-    dispatchTimer = setInterval(() => {
-      if (activeShowcaseTab === 'dispatch') setDispatchStage(dispatchStage + 1);
-    }, 2200);
+    if (!prefersReducedMotion) {
+      dispatchTimer = setInterval(() => {
+        if (activeShowcaseTab === 'dispatch') setDispatchStage(dispatchStage + 1);
+      }, 2200);
+    }
     setDispatchStage(0);
   }
   document.querySelectorAll('.phone-parcel-code').forEach((code) => {
     code.style.cursor = 'pointer';
-    code.addEventListener('click', () => {
-      const original = code.getAttribute('data-orig') || code.textContent;
-      code.setAttribute('data-orig', original);
+    code.setAttribute('role', 'button');
+    code.setAttribute('tabindex', '0');
+    code.setAttribute('aria-label', 'Copy tracking verification code MV-9482-NG');
+    function copyParcelCode() {
+      const strongEl = code.querySelector('strong') || code;
+      const original = strongEl.getAttribute('data-orig') || strongEl.textContent;
+      strongEl.setAttribute('data-orig', original);
       try { if (navigator.clipboard) navigator.clipboard.writeText(original.trim()); } catch (e) {}
-      code.textContent = 'Copied \u2713';
-      setTimeout(() => { code.textContent = original; }, 1400);
+      strongEl.textContent = 'Copied \u2713';
+      setTimeout(() => { strongEl.textContent = original; }, 1400);
+    }
+    code.addEventListener('click', copyParcelCode);
+    code.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copyParcelCode(); }
     });
   });
 
@@ -4135,7 +4219,9 @@ input, button, textarea, select {
       if (mobileName) mobileName.textContent = info.name;
 
       regionCards.forEach(card => {
-        card.classList.toggle('is-active', card.getAttribute('data-region') === code);
+        const isCurrent = card.getAttribute('data-region') === code;
+        card.classList.toggle('is-active', isCurrent);
+        card.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
       });
     }
 
@@ -4167,16 +4253,31 @@ input, button, textarea, select {
     const mobileOpenBtn = document.getElementById('mobile-region-selector-open');
     const closeBtn = document.getElementById('region-modal-close');
     const searchInput = document.getElementById('region-search-input');
+    const regionModalTrap = regionModal ? createFocusTrap(regionModal, closeRegionModal) : null;
 
     function openRegionModal() {
       if (regionModal) {
-        regionModal.style.display = 'flex';
+        regionModal.classList.add('is-open');
+        regionModal.classList.remove('is-hidden');
+        regionModal.style.display = 'grid';
+        openBtn?.setAttribute('aria-expanded', 'true');
+        mobileOpenBtn?.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('modal-open');
+        document.body.style.overflow = 'hidden';
+        regionModalTrap?.activate();
         searchInput?.focus();
       }
     }
     function closeRegionModal() {
       if (regionModal) {
+        regionModal.classList.remove('is-open');
+        regionModal.classList.add('is-hidden');
         regionModal.style.display = 'none';
+        openBtn?.setAttribute('aria-expanded', 'false');
+        mobileOpenBtn?.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        regionModalTrap?.deactivate(true);
       }
     }
 
@@ -4189,11 +4290,6 @@ input, button, textarea, select {
     regionModal?.addEventListener('click', (e) => {
       if (e.target === regionModal) closeRegionModal();
     });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && regionModal && regionModal.style.display !== 'none') {
-        closeRegionModal();
-      }
-    });
 
     searchInput?.addEventListener('input', (e) => {
       const q = e.target.value.toLowerCase().trim();
@@ -4204,7 +4300,9 @@ input, button, textarea, select {
     });
 
     regionCards.forEach(card => {
-      card.addEventListener('click', () => {
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      function selectRegion() {
         const selectedCode = card.getAttribute('data-region');
         safeSetStorage('mova_region', selectedCode);
         safeSetStorage('mova_region_manual', 'true');
@@ -4218,6 +4316,10 @@ input, button, textarea, select {
         } else if (hasLocalePrefix) {
           window.location.href = cleanSub === '/' ? '/en-ng/' : cleanSub;
         }
+      }
+      card.addEventListener('click', selectRegion);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectRegion(); }
       });
     });
   })();
@@ -4243,12 +4345,10 @@ input, button, textarea, select {
       btn.addEventListener('click', () => {
         tierBtns.forEach(b => {
           b.classList.remove('is-active');
-          b.style.borderColor = 'var(--border-subtle)';
-          b.style.background = 'white';
+          b.setAttribute('aria-checked', 'false');
         });
         btn.classList.add('is-active');
-        btn.style.borderColor = 'var(--mova-green-500)';
-        btn.style.background = '#eef9f2';
+        btn.setAttribute('aria-checked', 'true');
 
         const tier = btn.getAttribute('data-tier');
         if (tier === 'economy') avgFare = 4200;
@@ -4265,6 +4365,8 @@ input, button, textarea, select {
     function calculate() {
       const trips = parseInt(slider.value, 10);
       if (tripsVal) tripsVal.textContent = trips + ' trips';
+      slider.setAttribute('aria-valuenow', trips.toString());
+      slider.setAttribute('aria-valuetext', trips + ' trips per week');
       const gross = trips * avgFare;
       const movaFee = gross * 0.10;
       const movaNet = gross - movaFee;
@@ -4325,6 +4427,7 @@ input, button, textarea, select {
       });
 
       if (noResults) {
+        noResults.classList.toggle('is-hidden', visibleCount > 0);
         noResults.style.display = visibleCount === 0 ? 'block' : 'none';
       }
     }
@@ -4332,8 +4435,12 @@ input, button, textarea, select {
     filterBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        filterBtns.forEach(b => b.classList.remove('is-active'));
+        filterBtns.forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
         currentFilter = btn.getAttribute('data-city-filter') || 'all';
         applyFilter();
       });
@@ -4344,7 +4451,9 @@ input, button, textarea, select {
     voteForm?.addEventListener('submit', (e) => {
       e.preventDefault();
       if (voteSuccess) {
+        voteSuccess.classList.remove('is-hidden');
         voteSuccess.style.display = 'block';
+        voteSuccess.focus();
         voteForm.reset();
         setTimeout(() => {
           voteSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -4391,14 +4500,19 @@ input, button, textarea, select {
       });
 
       if (noResults) {
+        noResults.classList.toggle('is-hidden', visibleCount > 0);
         noResults.style.display = visibleCount === 0 ? 'block' : 'none';
       }
     }
 
     categoryBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        categoryBtns.forEach(b => b.classList.remove('is-active'));
+        categoryBtns.forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
         currentCat = btn.getAttribute('data-help-cat') || 'all';
         filterFaqs();
       });
@@ -4449,7 +4563,11 @@ input, button, textarea, select {
           submitBtn.innerHTML = originalBtnHtml;
         }
         if (ticketRefId) ticketRefId.textContent = randomId;
-        if (ticketSuccess) ticketSuccess.style.display = 'block';
+        if (ticketSuccess) {
+          ticketSuccess.classList.remove('is-hidden');
+          ticketSuccess.style.display = 'block';
+          ticketSuccess.focus();
+        }
         ticketForm.reset();
       }
     });

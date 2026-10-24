@@ -54,7 +54,7 @@
       
       <div class="desktop-actions">
         <button class="region-selector-btn" id="region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
-          <span class="region-flag" id="header-region-flag">🇳🇬</span>
+          <span class="region-flag" id="header-region-flag" aria-hidden="true">🇳🇬</span>
           <span id="header-region-name">Nigeria (EN)</span>
           <svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
         </button>
@@ -73,7 +73,7 @@
   <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
   
   <!-- Mobile Navigation Modal -->
-  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
+  <div class="mobile-menu is-hidden" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu" style="display: none;">
     <div class="mobile-menu__top">
       <span class="mobile-menu__label">Menu</span>
       <button class="menu-trigger" id="mobile-menu-close" type="button" aria-label="Close menu">
@@ -81,11 +81,11 @@
       </button>
     </div>
     <nav aria-label="Mobile navigation">
-      <a href="../ride/">Ride</a><a href="../drive/">Drive</a><a href="../deliver/">Deliver</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a><a href="../about/">About</a><a href="../help/">Help</a>
+      <a href="../ride/">Ride</a><a href="../drive/" class="is-active" aria-current="page">Drive</a><a href="../deliver/">Deliver</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a><a href="../about/">About</a><a href="../help/">Help</a>
     </nav>
     <div class="mobile-menu__actions">
-      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button">
-        <span class="region-flag" id="mobile-region-flag">🇳🇬</span>
+      <button class="region-selector-btn region-selector-btn--mobile" id="mobile-region-selector-open" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Select Country and Language">
+        <span class="region-flag" id="mobile-region-flag" aria-hidden="true">🇳🇬</span>
         <span id="mobile-region-name">Nigeria (EN)</span>
       </button>
       <a class="button button--primary" href="../#get-mova">
@@ -133,28 +133,28 @@
           <div class="section-header text-center">
             <p class="eyebrow">TRANSPARENT TAKE-HOME PAY</p>
             <h2>See how much more you keep with Mova.</h2>
-            <p class="section-lead" style="max-width: 680px; margin-inline: auto;">
+            <p class="section-lead">
               Use our interactive calculator to compare your net take-home earnings on Mova vs legacy platforms charging 25% commission.
             </p>
           </div>
 
           <div class="earnings-calc-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-              <label for="drive-trips-slider" style="font: 750 1.05rem var(--font-jakarta); color: var(--mova-navy-950);">
-                Weekly Completed Trips: <strong id="drive-trips-val" style="color: var(--mova-green-700);">50 trips</strong>
+            <div class="earnings-calc-header">
+              <label for="drive-trips-slider">
+                Weekly Completed Trips: <strong id="drive-trips-val">50 trips</strong>
               </label>
               <span style="font-size: 0.85rem; color: var(--text-secondary);">(~7 trips / day)</span>
             </div>
-            <input type="range" id="drive-trips-slider" min="10" max="120" step="5" value="50" style="width: 100%; accent-color: var(--mova-green-500); cursor: pointer;">
+            <input type="range" id="drive-trips-slider" min="10" max="120" step="5" value="50" class="mova-range-slider" aria-label="Weekly Completed Trips" aria-valuemin="10" aria-valuemax="120" aria-valuenow="50" aria-valuetext="50 trips per week">
 
-            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: center; flex-wrap: wrap;">
-              <button type="button" class="category-tier-btn is-active" data-tier="economy" style="padding: 0.5rem 1rem; border-radius: 999px; border: 1.5px solid var(--mova-green-500); background: #eef9f2; font: 700 0.82rem var(--font-jakarta); cursor: pointer;">
+            <div class="button-row button-row--center" style="margin-top: 1.5rem; flex-wrap: wrap;" role="radiogroup" aria-label="Vehicle category tier">
+              <button type="button" role="radio" aria-checked="true" class="category-tier-btn is-active" data-tier="economy">
                 Mova Go (₦4,200 avg/trip)
               </button>
-              <button type="button" class="category-tier-btn" data-tier="comfort" style="padding: 0.5rem 1rem; border-radius: 999px; border: 1.5px solid var(--border-subtle); background: white; font: 700 0.82rem var(--font-jakarta); cursor: pointer;">
+              <button type="button" role="radio" aria-checked="false" class="category-tier-btn" data-tier="comfort">
                 Mova Comfort (₦6,500 avg/trip)
               </button>
-              <button type="button" class="category-tier-btn" data-tier="xl" style="padding: 0.5rem 1rem; border-radius: 999px; border: 1.5px solid var(--border-subtle); background: white; font: 700 0.82rem var(--font-jakarta); cursor: pointer;">
+              <button type="button" role="radio" aria-checked="false" class="category-tier-btn" data-tier="xl">
                 Mova XL (₦9,800 avg/trip)
               </button>
             </div>
@@ -168,13 +168,13 @@
                 <small>Mova 10% Platform Fee</small>
                 <strong id="calc-fee" style="color: #0284c7;">-₦21,000</strong>
               </div>
-              <div style="background: white; border-radius: 1rem; padding: 1rem; border: 1.5px solid var(--mova-green-500);">
+              <div class="earnings-calc-takehome">
                 <small style="color: var(--mova-green-700);">YOUR NET TAKE-HOME</small>
                 <strong id="calc-net" style="color: var(--mova-green-700);">₦189,000</strong>
               </div>
             </div>
 
-            <div style="margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: 1rem; background: #fffbeb; border: 1px solid #fde68a; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+            <div class="earnings-calc-savings">
               <div style="font-size: 0.92rem; color: #92400e;">
                 <strong>Extra cash in your pocket vs 25% competitor apps:</strong>
                 <span id="calc-extra-note">You earn <strong>+₦31,500 more</strong> every week!</span>
@@ -186,7 +186,7 @@
       </section>
 
       <!-- 4 Core Pillars for Drivers -->
-      <section class="section" style="background: #fbfdfc; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <section class="section section--canvas section--bordered">
         <div class="container">
           <div class="section-header text-center">
             <p class="eyebrow">BUILT FOR DRIVER SUCCESS</p>
@@ -290,7 +290,7 @@
       </section>
 
       <!-- Fast 4-Step Onboarding Process -->
-      <section class="section" id="driver-requirements" style="background: #fbfdfc; border-top: 1px solid var(--border-subtle);">
+      <section class="section section--canvas section--bordered" id="driver-requirements">
         <div class="container">
           <div class="section-header text-center">
             <p class="eyebrow">FAST ONBOARDING</p>
@@ -351,22 +351,22 @@
         
         
     <div class="footer-group">
-      <h2>Mova</h2>
+      <h3 class="footer-group-title">Mova</h3>
       <a href="../about/">About</a><a href="../safety/">Safety</a><a href="../cities/">Cities</a>
     </div>
   
     <div class="footer-group">
-      <h2>Ride</h2>
+      <h3 class="footer-group-title">Ride</h3>
       <a href="../ride/">Ride with Mova</a><a href="../help/">Help</a>
     </div>
   
     <div class="footer-group">
-      <h2>Earn</h2>
+      <h3 class="footer-group-title">Earn</h3>
       <a href="../drive/">Drive</a><a href="../deliver/">Deliver</a>
     </div>
   
     <div class="footer-group">
-      <h2>Legal</h2>
+      <h3 class="footer-group-title">Legal</h3>
       <a href="../legal/">Legal Center</a><a href="../legal/privacy/">Privacy Draft</a><a href="../legal/terms/">Terms Draft</a>
     </div>
   
@@ -380,7 +380,7 @@
   </footer>
 
   <!-- Global Region / Locale Selector Modal -->
-  <div class="region-modal-backdrop" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
+  <div class="region-modal-backdrop is-hidden" id="region-modal" role="dialog" aria-modal="true" aria-label="Select your country" style="display: none;">
     <div class="region-modal-card">
       <div class="region-modal-header">
         <div>
@@ -392,52 +392,53 @@
         </button>
       </div>
       <div class="region-search-box">
+        <label for="region-search-input" class="visually-hidden">Search countries or cities</label>
         <svg width="18" height="18" viewBox="0 0 256 256" fill="#8899a6" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
-        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off">
+        <input type="text" id="region-search-input" placeholder="Search countries or cities..." autocomplete="off" aria-label="Search countries or cities">
       </div>
       <div class="region-grid" id="region-options-list">
-        <div class="region-card is-active" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
-          <span class="region-card-flag">🇳🇬</span>
+        <div class="region-card is-active" role="button" tabindex="0" aria-pressed="true" data-region="en-ng" data-flag="🇳🇬" data-name="Nigeria (EN)" data-currency="NGN">
+          <span class="region-card-flag" aria-hidden="true">🇳🇬</span>
           <div class="region-card-info">
             <strong>Nigeria</strong>
             <small>English · NGN (₦) · Active Market</small>
           </div>
           <span class="region-status-badge">Active</span>
         </div>
-        <div class="region-card" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
-          <span class="region-card-flag">🇬🇭</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-gh" data-flag="🇬🇭" data-name="Ghana (EN)" data-currency="GHS">
+          <span class="region-card-flag" aria-hidden="true">🇬🇭</span>
           <div class="region-card-info">
             <strong>Ghana</strong>
             <small>English · GHS (GH₵) · Accra Metro</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
-          <span class="region-card-flag">🇰🇪</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-ke" data-flag="🇰🇪" data-name="Kenya (EN)" data-currency="KES">
+          <span class="region-card-flag" aria-hidden="true">🇰🇪</span>
           <div class="region-card-info">
             <strong>Kenya</strong>
             <small>English · KES (KSh) · Nairobi Hub</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
-          <span class="region-card-flag">🇿🇦</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-za" data-flag="🇿🇦" data-name="South Africa (EN)" data-currency="ZAR">
+          <span class="region-card-flag" aria-hidden="true">🇿🇦</span>
           <div class="region-card-info">
             <strong>South Africa</strong>
             <small>English · ZAR (R) · Joburg & Cape Town</small>
           </div>
           <span class="region-status-badge region-status-badge--soon">Coming Soon</span>
         </div>
-        <div class="region-card" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
-          <span class="region-card-flag">🇬🇧</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en-gb" data-flag="🇬🇧" data-name="United Kingdom (EN)" data-currency="GBP">
+          <span class="region-card-flag" aria-hidden="true">🇬🇧</span>
           <div class="region-card-info">
             <strong>United Kingdom</strong>
             <small>English · GBP (£) · Global HQ</small>
           </div>
           <span class="region-status-badge region-status-badge--global">Corporate</span>
         </div>
-        <div class="region-card" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
-          <span class="region-card-flag">🌐</span>
+        <div class="region-card" role="button" tabindex="0" aria-pressed="false" data-region="en" data-flag="🌐" data-name="International (EN)" data-currency="USD">
+          <span class="region-card-flag" aria-hidden="true">🌐</span>
           <div class="region-card-info">
             <strong>International / Global</strong>
             <small>English · USD ($) · Global Gateway</small>
