@@ -2482,15 +2482,15 @@ function generateHomepage(rootPath = "") {
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Mobility, made yours</p>
-          <h1>Move your <span>way.</span></h1>
+          <p class="eyebrow">${iconSvg("shield-fill", 14)} AFRICA’S MOBILITY PLATFORM</p>
+          <h1>Freedom to move.<br><span>Your way.</span> Every day.</h1>
           <p class="hero-manifesto">Your ride. Your price. Your choice.</p>
-          <p class="hero-description">Request a ride, make an offer, choose a fixed-price trip, or go metered.</p>
+          <p class="hero-description">Experience fair urban mobility. Propose your fare, lock in guaranteed upfront rates, or choose metered rides. Built with vetted drivers, a 10% commission model, and 24/7 dedicated in-trip security.</p>
           
           <div class="hero-choices" aria-label="Mova ride pricing choices">
-            <span>${iconSvg("handshake-duotone", 15)} Make an offer</span>
-            <span>${iconSvg("lock-duotone", 15)} Fixed price</span>
-            <span>${iconSvg("path-duotone", 15)} Metered</span>
+            <span>${iconSvg("handshake-duotone", 15)} Make an Offer</span>
+            <span>${iconSvg("lock-duotone", 15)} Fixed Upfront</span>
+            <span>${iconSvg("path-duotone", 15)} Metered Ride</span>
           </div>
           
           <div class="button-row">
@@ -2499,77 +2499,48 @@ function generateHomepage(rootPath = "") {
               ${iconSvg("arrow-up-right", 18)}
             </a>
             <a class="button button--secondary" href="#ride-modes">
-              Explore ride modes
+              Explore Ride Modes
             </a>
           </div>
           
           <div class="hero-proof">
             <span>
-              ${iconSvg("mappin-line-fill", 20)}
-              Launching in Nigeria
+              ${iconSvg("mappin-line-fill", 18)}
+              Lagos Launch Market
             </span>
             <span>
-              ${iconSvg("check-fill", 20)}
-              Three ways to ride
+              ${iconSvg("check-fill", 18)}
+              10% Driver Commission
             </span>
             <span>
-              ${iconSvg("shield-fill", 20)}
-              Built around choice
+              ${iconSvg("shield-fill", 18)}
+              24/7 Safety Command
             </span>
           </div>
         </div>
         
-        <!-- Hero Visual with Interactive animations -->
+        <!-- Hero Visual: Cinematic Architectural Composition -->
         <div class="hero-visual" id="hero-visual-container">
           <div class="ambient-glow-orb" aria-hidden="true"></div>
-          <img class="hero-photo" src="${rootPath}images/marketing/rider-hero.jpg" alt="A rider entering a car in a modern Nigerian city" loading="eager">
+          <img class="hero-photo" src="${rootPath}images/marketing/rider-hero.jpg" alt="A rider entering a comfortable sedan in modern Lagos" loading="eager">
           
-          <div class="hero-route" aria-hidden="true">
-            <span class="hero-route__start"></span>
-            <span class="hero-route__end"></span>
-            ${iconSvg("car-profile-fill", 20)}
-          </div>
-          
-          <div class="driver-search" aria-hidden="true">
-            <i></i><span>Finding a driver</span>
-          </div>
-          
-          <div class="hero-trip-card" data-tilt aria-label="Illustrative matched-driver details">
-            <p>
-              ${iconSvg("check-fill", 15)}
-              Driver matched <em>4 min away</em>
-            </p>
+          <!-- Single Refined Showcase Card (Bottom-Anchored) -->
+          <div class="hero-trip-card" data-tilt aria-label="Live matched driver demonstration">
+            <div class="hero-trip-card__header">
+              <span class="live-dot-pulse"><i></i> Driver Matched</span>
+              <em>4 min away</em>
+            </div>
             <div class="matched-driver">
               <span class="driver-avatar">KA</span>
-              <span>
-                <strong>Kareem A.</strong>
-                <small>Silver sedan · <span class="counter-num" data-target="4.9" data-decimals="1">4.9</span> ★ · <span class="counter-num" data-target="1420" data-format="comma">1,420</span> trips</small>
-              </span>
+              <div>
+                <strong>Kareem A. · 4.9★</strong>
+                <small>Toyota Corolla · ₦4,800 Agreed Fare</small>
+              </div>
             </div>
-            <div class="trip-point">
-              <span>${iconSvg("map-pin-fill", 15)}</span>
-              <small>Pickup</small>
-              <strong>Your location</strong>
-            </div>
-            <div class="trip-point">
-              <span>${iconSvg("navigation-fill", 15)}</span>
-              <small>Destination</small>
-              <strong>Choose where to go</strong>
-            </div>
-          </div>
-          
-          <div class="hero-offer-card" data-tilt>
-            <small>Rider choice selected</small>
-            <strong>Make an Offer</strong>
-            <span>Illustrative fare · ₦4,500</span>
-            <p>Fixed ₦5,200 · Metered available</p>
-          </div>
-          
-          <div class="driver-chip" data-tilt>
-            <div class="avatar">KA</div>
-            <div>
-              <small>Ready for your trip</small>
-              <strong>Kareem ${iconSvg("star-fill", 12)} 4.9</strong>
+            <div class="trip-point-row">
+              <span class="trip-badge trip-badge--pickup">${iconSvg("map-pin-fill", 12)} Victoria Island</span>
+              <span class="trip-badge trip-badge--dest">${iconSvg("navigation-fill", 12)} Lekki Phase 1</span>
+              <span class="trip-badge trip-badge--mode">Make an Offer</span>
             </div>
           </div>
         </div>
@@ -2580,9 +2551,9 @@ function generateHomepage(rootPath = "") {
     <section class="section ride-modes-section" id="ride-modes">
       <div class="container">
         <div class="section-heading section-heading--center">
-          <p class="eyebrow">The power of choice</p>
-          <h2>How do you want to ride today?</h2>
-          <p class="section-copy">Different journeys call for different pricing approaches. Mova gives you three clear ways to choose before every request.</p>
+          <p class="eyebrow">THE TRI-CHOICE ENGINE</p>
+          <h2>One platform. Three transparent ways to ride.</h2>
+          <p class="section-copy">Different journeys call for different pricing approaches. Mova gives you three clear ways to choose before every request—putting control back in your hands.</p>
         </div>
 
         <!-- Choice Engine Trip Simulator -->
@@ -2614,15 +2585,15 @@ function generateHomepage(rootPath = "") {
           <article class="ride-mode-card spotlight-card">
             <div class="mode-card-head">
               <span class="mode-icon mode-icon--gradient">${iconSvg("handshake-duotone", 25)}</span>
-              <span class="mode-badge">More choice</span>
+              <span class="mode-badge">Rider Discretion</span>
             </div>
             <h3>Make an Offer</h3>
-            <p class="mode-subtitle">More say in what you pay</p>
-            <p>Suggest a fare within Mova’s configured pricing boundaries. Drivers may accept or respond with a counteroffer where supported.</p>
+            <p class="mode-subtitle">Propose your own fare</p>
+            <p>Suggest a fare within Mova’s calibrated pricing boundaries. Available drivers review your proposal and accept or counter in real time.</p>
             
             <div class="mode-ui">
               <div class="mode-ui-label">
-                <span>Suggested bracket</span>
+                <span>Fair Market Bracket</span>
                 <strong id="offer-suggested-fare">₦4,200 – ₦5,200</strong>
               </div>
               <div class="offer-control">
@@ -2633,25 +2604,25 @@ function generateHomepage(rootPath = "") {
                 </div>
                 <button type="button" id="offer-increase" aria-label="Increase illustrative offer">${iconSvg("plus", 14)}</button>
               </div>
-              <p class="ui-note">Adjust with +/- or drag the distance simulator above</p>
+              <p class="ui-note">Calibrated with real-time route dynamics</p>
             </div>
           </article>
           
           <!-- Card 2: Fixed Price (Featured) -->
           <article class="ride-mode-card ride-mode-card--selected spotlight-card">
-            <span class="featured-label">Upfront price</span>
+            <span class="featured-label">Guaranteed Upfront</span>
             <div class="mode-card-head">
               <span class="mode-icon mode-icon--navy">${iconSvg("lock-duotone", 25)}</span>
-              <span class="mode-badge">Clear before booking</span>
+              <span class="mode-badge">Zero Surge Surprises</span>
             </div>
             <h3>Fixed Price</h3>
             <p class="mode-subtitle">Certainty before you step in</p>
-            <p>See the price before the trip and choose whether to proceed. The agreed amount is presented clearly before booking.</p>
+            <p>Lock in a guaranteed upfront fare before you confirm. Traffic delays, weather, or unexpected diversions will not increase your price.</p>
             
             <div class="mode-ui">
               <div class="mode-ui-label">
-                <span>Upfront price</span>
-                <strong>Agreed before trip</strong>
+                <span>Locked Fare</span>
+                <strong>Agreed before booking</strong>
               </div>
               <div class="fixed-total">
                 <div>
@@ -2660,7 +2631,7 @@ function generateHomepage(rootPath = "") {
                 </div>
                 ${iconSvg("check-fill", 28)}
               </div>
-              <p class="ui-note">Fixed upfront fare based on real-time route analysis</p>
+              <p class="ui-note">Guaranteed total · No mid-trip recalculations</p>
             </div>
           </article>
           
@@ -2668,15 +2639,15 @@ function generateHomepage(rootPath = "") {
           <article class="ride-mode-card spotlight-card">
             <div class="mode-card-head">
               <span class="mode-icon mode-icon--blue">${iconSvg("path-duotone", 25)}</span>
-              <span class="mode-badge">Journey based</span>
+              <span class="mode-badge">Pay as You Go</span>
             </div>
             <h3>Metered Ride</h3>
-            <p class="mode-subtitle mode-subtitle--blue">Fare based on the journey</p>
-            <p>Fare reflects the actual journey according to Mova’s metered pricing model, including applicable distance and time.</p>
+            <p class="mode-subtitle mode-subtitle--blue">Precise distance &amp; duration</p>
+            <p>Your fare tracks the actual route travelled using Mova’s calibrated GPS telemetry and regulated per-kilometer and minute rates.</p>
             
             <div class="mode-ui">
               <div class="mode-ui-label">
-                <span>Journey progress</span>
+                <span>Real-time Telemetry</span>
                 <strong class="live-label"><i></i> Live</strong>
               </div>
               <div class="meter-total">
@@ -2700,8 +2671,9 @@ function generateHomepage(rootPath = "") {
     <section class="section section--muted">
       <div class="container">
         <div class="section-heading section-heading--center">
-          <p class="eyebrow">The Mova ecosystem</p>
-          <h2>One Mova. More ways to move.</h2>
+          <p class="eyebrow">THE MOVA ECOSYSTEM</p>
+          <h2>Engineered for every side of urban transit.</h2>
+          <p class="section-copy">A unified platform connecting daily commuters, professional captains, and rapid parcel logistics across West Africa's dynamic commercial hubs.</p>
         </div>
         
         <div class="ecosystem-grid" role="region" aria-label="Mova services">
@@ -2710,9 +2682,9 @@ function generateHomepage(rootPath = "") {
               <img src="${rootPath}images/marketing/rider-hero.jpg" alt="A Mova rider travelling with a driver" loading="lazy">
             </div>
             <div>
-              <p class="tag">For riders</p>
-              <h3>Ride</h3>
-              <p>Book a trip with the pricing approach that fits you.</p>
+              <p class="tag">For Commuters</p>
+              <h3>Ride with Choice</h3>
+              <p>Choose your pricing model before every journey: propose an offer, lock in a fixed rate, or ride metered.</p>
               <a class="button button--ghost" href="ride/">
                 Explore rides
                 ${iconSvg("arrow-up-right", 18)}
@@ -2725,9 +2697,9 @@ function generateHomepage(rootPath = "") {
               <img src="${rootPath}images/marketing/driver-hero.jpg" alt="A driver at the wheel" loading="lazy">
             </div>
             <div>
-              <p class="tag">For drivers</p>
-              <h3>Drive</h3>
-              <p>Find flexible opportunities and choose trips with clear information.</p>
+              <p class="tag">For Captains &amp; Fleets</p>
+              <h3>Drive &amp; Earn Fairly</h3>
+              <p>Keep 90% of your earnings with our 10% commission model. Full destination transparency before acceptance.</p>
               <a class="button button--ghost" href="drive/">
                 Explore driving
                 ${iconSvg("arrow-up-right", 18)}
@@ -2740,9 +2712,9 @@ function generateHomepage(rootPath = "") {
               <img src="${rootPath}images/marketing/courier-hero.jpg" alt="A courier preparing a package" loading="lazy">
             </div>
             <div>
-              <p class="tag">For deliveries</p>
-              <h3>Deliver</h3>
-              <p>Send packages or discover courier opportunities through Mova.</p>
+              <p class="tag">For Senders &amp; Couriers</p>
+              <h3>Deliver with Speed</h3>
+              <p>Same-day motorcycle and van parcel dispatch with real-time route telemetry and secure recipient PIN handoff.</p>
               <a class="button button--ghost" href="deliver/">
                 Explore delivery
                 ${iconSvg("arrow-up-right", 18)}
@@ -2760,44 +2732,44 @@ function generateHomepage(rootPath = "") {
           <img src="${rootPath}images/marketing/rider-hero.jpg" alt="A rider enjoying a Mova journey" loading="lazy">
           <div class="rider-status">
             ${iconSvg("check-fill", 18)}
-            <span><small>Active trip</small>Details close at hand</span>
+            <span><small>Verified Trip</small>Live GPS Telemetry</span>
           </div>
         </div>
         
         <div>
           <div class="section-heading">
-            <p class="eyebrow">The rider experience</p>
-            <h2>Wherever you’re headed, move on your terms.</h2>
-            <p class="section-copy">From pickup to arrival, Mova keeps your options clear and your active trip information within reach.</p>
+            <p class="eyebrow">THE RIDER EXPERIENCE</p>
+            <h2>Move on your own terms. Every journey, every day.</h2>
+            <p class="section-copy">From pickup to arrival, Mova eliminates surge surprises, provides live telemetry, and puts transparent pricing in your hands.</p>
           </div>
           
           <div class="benefit-list">
             <div class="benefit">
               <span>${iconSvg("dollar-duotone", 23)}</span>
               <div>
-                <h3>Pricing choice</h3>
-                <p>Choose the ride and pricing experience that works for the moment.</p>
+                <h3>Three Transparent Pricing Models</h3>
+                <p>Never get trapped by arbitrary surge algorithms. Choose upfront fixed pricing, propose an offer, or ride metered.</p>
               </div>
             </div>
             <div class="benefit">
-              <span>${iconSvg("mobile-duotone", 23)}</span>
+              <span>${iconSvg("shield-duotone", 23)}</span>
               <div>
-                <h3>Easy booking</h3>
-                <p>Set your pickup, choose your destination, and select how you want to ride.</p>
+                <h3>Vetted Professional Drivers</h3>
+                <p>Every driver undergoes comprehensive background screening, facial authentication, and a 45-point vehicle inspection.</p>
               </div>
             </div>
             <div class="benefit">
               <span>${iconSvg("navigation-duotone", 23)}</span>
               <div>
-                <h3>Trip visibility</h3>
-                <p>Follow your active trip and keep the important details close.</p>
+                <h3>Live Route Telemetry</h3>
+                <p>Share your moving trip route with up to 5 trusted emergency contacts via WhatsApp or SMS in a single tap.</p>
               </div>
             </div>
             <div class="benefit">
               <span>${iconSvg("chat-duotone", 23)}</span>
               <div>
-                <h3>Stay connected</h3>
-                <p>Communicate with your matched driver during an active service.</p>
+                <h3>Direct In-App Coordination</h3>
+                <p>Call or chat with your matched driver inside the app with end-to-end privacy and zero phone number exposure.</p>
               </div>
             </div>
           </div>
@@ -2811,15 +2783,16 @@ function generateHomepage(rootPath = "") {
         <div class="container driver-layout">
           <div>
             <div class="section-heading section-heading--inverse">
-              <p class="eyebrow">Drive with Mova</p>
-              <h2>Your time. Your opportunities.</h2>
-              <p class="section-copy">Find ride opportunities, see useful trip information, and choose what works for you—all on one Mova platform.</p>
+              <p class="eyebrow">PARTNER WITH MOVA</p>
+              <h2>Keep what you earn.<br><span style="color: var(--mova-green-400);">Only 10% commission.</span></h2>
+              <p class="section-copy">Traditional ride-hailing platforms take 25% or more in commissions and hidden charges. Mova caps platform fees at an industry-low 10%, putting significantly more income directly into your pocket.</p>
             </div>
             
             <ul class="check-list">
-              <li>${iconSvg("check-fill", 19)} Flexible earning opportunities</li>
-              <li>${iconSvg("check-fill", 19)} Choice over the trips you take</li>
-              <li>${iconSvg("check-fill", 19)} Accept or counter where supported</li>
+              <li>${iconSvg("check-fill", 19)} <strong>90% Driver Take-Home:</strong> Keep nine out of every ten Naira earned</li>
+              <li>${iconSvg("check-fill", 19)} <strong>Complete Trip Transparency:</strong> See pickup, destination, and fare before accepting</li>
+              <li>${iconSvg("check-fill", 19)} <strong>Guaranteed Weekly Monday Payouts:</strong> Direct to any Nigerian bank with zero hidden fees</li>
+              <li>${iconSvg("check-fill", 19)} <strong>Accept or Counter Offers:</strong> Freedom to negotiate fares where supported</li>
             </ul>
             
             <a class="button button--inverse" href="drive/">
@@ -2829,30 +2802,30 @@ function generateHomepage(rootPath = "") {
           </div>
           
           <div class="driver-visual">
-            <img src="${rootPath}images/marketing/driver-hero.jpg" alt="A Mova driver ready for a trip" loading="lazy">
+            <img src="${rootPath}images/marketing/driver-hero.jpg" alt="A professional Mova driver ready for a trip" loading="lazy">
             <div class="opportunity-card opportunity-card--detailed" aria-label="Illustrative new ride opportunity">
               <div class="opportunity-head">
-                <span><i></i>${iconSvg("bell-fill", 14)} New ride opportunity</span>
-                <small>Illustrative UI</small>
+                <span><i></i>${iconSvg("bell-fill", 14)} Live Opportunity</span>
+                <small>Lagos Central</small>
               </div>
               <div class="opportunity-meta">
-                <strong>8 min</strong>
+                <strong>4 min</strong>
                 <span>Estimated pickup</span>
               </div>
               <div class="opportunity-route">
                 <div>
                   ${iconSvg("map-pin-fill", 15)}
-                  <p><small>Pickup</small>Current area</p>
+                  <p><small>Pickup</small>Adetokunbo Ademola, VI</p>
                 </div>
                 <i></i>
                 <div>
                   ${iconSvg("navigation-fill", 15)}
-                  <p><small>Destination</small>Trip destination</p>
+                  <p><small>Destination</small>Admiralty Way, Lekki 1</p>
                 </div>
               </div>
               <div class="opportunity-offer">
                 <span>Rider offer</span>
-                <strong>₦4,500</strong>
+                <strong>₦4,800</strong>
               </div>
               <div class="opportunity-actions" aria-hidden="true">
                 <button type="button" tabindex="-1">Counter</button>
@@ -2872,29 +2845,29 @@ function generateHomepage(rootPath = "") {
           <div class="parcel-status">
             ${iconSvg("check-fill", 20)}
             <div>
-              <small>Delivery status</small>
-              <strong>Courier assigned</strong>
+              <small>Delivery Status</small>
+              <strong>Courier Assigned · In Transit</strong>
             </div>
           </div>
         </div>
         
         <div>
           <div class="section-heading">
-            <p class="eyebrow">Mova Courier</p>
-            <h2>Fast, connected city parcel dispatch.</h2>
-            <p class="section-copy">A clear delivery experience for people sending packages and couriers moving them through the city.</p>
+            <p class="eyebrow">RAPID URBAN LOGISTICS</p>
+            <h2>City parcel delivery. Verified from pickup to handoff.</h2>
+            <p class="section-copy">Whether sending business documents, retail packages, or urgent essentials across town, Mova Courier pairs you with verified dispatch riders in minutes.</p>
           </div>
           
           <div class="courier-audiences">
             <div>
               ${iconSvg("package-regular", 24)}
-              <h3>For senders</h3>
-              <p>Arrange a package delivery and follow its active lifecycle.</p>
+              <h3>For Senders</h3>
+              <p>Book instant dispatch, follow package movement live on the map, and confirm safe delivery with secure recipient PIN handoff.</p>
             </div>
             <div>
               ${iconSvg("user-regular", 24)}
-              <h3>For couriers</h3>
-              <p>Review delivery opportunities and useful assignment details.</p>
+              <h3>For Couriers &amp; Fleets</h3>
+              <p>Earn transparent per-drop fees, view package specifications before acceptance, and maximize your route efficiency across Lagos.</p>
             </div>
           </div>
           
@@ -2912,36 +2885,36 @@ function generateHomepage(rootPath = "") {
         <div class="safety-panel">
           <div>
             <div class="section-heading">
-              <p class="eyebrow">Safety at every step</p>
-              <h2>Move with greater confidence.</h2>
-              <p class="section-copy">Mova is designed to keep relevant trip information visible and help riders and drivers stay connected during an active service.</p>
+              <p class="eyebrow">UNCOMPROMISING SAFETY</p>
+              <h2>Protected before, during, and after every trip.</h2>
+              <p class="section-copy">Safety is built directly into our app architecture, driver onboarding protocols, and round-the-clock emergency incident operations.</p>
             </div>
             <a class="button button--secondary" href="safety/">
-              Explore safety
+              Explore Safety Standards
               ${iconSvg("arrow-up-right", 18)}
             </a>
           </div>
           
           <div class="safety-grid">
             <div>
+              ${iconSvg("shield-fill", 27)}
+              <h3>24/7 Command Hotline</h3>
+              <p>Dedicated rapid-intervention team reachable around the clock via in-app dispatch and toll-free voice.</p>
+            </div>
+            <div>
               ${iconSvg("shield-regular", 27)}
-              <h3>Trip visibility</h3>
-              <p>Follow key details through an active trip.</p>
+              <h3>One-Tap In-App SOS</h3>
+              <p>Instant emergency broadcast transmitting live GPS coordinates, vehicle details, and driver identity to responders.</p>
+            </div>
+            <div>
+              ${iconSvg("navigation-regular", 27)}
+              <h3>Live Route Sharing</h3>
+              <p>Share live moving vehicle location, driver name, photo, and ETA directly via WhatsApp or SMS with trusted contacts.</p>
             </div>
             <div>
               ${iconSvg("lock-regular", 27)}
-              <h3>Account security</h3>
-              <p>Protection designed into the Mova experience.</p>
-            </div>
-            <div>
-              ${iconSvg("chat-regular", 27)}
-              <h3>Active communication</h3>
-              <p>Connect with your match when you need to.</p>
-            </div>
-            <div>
-              ${iconSvg("user-regular", 27)}
-              <h3>Support access</h3>
-              <p>Find help and report an issue through Mova.</p>
+              <h3>Strict Driver Vetting</h3>
+              <p>Comprehensive background verification, biometric authentication, and 45-point vehicle roadworthiness checks.</p>
             </div>
           </div>
         </div>
@@ -2955,38 +2928,41 @@ function generateHomepage(rootPath = "") {
           <div class="market-copy">
             <div class="market-eyebrow">
               ${iconSvg("mappin-line-bold", 14)}
-              SCALE &amp; FOOTPRINT
+              EXPEDITION FOOTPRINT
             </div>
-            <h2>Starting in Nigeria.<br>Built to go further.</h2>
-            <p class="market-description">Mova is launching first in Nigeria, with a platform designed to support more markets over time.</p>
+            <h2>Born in Lagos.<br>Architected for Africa.</h2>
+            <p class="market-description">Mova launches first in Lagos—Africa’s most dynamic commercial metropolis. Our high-throughput dispatch engine is calibrated for Lagos transit corridors, island-mainland arteries, and major business hubs.</p>
             
             <div class="market-status-list">
               <div>
                 <i></i>
                 <span>
-                  <strong>Nigeria</strong>
-                  <small>First launch market</small>
+                  <strong>Nigeria (Lagos Metro)</strong>
+                  <small>Commercial launch market with high-density dispatch</small>
                 </span>
-                <b>Launching first</b>
+                <b>Launching First</b>
               </div>
               <div>
                 <i></i>
                 <span>
-                  <strong>Multi-market ready</strong>
-                  <small>Country-aware services and pricing</small>
+                  <strong>Multi-Market Architecture</strong>
+                  <small>Pan-African currency engine supporting NGN, GHS, KES, ZAR</small>
                 </span>
               </div>
               <div>
                 <i></i>
                 <span>
-                  <strong>Availability updates</strong>
-                  <small>Confirmed cities will be published as rollout plans are finalised</small>
+                  <strong>Regional Expansion</strong>
+                  <small>Accra, Nairobi, Kigali, and Johannesburg hubs rolling out Q2 2027</small>
                 </span>
               </div>
             </div>
             
             <a class="button button--secondary" href="cities/">
               View market updates
+              ${iconSvg("arrow-up-right", 18)}
+            </a>
+          </div>
               ${iconSvg("arrow-up-right", 18)}
             </a>
           </div>
@@ -3193,35 +3169,35 @@ function generateHomepage(rootPath = "") {
     <section class="section section--white">
       <div class="container faq-layout">
         <div class="section-heading">
-          <p class="eyebrow">Questions, answered</p>
-          <h2>A few things to know about Mova.</h2>
-          <p class="section-copy">Straightforward answers before your first trip.</p>
+          <p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p>
+          <h2>Everything you need to know about Mova.</h2>
+          <p class="section-copy">Clear, transparent answers about our pricing models, driver partnership, safety standards, and launch timeline.</p>
         </div>
         
         <div class="faq-list">
           <details>
-            <summary>What is Mova?<span aria-hidden="true">+</span></summary>
-            <p>Mova is a mobility platform that brings rides, driver opportunities, and delivery experiences together in one place.</p>
+            <summary>What makes Mova different from traditional ride-hailing apps?<span aria-hidden="true">+</span></summary>
+            <p>Mova is built on radical transparency and rider choice. Unlike closed platforms that impose arbitrary surge algorithms, Mova gives you three distinct pricing options for every trip: propose an Offer, lock in a Fixed Upfront rate, or ride Metered. For drivers, we charge an industry-low 10% commission compared to the 25%+ charged elsewhere.</p>
           </details>
           <details>
-            <summary>How does making an offer work?<span aria-hidden="true">+</span></summary>
-            <p>For supported trips, you can suggest a fare within Mova’s pricing boundaries and respond to offers from available drivers.</p>
+            <summary>How does the "Make an Offer" ride model work?<span aria-hidden="true">+</span></summary>
+            <p>For supported routes, you can suggest a fare within Mova’s calibrated pricing boundaries. Nearby vetted drivers review your offer in real time and can accept directly or propose a counteroffer, ensuring a mutually agreed fare before booking.</p>
           </details>
           <details>
-            <summary>Can I choose a fixed-price ride?<span aria-hidden="true">+</span></summary>
-            <p>Yes. Fixed-price booking lets you see and agree to the trip price before your journey begins.</p>
+            <summary>How does Fixed Price protect riders from surge spikes?<span aria-hidden="true">+</span></summary>
+            <p>Fixed Price calculates a guaranteed upfront fare before you confirm your request. Once booked, that price is 100% locked. Heavy Lagos traffic, sudden rain, or route detours will never increase the agreed fare.</p>
           </details>
           <details>
-            <summary>What is a metered ride?<span aria-hidden="true">+</span></summary>
-            <p>A metered ride calculates the fare from the actual journey using Mova’s metered pricing model.</p>
+            <summary>What is a Metered Ride?<span aria-hidden="true">+</span></summary>
+            <p>A Metered Ride uses calibrated GPS telemetry to compute your fare based on actual distance travelled and elapsed trip time, ideal when you have multiple stops or an unpredictable schedule.</p>
           </details>
           <details>
-            <summary>How do I become a Driver?<span aria-hidden="true">+</span></summary>
-            <p>Visit the Drive page to learn about the onboarding process and register your interest.</p>
+            <summary>How do drivers benefit from Mova's 10% commission?<span aria-hidden="true">+</span></summary>
+            <p>Drivers keep 90% of every fare they complete. In addition, Mova offers complete trip destination transparency before acceptance, direct weekly Monday bank payouts, and zero hidden device or platform rental fees.</p>
           </details>
           <details>
-            <summary>Does Mova offer delivery?<span aria-hidden="true">+</span></summary>
-            <p>Mova Courier is being built for package delivery and courier opportunities through the same Mova platform.</p>
+            <summary>What safety features protect riders and drivers during active trips?<span aria-hidden="true">+</span></summary>
+            <p>Every active trip features in-app SOS emergency dispatch, one-tap live GPS route sharing via WhatsApp or SMS, 24/7 dedicated telephone support via our Safety Command Center (+234 704 783 8642), and thorough 45-point vehicle and driver background vetting.</p>
           </details>
         </div>
       </div>
@@ -3231,8 +3207,8 @@ function generateHomepage(rootPath = "") {
     <section class="section section--white section--closing">
       <div class="container">
         <div class="closing-cta">
-          <p class="eyebrow">Move with Mova</p>
-          <h2>Ready to move your way?</h2>
+          <p class="eyebrow">THE FUTURE OF URBAN TRANSIT</p>
+          <h2>Ready to move on your own terms?</h2>
           <p>Your ride. Your price. Your choice.</p>
           <div class="button-row">
             <a class="button button--inverse" href="#get-mova">
