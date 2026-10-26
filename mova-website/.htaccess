@@ -1,5 +1,0 @@
-# Serve index.html as the default document for / and every directory
-DirectoryIndex index.html index.htm
-
-# Custom 404 page
-ErrorDocument 404 /404.html
