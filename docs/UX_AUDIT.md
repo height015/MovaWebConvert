@@ -1,6 +1,6 @@
 # Mova UI/UX Audit & Design Refinement Report
 
-**Project:** Mova Public Marketing Website (`mova.ng`)  
+**Project:** Mova Public Marketing Website (`ridebymova.com`)  
 **Design Intelligence Engine:** UXSkill v2.0  
 **Audit Scope:** Public Web Application (Homepage, Ride, Drive, Deliver, Safety, Cities, About, Help Center, Legal Center, 404, and Regional Localized Hierarchy)  
 **Date:** October 2026  
@@ -280,7 +280,7 @@ The responsive stylesheet was structured into an intentional cascading hierarchy
 1. **Production Marketing Photography (Asset Replacement):**
    - The current JPEGs (`rider-hero.jpg`, `driver-hero.jpg`, `courier-hero.jpg`, `about-hero.jpg`, `safety-hero.jpg`) render cleanly at current container sizes, but remain placeholder-named. As documented in `docs/visual-assets.md`, approved 2400-3200px long-edge commercial photography should be commissioned prior to national marketing campaigns.
 2. **BIMI / DMARC DNS Publishing:**
-   - The vector BIMI asset (`brand/mova-bimi.svg`) is prepared and verified. The BIMI DNS TXT record should be published once DMARC enforcement (`p=reject`) is confirmed on `mova.ng`.
+   - The vector BIMI asset (`brand/mova-bimi.svg`) is prepared and verified. The BIMI DNS TXT record should be published once DMARC enforcement (`p=reject`) is confirmed on `ridebymova.com`.
 
 ---
 

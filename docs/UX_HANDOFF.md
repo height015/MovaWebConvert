@@ -2,7 +2,7 @@
 
 ## 1. Executive Overview & Brand Vision
 
-This document details the design decisions, component architecture, responsive rules, and quality verification standards implemented during **Phase 2: Premium Visual Design & Experience Refinement** for the **Mova** mobility and logistics platform ([`mova.ng`](https://mova.ng)).
+This document details the design decisions, component architecture, responsive rules, and quality verification standards implemented during **Phase 2: Premium Visual Design & Experience Refinement** for the **Mova** mobility and logistics platform ([`ridebymova.com`](https://ridebymova.com)).
 
 ### Core Platform Objectives
 * **Identity Preservation:** Deepened Mova's signature deep navy (`#00172c`) and energetic emerald green accents (`#007d50`, `#00a963`, `#24c93b`), creating a distinct, trustworthy, and technologically sophisticated brand aesthetic.
@@ -151,7 +151,7 @@ The design follows a mobile-first, content-adaptive breakpoint strategy:
 1. **Production Commercial Photography:**
    - As outlined in [`mova-website/docs/visual-assets.md`](file:///Users/joe/Documents/MovaWebConvert/mova-website/docs/visual-assets.md), the current JPEG images (`rider-hero.jpg`, `driver-hero.jpg`, `courier-hero.jpg`, `about-hero.jpg`, `safety-hero.jpg`) function cleanly as visual placeholders. For national consumer campaigns, authentic photography shot in Lagos/Abuja featuring local drivers, riders, and dispatchers should replace them.
 2. **BIMI / DMARC DNS Record Deployment:**
-   - The verified vector BIMI asset is stored in `mova-website/brand/mova-bimi.svg`. Once DMARC email quarantine/reject enforcement (`p=reject`) is configured on `mova.ng`, the corresponding DNS TXT record should be published.
+   - The verified vector BIMI asset is stored in `mova-website/brand/mova-bimi.svg`. Once DMARC email quarantine/reject enforcement (`p=reject`) is configured on `ridebymova.com`, the corresponding DNS TXT record should be published.
 3. **PWA Service Worker Enhancement (Optional Phase 3):**
    - Implement an offline service worker to cache core CSS, icons, and shell HTML, enabling instant repeat visits in regions with unstable cellular data.
 

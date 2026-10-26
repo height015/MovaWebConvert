@@ -2,7 +2,7 @@
 ## Strategic Design Direction & Architectural Blueprint
 
 **Document Version:** 1.0.0  
-**Target Surface:** Mova Public Web Experience (`mova.ng`)  
+**Target Surface:** Mova Public Web Experience (`ridebymova.com`)  
 **Architecture:** Zero-Framework Vanilla HTML5 · Modern CSS3 (Tokens & Custom Properties) · Modular ES6 JavaScript  
 **Single Source of Truth:** [`mova-website/build-vanilla.mjs`](file:///Users/joe/Documents/MovaWebConvert/mova-website/build-vanilla.mjs) · [`mova-website/css/style.css`](file:///Users/joe/Documents/MovaWebConvert/mova-website/css/style.css) · [`mova-website/js/main.js`](file:///Users/joe/Documents/MovaWebConvert/mova-website/js/main.js)  
 

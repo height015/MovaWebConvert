@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /legal/
 
-Sitemap: https://mova.ng/sitemap.xml
+Sitemap: https://ridebymova.com/sitemap.xml

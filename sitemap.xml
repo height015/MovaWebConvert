@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mova.ng/</loc>
+    <loc>https://ridebymova.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mova.ng/ride</loc>
+    <loc>https://ridebymova.com/ride</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/drive</loc>
+    <loc>https://ridebymova.com/drive</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/deliver</loc>
+    <loc>https://ridebymova.com/deliver</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/safety</loc>
+    <loc>https://ridebymova.com/safety</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/cities</loc>
+    <loc>https://ridebymova.com/cities</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/about</loc>
+    <loc>https://ridebymova.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/help</loc>
+    <loc>https://ridebymova.com/help</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

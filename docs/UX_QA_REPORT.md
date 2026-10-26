@@ -2,7 +2,7 @@
 
 **Audit Date:** October 24, 2026  
 **Auditor Roles:** Senior Quality Assurance Engineer, UX Researcher, Accessibility Specialist, Frontend Quality Engineer  
-**Target Application:** Mova Integrated Mobility Platform ([`mova.ng`](https://mova.ng))  
+**Target Application:** Mova Integrated Mobility Platform ([`ridebymova.com`](https://ridebymova.com))  
 **Architecture:** Vanilla HTML5, Modern CSS3, ES6 JavaScript (Zero Runtime Bundler Dependencies)
 
 ---

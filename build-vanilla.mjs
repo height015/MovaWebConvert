@@ -86,7 +86,7 @@ function iconSvg(id, size = 20, extraClass = "") {
 // 2. Data from existing project configs
 const siteConfig = {
   name: "Mova",
-  url: "https://mova.ng",
+  url: "https://ridebymova.com",
   description: "Choose how you move with flexible ride pricing, driver opportunities, and delivery—all in one Mova app.",
   nav: [
     { label: "Ride", slug: "ride" },
@@ -328,17 +328,22 @@ function renderHtmlShell({
   <meta property="og:url" content="${canonicalUrl}">
   <meta property="og:site_name" content="Mova">
   <meta property="og:locale" content="en_NG">
-  <meta property="og:image" content="${siteConfig.url}/brand/mova-logo-official.png">
+  <meta property="og:image" content="${siteConfig.url}/brand/mova-og.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mova logo">
   
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${fullTitle}">
   <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="${siteConfig.url}/brand/mova-og.jpg">
   
   <!-- Favicon and App Icons -->
-  <link rel="shortcut icon" href="${rootPath}brand/favicon.ico?v=2">
-  <link rel="icon" type="image/x-icon" href="${rootPath}brand/favicon.ico?v=2">
-  <link rel="icon" type="image/png" sizes="32x32" href="${rootPath}brand/mova-favicon.png?v=2">
-  <link rel="apple-touch-icon" href="${rootPath}brand/mova-favicon.png?v=2">
+  <link rel="shortcut icon" href="/brand/favicon.ico?v=2">
+  <link rel="icon" type="image/x-icon" href="/brand/favicon.ico?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/brand/mova-favicon.png?v=2">
+  <link rel="apple-touch-icon" href="/brand/mova-favicon.png?v=2">
   <meta name="theme-color" content="#071b2b">
   
   <!-- Modern Google Fonts -->
@@ -2202,7 +2207,7 @@ function generateHelpPage(rootPath = "../") {
             <details data-cat="delivery" data-keywords="business api merchant bulk invoice corporate ecommerce">
               <summary>How do I set up a corporate business logistics account?</summary>
               <p>
-                Businesses dispatching 10+ parcels per day can register for a Mova Business Account to access our developer REST API, batch route optimization (up to 20 dropoffs per courier), monthly consolidated invoicing, and discounted corporate billing. Contact business@mova.ng to set up your account.
+                Businesses dispatching 10+ parcels per day can register for a Mova Business Account to access our developer REST API, batch route optimization (up to 20 dropoffs per courier), monthly consolidated invoicing, and discounted corporate billing. Contact info@ridebymova.com to set up your account.
               </p>
             </details>
 
@@ -4633,48 +4638,48 @@ input, button, textarea, select {
 Allow: /
 Disallow: /legal/
 
-Sitemap: https://mova.ng/sitemap.xml
+Sitemap: https://ridebymova.com/sitemap.xml
 `);
 
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mova.ng/</loc>
+    <loc>https://ridebymova.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mova.ng/ride</loc>
+    <loc>https://ridebymova.com/ride</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/drive</loc>
+    <loc>https://ridebymova.com/drive</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/deliver</loc>
+    <loc>https://ridebymova.com/deliver</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/safety</loc>
+    <loc>https://ridebymova.com/safety</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/cities</loc>
+    <loc>https://ridebymova.com/cities</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/about</loc>
+    <loc>https://ridebymova.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mova.ng/help</loc>
+    <loc>https://ridebymova.com/help</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
